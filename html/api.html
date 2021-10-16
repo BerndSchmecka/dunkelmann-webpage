@@ -19,8 +19,18 @@
         </section>
     
         <section class="page-content">
-            <h1>Wichtige Information</h1>
-            <p>Diese Webseite befindet sich derzeit im Bau. Bitte beachten Sie auch <a href="https://md.dunkelmann.eu">md.dunkelmann.eu</a>.</p>
+            <h1>Die Dunkelmann-API</h1>
+            <p>
+                Auf dieser Seite wird die Dunkelmann-API erklärt.
+                Diese ist unter <code>api.dunkelmann.eu</code> zu erreichen und es existieren folgende Endpoints:
+            </p>
+            <code>GET /ts3version</code>
+            <p>Dieser Endpoint liefert beispielsweise folgende Antwort:</p>
+            <code>{"value":5,"versions":[{"channel":"server","timestamp":1547625010,"version":"3.6.0"},{"channel":"stable","timestamp":1606312422,"version":"3.5.6"},{"channel":"beta","timestamp":1608224421,"version":"3.5.7"},{"channel":"alpha","timestamp":1613066709,"version":"3.5.7"}],"value2":4}</code>
+            <p>Dabei sind <code>value</code> <abbr title="beziehungsweise">bzw.</abbr> <code>value2</code> unbekannte Werte.</p>
+            <p>Der Wert <code>versions</code> hingegen ist ein Array, welches aus Objekten für jeden Update-Channel von TeamSpeak 3 besteht.</p>
+            <p>Dabei steht <code>channel</code> für den <abbr title="entsprechenden">entspr.</abbr> Channel, <code>timestamp</code> für die Versionsnummer (UNIX-Zeit des Buildzeitpunktes) und <code>version</code> für die Versionsnummer.</p>
+            <p>Während <code>alpha</code>, <code>beta</code> und <code>stable</code> immer aktuelle Werte beinhalten, ist <code>server</code> nicht die aktuelle Server-Version, sondern nur die letzte Server-Version, die alle aktuellen Clients noch unterstützt. Somit wird dieser Wert nur bei kritischen Updates angehoben.</p>
         </section>
     </body>
 </html>
