@@ -1,0 +1,81 @@
+:root {
+    --accent-color: #62C3D0;
+    --font-color: #000;
+    --bg-color: #fff;
+    }
+    
+    ::selection{
+    color: var(--bg-color);  
+    background-color: var(--accent-color);  
+    } 
+    
+    body {
+    margin: 0;
+    background-color: var(--bg-color);
+    }
+    
+    ul {
+    position: fixed;
+    top: 0%;
+    width: 100%;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: var(--bg-color);
+    box-shadow: 0 0 80px 0px #00000020;
+    z-index: 999;
+    }
+    
+    li {
+    float: left;
+    }
+    
+    li a {
+    font-family: 'Raleway', sans-serif;
+    display: block;
+    color: var(--font-color);
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    transition:.2s;
+    }
+    
+    li a:hover {
+    color: var(--accent-color);
+    }
+    
+    .page-content {
+    padding: 20px;
+    margin-top: 30px;
+    font-family: 'Raleway', sans-serif;
+    }
+    
+    .page-content h1 {
+    text-decoration: underline;
+    text-decoration-color: var(--accent-color);
+    font-size: 21pt;
+    }
+    
+    .page-content a {
+    text-decoration: underline;
+    text-decoration-color: var(--accent-color);
+    color: var(--font-color);
+    transition:.2s; 
+    }
+    
+    .page-content a:hover {
+    color: var(--accent-color);
+    }
+    
+    ::-webkit-scrollbar {  
+    width: 7px;
+    }
+    
+    ::-webkit-scrollbar-track {
+      background: var(--bg-color); 
+    }
+     
+    ::-webkit-scrollbar-thumb {
+      background: var(--accent-color);
+    }
