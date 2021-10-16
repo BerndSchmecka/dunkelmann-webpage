@@ -44,6 +44,11 @@ li a {
 li a:hover {
     color: var(--accent-color);
 }
+
+.active {
+    color: var(--bg-color);
+    background-color: var(--font-color);
+}
     
 .page-content {
     padding: 20px;
