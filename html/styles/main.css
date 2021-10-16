@@ -47,7 +47,11 @@ li a:hover {
 
 .active {
     color: var(--bg-color);
-    background-color: var(--font-color);
+    background-color: var(--accent-color);
+}
+
+.active:hover {
+    color: var(--font-color);
 }
     
 .page-content {
