@@ -71,6 +71,15 @@ li a:hover {
 .page-content code {
     color: var(--accent-color);
 }
+
+.page-content abbr {
+    cursor: help;
+    transition:.2s;
+}
+
+.page-content abbr:hover {
+    color: var(--accent-color);
+}
     
 ::-webkit-scrollbar {  
     width: 7px;
