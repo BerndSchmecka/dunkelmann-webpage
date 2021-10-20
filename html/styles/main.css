@@ -107,3 +107,9 @@ li a:hover {
 ::-webkit-scrollbar-thumb {
     background: var(--accent-color);
 }
+
+footer {
+    position: absolute;
+    bottom:0;
+    right:0;
+}
