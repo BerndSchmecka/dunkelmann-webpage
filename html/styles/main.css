@@ -89,6 +89,11 @@ li a:hover {
 .page-content abbr:hover {
     color: var(--accent-color);
 }
+
+.embedded-content {
+    width: 100%;
+    
+}
     
 ::-webkit-scrollbar {  
     width: 7px;
