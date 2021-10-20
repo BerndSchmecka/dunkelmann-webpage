@@ -9,6 +9,15 @@
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@300&display=swap" rel="stylesheet">
         <link rel="stylesheet" href="styles/main.css">
+        <script>
+
+            function resizeIframe(obj) {
+          
+              obj.style.height = obj.contentWindow.document.body.scrollHeight + 'px';
+          
+            }
+          
+        </script>
     </head>
     <body>
         <section>
@@ -21,7 +30,7 @@
     
         <section class="page-content">
             <h1>G&auml;stebuch</h1>
-            <iframe class="embedded-content" src="https://embed.dunkelmann.eu/gaestebuch/" title="G&auml;stebuch"></iframe>
+            <iframe class="embedded-content" src="https://embed.dunkelmann.eu/gaestebuch/" title="G&auml;stebuch" scrolling="no" onload="resizeIframe(this)"></iframe>
         </section>
     </body>
 </html>
