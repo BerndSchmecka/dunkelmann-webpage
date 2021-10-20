@@ -133,11 +133,11 @@ li a:hover {
     }
 
     .active {
-        color: var(--font-color-dark);
+        color: var(--bg-color-dark);
     }
 
     .active:hover {
-        color: var(--font-color-dark);
+        color: var(--bg-color-dark);
     }
 
     ::-webkit-scrollbar-track {
