@@ -51,7 +51,7 @@ li a:hover {
 }
 
 .active:hover {
-    color: var(--font-color);
+    color: var(--bg-color);
 }
     
 .page-content {
