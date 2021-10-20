@@ -2,7 +2,7 @@
     --accent-color: #62C3D0;
     --font-color: #000;
     --bg-color: #fff;
-    --font-color-dark: #d6d0c6;
+    --font-color-dark: #c9c3b8;
     --bg-color-dark: #242525;
 }
     
@@ -130,5 +130,17 @@ li a:hover {
 
     .page-content a {
         color: var(--font-color-dark);
+    }
+
+    .active {
+        color: var(--font-color-dark);
+    }
+
+    .active:hover {
+        color: var(--font-color-dark);
+    }
+
+    ::-webkit-scrollbar-track {
+        background: var(--bg-color-dark); 
     }
 }
