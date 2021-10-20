@@ -123,4 +123,12 @@ li a:hover {
     li a {
         color: var(--font-color-dark);
     }
+
+    .page-content {
+        color: var(--font-color-dark);
+    }
+
+    .page-content a {
+        color: var(--font-color-dark);
+    }
 }
