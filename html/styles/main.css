@@ -2,6 +2,8 @@
     --accent-color: #62C3D0;
     --font-color: #000;
     --bg-color: #fff;
+    --font-color-dark: #d6d0c6;
+    --bg-color-dark: #1f2020;
 }
     
 ::selection{
@@ -106,4 +108,19 @@ li a:hover {
      
 ::-webkit-scrollbar-thumb {
     background: var(--accent-color);
+}
+
+@media (prefers-color-scheme: dark) {
+    body {
+        background-color: var(--bg-color-dark);
+    }
+
+    ul {
+        background-color: var(--bg-color-dark);
+        box-shadow: 0 0 80px 0px #ffffff20;
+    }
+
+    li a {
+        color: var(--font-color-dark);
+    }
 }
