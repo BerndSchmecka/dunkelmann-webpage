@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>503 - Service Temporarily Unavailable</title>
+</head>
+<body>
+    <section style="margin: auto; width: 50%;">
+        <div style="clear: left;">
+            <p style="float: left;"><img width="256px" src="https://upload.wikimedia.org/wikipedia/commons/f/f4/Baustelle.svg" alt="Baustellenschild"></p>
+            <p>
+                <h1>503 Service Temporarily Unavailable</h1>
+                <p>
+                    An dieser Seite wird derzeit gearbeitet, deswegen wird Ihnen diese Fehlermeldung angezeigt. Dieser Fehler ist nur temporär. Versuchen Sie es zu einem späteren Zeitpunkt erneut!
+                </p>
+                <p id="retry_after" style="font-family: 'Courier New', Courier, monospace;">
+                    Retry-After: %date%
+                </p>
+            </p>
+        </div>
+    </section>
+    <script>
+        var req = new XMLHttpRequest();
+        req.open('GET', document.location, false);
+        req.send(null);
+        var header = req.getResponseHeader("Retry-After");
+        document.getElementById('retry_after').innerHTML.replace('%date%', header);
+    </script>
+</body>
+</html>
