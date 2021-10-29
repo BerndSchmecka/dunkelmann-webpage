@@ -26,7 +26,8 @@
         req.onreadystatechange = function () {
             if(req.readyState === 4 && req.status === 503) {
                 var header = req.getResponseHeader("Retry-After");
-                document.getElementById('retry_after').innerHTML.replace('%date%', header);
+                var obj = document.getElementById('retry_after');
+                obj.innerHTML = obj.innerHTML.replace('%date%', header);
             }
         }
         req.open('GET', document.location, true);
