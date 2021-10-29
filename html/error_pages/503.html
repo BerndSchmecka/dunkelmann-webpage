@@ -23,10 +23,14 @@
     </section>
     <script>
         var req = new XMLHttpRequest();
-        req.open('GET', document.location, false);
+        req.onreadystatechange = function () {
+            if(req.readyState === 4 && req.status === 503) {
+                var header = req.getResponseHeader("Retry-After");
+                document.getElementById('retry_after').innerHTML.replace('%date%', header);
+            }
+        }
+        req.open('GET', document.location, true);
         req.send(null);
-        var header = req.getResponseHeader("Retry-After");
-        document.getElementById('retry_after').innerHTML.replace('%date%', header);
     </script>
 </body>
 </html>
