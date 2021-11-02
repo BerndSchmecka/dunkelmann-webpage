@@ -1,0 +1,60 @@
+<html>
+    <head>
+        <title>TeamSpeak - Dunkelmann</title>
+        <meta name="theme-color" content="#62C3D0">
+        <meta name="author" content="Dunkelmann">
+        <meta name="keywords" content="Dunkelmann">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@300&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="styles/main.css">
+    </head>
+    <body>
+        <section>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="api.html">API</a></li>
+                <li><a class="active" href="teamspeak.html">TeamSpeak</a></li>
+                <li><a href="gaestebuch.html">G&auml;stebuch</a></li>
+            </ul>
+        </section>
+    
+        <section class="page-content">
+            <h1>Aktuelle TeamSpeak-Versionen</h1>
+            <p>Folgende Versionen von TeamSpeak sind derzeit aktuell:</p>
+            <h2>TeamSpeak 3</h2>
+            <table id="ts3version">
+            </table>
+            <h2>TeamSpeak 5</h2>
+            <table id="ts5version">
+            </table>
+        </section>
+
+        <script>
+            var tRequest = new XMLHttpRequest();
+            tRequest.onreadystatechange = function() {
+                if(tRequest.readyState === 4 && tRequest.status === 200){
+                    var obj = JSON.parse(tRequest.responseText);
+                    obj.versions.forEach(element => {
+                        document.getElementById('ts3version').innerHTML += "<tr><td>"+element.channel[0].toUpperCase()+element.channel.substring(1)+":</td><td>"+element.version+" [Build: "+element.timestamp+"]</td></tr>";
+                    });
+                }
+            }
+            tRequest.open("GET", "https://api.dunkelmann.eu/ts3version");
+            tRequest.send();
+
+            var fRequest = new XMLHttpRequest();
+            fRequest.onreadystatechange = function() {
+                if(fRequest.readyState === 4 && fRequest.status === 200){
+                    var obj = JSON.parse(fRequest.responseText);
+                    obj.versionInfo.forEach(element => {
+                        document.getElementById('ts5version').innerHTML += "<tr><td>"+element.platformName[0].toUpperCase()+element.platformName.substring(1)+":</td><td>"+element.platformInfo.version+"-"+element.platformInfo.version_string + " [Build: "+element.platformInfo.timestamp+"]</td></tr>";
+                    });
+                }
+            }
+            fRequest.open("GET", "https://api.dunkelmann.eu/ts5version");
+            fRequest.send();
+        </script>
+    </body>
+</html>

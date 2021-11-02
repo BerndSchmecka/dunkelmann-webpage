@@ -67,6 +67,12 @@ li a:hover {
     text-decoration-color: var(--accent-color);
     font-size: 21pt;
 }
+
+.page-content h2 {
+    text-decoration: underline;
+    text-decoration-color: var(--accent-color);
+    font-size: 15pt;
+}
     
 .page-content a {
     text-decoration: underline;
