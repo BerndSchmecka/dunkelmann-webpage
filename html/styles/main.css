@@ -138,6 +138,10 @@ li a:hover {
         color: var(--font-color-dark);
     }
 
+    .page-content table {
+        color: var(--font-color-dark);
+    }
+
     .active {
         color: var(--bg-color-dark);
     }
