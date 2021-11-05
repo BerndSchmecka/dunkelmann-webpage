@@ -1,11 +1,43 @@
 <html>
 <head>
 <title>Dunkelmann Status</title>
+<meta name="author" content="Dunkelmann">
+<meta name="keywords" content="Dunkelmann,Status,Statuspage">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Raleway:wght@300&display=swap" rel="stylesheet">
 <style>
+:root {
+    --accent-color: #62C3D0;
+    --font-color: #000;
+    --bg-color: #fff;
+    --font-color-dark: #c9c3b8;
+    --bg-color-dark: #242525;
+}
+
 .embedded-content {
 width: 100%;
 height: 100%;
 border: none;
+}
+
+b {
+	text-decoration: underline;
+	text-decoration-color: var(--accent-color);
+	font-weight: bolder;
+	font-size: 14pt;
+}
+
+body {
+	font-family: 'Raleway', sans-serif;
+}
+
+@media (prefers-color-scheme: dark) {
+	body {
+		color: var(--font-color-dark);
+		background-color: var(--bg-color-dark);
+	}
 }
 </style>
 </head>
