@@ -85,6 +85,33 @@ li a:hover {
     color: var(--accent-color);
 }
 
+.page-content #ts3version td {
+    text-align: center;
+    padding: 10px;
+}
+
+.page-content #ts5version td {
+    text-align: center;
+    padding: 10px;
+}
+
+.page-content button {
+    padding: 5px 10px 5px 10px;
+    background-color: var(--accent-color);
+    color: var(--bg-color);
+    font-size: 12pt;
+    font-family: 'Raleway', sans-serif;
+    border: 2px solid var(--accent-color);
+    border-radius: 8px;
+    transition:.2s;
+}
+
+.page-content button:hover {
+    background-color: var(--bg-color);
+    color: var(--font-color);
+    cursor: pointer;
+}
+
 .page-content code {
     color: var(--accent-color);
 }

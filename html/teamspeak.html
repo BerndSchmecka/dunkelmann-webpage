@@ -25,19 +25,41 @@
             <p>Folgende Versionen von TeamSpeak sind derzeit aktuell:</p>
             <h2>TeamSpeak 3</h2>
             <table id="ts3version">
+                <tr>
+                    <th>Update Channel</th>
+                    <th>Current Version</th>
+                </tr>
             </table>
             <h2>TeamSpeak 5</h2>
             <table id="ts5version">
+                <tr>
+                    <th>Platform</th>
+                    <th>Current Version (<abbr title="Version from the 'latest' Update Channel">latest</abbr>)</th>
+                    <th>Download (<abbr title="Version from the 'latest' Update Channel">latest</abbr>)</th>
+                </tr>
             </table>
         </section>
 
         <script>
+            function getDownloadExtension(platformName) {
+                switch(platformName.toLowerCase()){
+                    case "windows":
+                        return "msi";
+                    case "mac":
+                        return "dmg";
+                    case "linux":
+                        return "tar.gz";
+                    default:
+                        return "html"; //Bad Case
+                }
+            }
+
             var tRequest = new XMLHttpRequest();
             tRequest.onreadystatechange = function() {
                 if(tRequest.readyState === 4 && tRequest.status === 200){
                     var obj = JSON.parse(tRequest.responseText);
                     obj.versions.forEach(element => {
-                        document.getElementById('ts3version').innerHTML += "<tr><td>"+element.channel[0].toUpperCase()+element.channel.substring(1)+":</td><td>"+element.version+" [Build: "+element.timestamp+"]</td></tr>";
+                        document.getElementById('ts3version').innerHTML += "<tr><td>"+element.channel[0].toUpperCase()+element.channel.substring(1)+"</td><td>"+element.version+" [Build: "+element.timestamp+"]</td></tr>";
                     });
                 }
             }
@@ -49,7 +71,7 @@
                 if(fRequest.readyState === 4 && fRequest.status === 200){
                     var obj = JSON.parse(fRequest.responseText);
                     obj.versionInfo.forEach(element => {
-                        document.getElementById('ts5version').innerHTML += "<tr><td>"+element.platformName[0].toUpperCase()+element.platformName.substring(1)+":</td><td>"+element.platformInfo.version+"-"+element.platformInfo.version_string + " [Build: "+element.platformInfo.timestamp+"]</td></tr>";
+                        document.getElementById('ts5version').innerHTML += "<tr><td>"+element.platformName[0].toUpperCase()+element.platformName.substring(1)+"</td><td>"+element.platformInfo.version+"-"+element.platformInfo.version_string + " [Build: "+element.platformInfo.timestamp+"]</td><td><button onclick=\"window.open('"+ "https://files.teamspeak-services.com/pre_releases/client/" + element.platformInfo.version+"-"+element.platformInfo.version_string + "/teamspeak-client." + getDownloadExtension(element.platformName) +"', '_blank').focus();\">Download</button></td></tr>";
                     });
                 }
             }
