@@ -1,5 +1,7 @@
-.bg-blur {
-    background: rgba(255,255,255,0.7);
-    box-shadow: 0 0 80px 0px #00000020;
-    backdrop-filter: saturate(180%) blur(20px);
+code {
+    color: var(--bs-primary) !important;
+}
+
+h1, h2 {
+    text-decoration: underline solid var(--bs-primary) 0.07em !important;
 }

@@ -1,26 +1,29 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="de">
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="author" content="Dunkelmann">
+    <meta name="keywords" content="Dunkelmann">
+    <link rel="stylesheet" href="https://cdn.dunkelmann.eu/frameworks/bootstrap@5.0.2/dist/css/bootstrap.min.css">
     <title>503 - Service Temporarily Unavailable</title>
 </head>
 <body>
-    <section style="margin: auto; width: 50%;">
-        <div style="clear: left;">
-            <p style="float: left;"><img width="256px" src="https://upload.wikimedia.org/wikipedia/commons/f/f4/Baustelle.svg" alt="Baustellenschild"></p>
-            <p>
+    <div class="container" style="margin-top:75px;">
+        <div class="row">
+            <div class="col-md-3">
+                <img class="rounded float-left" width="256px" src="https://upload.wikimedia.org/wikipedia/commons/f/f4/Baustelle.svg" alt="Baustellenschild">
+            </div>
+            <div class="col-md-9">
                 <h1>503 Service Temporarily Unavailable</h1>
-                <p>
-                    An dieser Seite wird derzeit gearbeitet, deswegen wird Ihnen diese Fehlermeldung angezeigt. Dieser Fehler ist nur temporär. Versuchen Sie es zu einem späteren Zeitpunkt erneut!
-                </p>
+                <p>An dieser Seite wird derzeit gearbeitet, deswegen wird Ihnen diese Fehlermeldung angezeigt. Dieser Fehler ist nur temporär. Versuchen Sie es zu einem späteren Zeitpunkt erneut!</p>
                 <p id="retry_after" style="font-family: 'Courier New', Courier, monospace;">
                     Retry-After: %date%
                 </p>
-            </p>
+            </div>
         </div>
-    </section>
+    </div>
+    <script src="https://cdn.dunkelmann.eu/frameworks/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
     <script>
         var req = new XMLHttpRequest();
         req.onreadystatechange = function () {
