@@ -62,16 +62,8 @@
     </div>
     <script src="https://cdn.dunkelmann.eu/frameworks/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
     <script>
-        var req = new XMLHttpRequest();
-        req.onreadystatechange = function () {
-            if(req.readyState === 4 && req.status === 503) {
-                var header = req.getRequestHeader("Host");
-                var obj = document.getElementById('host');
-                obj.innerHTML = obj.innerHTML.replace('%host%', header);
-            }
-        }
-        req.open('GET', document.location, true);
-        req.send(null);
+        var obj = document.getElementById('host');
+        obj.innerHTML = obj.innerHTML.replace('%host%', window.location.host);
     </script>
 </body>
 </html>
