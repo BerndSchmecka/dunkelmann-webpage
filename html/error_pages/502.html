@@ -12,8 +12,9 @@
 <body>
     <div class="container-fluid">
         <div class="row">
-            <div class="col">
+            <div class="col-6">
                 <h1>502 Bad Gateway</h1>
+                <p>Du bekommst diese Meldung angezeigt, da zwar der Hauptserver von <strong>dunkelmann.eu</strong> einwandfrei funktioniert, aber der dahinterliegende Server für <strong class="host">%host%</strong> nicht zu erreichen ist. Dies kann mehrere Ursachen haben, vermutlich ist der Server abgestürzt oder wird kurz neugestartet. Für längere <strong>geplante</strong> Wartungen wird in der Regel eine Seite mit Statuscode 503 vorgeschaltet, die &uuml;ber die Wartungen informiert.</p>
             </div>
         </div>
         <div class="row">
@@ -44,26 +45,28 @@
         </div>
         <div class="row" style="margin-top: 30px;">
             <div class="col-2">
-                <p>Dein Browser</p>
+                <strong>Dein Browser</strong>
             </div>
             <div class="col-2">
                 
             </div>
             <div class="col-2">
-                <p>Dunkelmann Webserver</p>
+                <strong>Dunkelmann Webserver</strong>
             </div>
             <div class="col-2">
                 
             </div>
             <div class="col-2">
-                <p id="host">%host%</p>
+                <strong class="host">%host%</strong>
             </div>
         </div>
     </div>
     <script src="https://cdn.dunkelmann.eu/frameworks/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
     <script>
-        var obj = document.getElementById('host');
-        obj.innerHTML = obj.innerHTML.replace('%host%', window.location.host);
+        var obj_list = document.getElementsByClassName('host');
+        Array.prototype.forEach.call(obj_list, function(obj) {
+            obj.innerHTML = obj.innerHTML.replace('%host%', window.location.host);
+        });
     </script>
 </body>
 </html>
