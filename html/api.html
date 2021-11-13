@@ -1,38 +1,51 @@
-<html>
+<!DOCTYPE html>
+<html lang="de">
     <head>
-        <title>API - Dunkelmann</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="theme-color" content="#62C3D0">
         <meta name="author" content="Dunkelmann">
         <meta name="keywords" content="Dunkelmann">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="preconnect" href="https://fonts.googleapis.com">
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@300&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdn.dunkelmann.eu/frameworks/bootstrap@5.0.2/dist/css/bootstrap.min.css">
         <link rel="stylesheet" href="styles/main.css">
+        <title>API - Dunkelmann</title>
     </head>
     <body>
-        <section>
-            <ul>
-                <li><a href="index.html">Home</a></li>
-                <li><a class="active" href="api.html">API</a></li>
-                <li><a href="teamspeak.html">TeamSpeak</a></li>
-                <li><a href="gaestebuch.html">G&auml;stebuch</a></li>
-            </ul>
-        </section>
+        <nav class="navbar navbar-expand-lg fixed-top navbar-light bg-blur">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="#">Dunkelmann</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+                    <div class="navbar-nav">
+                        <a class="nav-link" href="index.html">Home</a>
+                        <a class="nav-link active" aria-current="page" href="api.html">API</a>
+                        <a class="nav-link" href="teamspeak.html">TeamSpeak</a>
+                        <a class="nav-link" href="gaestebuch.html">G&auml;stebuch</a>
+                    </div>
+                </div>
+            </div>
+        </nav>
     
-        <section class="page-content">
-            <h1>Die Dunkelmann-API</h1>
-            <p>
-                Auf dieser Seite wird die Dunkelmann-API erkl&auml;rt.
-                Diese ist unter <code>api.dunkelmann.eu</code> zu erreichen und es existieren folgende Endpoints:
-            </p>
-            <code>GET /ts3version</code>
-            <p>Dieser Endpoint liefert beispielsweise folgende Antwort:</p>
-            <code>{"value":5,"versions":[{"channel":"server","timestamp":1547625010,"version":"3.6.0"},{"channel":"stable","timestamp":1606312422,"version":"3.5.6"},{"channel":"beta","timestamp":1608224421,"version":"3.5.7"},{"channel":"alpha","timestamp":1613066709,"version":"3.5.7"}],"value2":4}</code>
-            <p>Dabei sind <code>value</code> <abbr title="beziehungsweise">bzw.</abbr> <code>value2</code> unbekannte Werte.</p>
-            <p>Der Wert <code>versions</code> hingegen ist ein Array, welches aus Objekten f&uuml;r jeden Update-Channel von TeamSpeak 3 besteht.</p>
-            <p>Dabei steht <code>channel</code> f&uuml;r den <abbr title="entsprechenden">entspr.</abbr> Channel, <code>timestamp</code> f&uuml;r die Versionsnummer (UNIX-Zeit des Buildzeitpunktes) und <code>version</code> f&uuml;r die Versionsnummer.</p>
-            <p>W&auml;hrend <code>alpha</code>, <code>beta</code> und <code>stable</code> immer aktuelle Werte beinhalten, ist <code>server</code> nicht die aktuelle Server-Version, sondern nur die letzte Server-Version, die alle aktuellen Clients noch unterst&uuml;tzt. Somit wird dieser Wert nur bei kritischen Updates angehoben.</p>
-        </section>
+        <div class="container-fluid" style="margin-top:75px;">
+            <div class="row">
+                <div class="col">
+                    <h1>Die Dunkelmann-API</h1>
+                    <p>
+                        Auf dieser Seite wird die Dunkelmann-API erkl&auml;rt.
+                        Diese ist unter <code>api.dunkelmann.eu</code> zu erreichen und es existieren folgende Endpoints:
+                    </p>
+                    <code>GET /ts3version</code>
+                    <p>Dieser Endpoint liefert beispielsweise folgende Antwort:</p>
+                    <code>{"value":5,"versions":[{"channel":"server","timestamp":1547625010,"version":"3.6.0"},{"channel":"stable","timestamp":1606312422,"version":"3.5.6"},{"channel":"beta","timestamp":1608224421,"version":"3.5.7"},{"channel":"alpha","timestamp":1613066709,"version":"3.5.7"}],"value2":4}</code>
+                    <p>Dabei sind <code>value</code> <abbr title="beziehungsweise">bzw.</abbr> <code>value2</code> unbekannte Werte.</p>
+                    <p>Der Wert <code>versions</code> hingegen ist ein Array, welches aus Objekten f&uuml;r jeden Update-Channel von TeamSpeak 3 besteht.</p>
+                    <p>Dabei steht <code>channel</code> f&uuml;r den <abbr title="entsprechenden">entspr.</abbr> Channel, <code>timestamp</code> f&uuml;r die Versionsnummer (UNIX-Zeit des Buildzeitpunktes) und <code>version</code> f&uuml;r die Versionsnummer.</p>
+                    <p>W&auml;hrend <code>alpha</code>, <code>beta</code> und <code>stable</code> immer aktuelle Werte beinhalten, ist <code>server</code> nicht die aktuelle Server-Version, sondern nur die letzte Server-Version, die alle aktuellen Clients noch unterst&uuml;tzt. Somit wird dieser Wert nur bei kritischen Updates angehoben.</p>
+                </div>
+            </div>
+        </div>
+        <script src="https://cdn.dunkelmann.eu/frameworks/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
     </body>
 </html>

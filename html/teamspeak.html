@@ -1,45 +1,75 @@
-<html>
+<!DOCTYPE html>
+<html lang="de">
     <head>
-        <title>TeamSpeak - Dunkelmann</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="theme-color" content="#62C3D0">
         <meta name="author" content="Dunkelmann">
         <meta name="keywords" content="Dunkelmann">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="preconnect" href="https://fonts.googleapis.com">
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@300&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdn.dunkelmann.eu/frameworks/bootstrap@5.0.2/dist/css/bootstrap.min.css">
         <link rel="stylesheet" href="styles/main.css">
+        <title>TeamSpeak - Dunkelmann</title>
     </head>
     <body>
-        <section>
-            <ul>
-                <li><a href="index.html">Home</a></li>
-                <li><a href="api.html">API</a></li>
-                <li><a class="active" href="teamspeak.html">TeamSpeak</a></li>
-                <li><a href="gaestebuch.html">G&auml;stebuch</a></li>
-            </ul>
-        </section>
+        <nav class="navbar navbar-expand-lg fixed-top navbar-light bg-blur">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="#">Dunkelmann</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+                    <div class="navbar-nav">
+                        <a class="nav-link" href="index.html">Home</a>
+                        <a class="nav-link" href="api.html">API</a>
+                        <a class="nav-link active" aria-current="page" href="teamspeak.html">TeamSpeak</a>
+                        <a class="nav-link" href="gaestebuch.html">G&auml;stebuch</a>
+                    </div>
+                </div>
+            </div>
+        </nav>
     
-        <section class="page-content">
-            <h1>Aktuelle TeamSpeak-Versionen</h1>
-            <p>Folgende Versionen von TeamSpeak sind derzeit aktuell:</p>
-            <h2>TeamSpeak 3</h2>
-            <table id="ts3version">
-                <tr>
-                    <th>Update Channel</th>
-                    <th>Current Version</th>
-                </tr>
-            </table>
-            <h2>TeamSpeak 5</h2>
-            <table id="ts5version">
-                <tr>
-                    <th>Platform</th>
-                    <th>Current Version (<abbr title="Version from the 'latest' Update Channel">latest</abbr>)</th>
-                    <th>Download (<abbr title="Version from the 'latest' Update Channel">latest</abbr>)</th>
-                </tr>
-            </table>
-        </section>
+        <div class="container-fluid" style="margin-top:75px;">
+            <div class="row">
+                <div class="col">
+                    <h1>Aktuelle TeamSpeak-Versionen</h1>
+                    <p>Folgende Versionen von TeamSpeak sind derzeit aktuell:</p>
+                </div>
+            </div>
 
+            <div class="row">
+                <div class="col">
+                    <h2>TeamSpeak 3</h2>
+                    <table class="table table-striped table-bordered">
+                        <thead>
+                            <tr>
+                                <th scope="col">Update Channel</th>
+                                <th scope="col">Current Version</th>
+                            </tr>
+                        </thead>
+                        <tbody id="ts3version">
+        
+                        </tbody>
+                    </table>
+                </div>
+                <div class="col">
+                    <h2>TeamSpeak 5</h2>
+                    <table class="table table-striped table-bordered">
+                        <thead>
+                            <tr>
+                                <th scope="col">Platform</th>
+                                <th scope="col">Current Version (<abbr title="Version from the 'latest' Update Channel">latest</abbr>)</th>
+                                <th scope="col">Download (<abbr title="Version from the 'latest' Update Channel">latest</abbr>)</th>
+                            </tr>
+                        </thead>
+                        <tbody id="ts5version">
+        
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <script src="https://cdn.dunkelmann.eu/frameworks/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
         <script>
             function getDownloadExtension(platformName) {
                 switch(platformName.toLowerCase()){
@@ -59,7 +89,7 @@
                 if(tRequest.readyState === 4 && tRequest.status === 200){
                     var obj = JSON.parse(tRequest.responseText);
                     obj.versions.forEach(element => {
-                        document.getElementById('ts3version').innerHTML += "<tr><td>"+element.channel[0].toUpperCase()+element.channel.substring(1)+"</td><td>"+element.version+" [Build: "+element.timestamp+"]</td></tr>";
+                        document.getElementById('ts3version').innerHTML += "<tr><th scope=\"row\">"+element.channel[0].toUpperCase()+element.channel.substring(1)+"</th><td>"+element.version+" [Build: "+element.timestamp+"]</td></tr>";
                     });
                 }
             }
@@ -71,7 +101,7 @@
                 if(fRequest.readyState === 4 && fRequest.status === 200){
                     var obj = JSON.parse(fRequest.responseText);
                     obj.versionInfo.forEach(element => {
-                        document.getElementById('ts5version').innerHTML += "<tr><td>"+element.platformName[0].toUpperCase()+element.platformName.substring(1)+"</td><td>"+element.platformInfo.version+"-"+element.platformInfo.version_string + " [Build: "+element.platformInfo.timestamp+"]</td><td><button onclick=\"window.open('"+ "https://files.teamspeak-services.com/pre_releases/client/" + element.platformInfo.version+"-"+element.platformInfo.version_string + "/teamspeak-client." + getDownloadExtension(element.platformName) +"', '_blank').focus();\">Download</button></td></tr>";
+                        document.getElementById('ts5version').innerHTML += "<tr><th scope=\"row\">"+element.platformName[0].toUpperCase()+element.platformName.substring(1)+"</th><td>"+element.platformInfo.version+"-"+element.platformInfo.version_string + " [Build: "+element.platformInfo.timestamp+"]</td><td><button type=\"button\" class=\"btn btn-primary\" onclick=\"window.open('"+ "https://files.teamspeak-services.com/pre_releases/client/" + element.platformInfo.version+"-"+element.platformInfo.version_string + "/teamspeak-client." + getDownloadExtension(element.platformName) +"', '_blank').focus();\">Download</button></td></tr>";
                     });
                 }
             }

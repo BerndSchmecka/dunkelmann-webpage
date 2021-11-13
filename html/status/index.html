@@ -1,122 +1,94 @@
-<html>
-<head>
-<title>Dunkelmann Status</title>
-<meta name="author" content="Dunkelmann">
-<meta name="keywords" content="Dunkelmann,Status,Statuspage">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Raleway:wght@300&display=swap" rel="stylesheet">
-<style>
-:root {
-    --accent-color: #62C3D0;
-    --font-color: #000;
-    --bg-color: #fff;
-    --font-color-dark: #c9c3b8;
-    --bg-color-dark: #242525;
-}
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta name="author" content="Dunkelmann">
+		<meta name="keywords" content="Dunkelmann,Status,Statuspage">
+		<link rel="stylesheet" href="https://cdn.dunkelmann.eu/frameworks/bootstrap@5.0.2/dist/css/bootstrap.min.css">
+		<title>Dunkelmann Status</title>
+	</head>
+    
+	<body>
+		<div id="status_table"><b>Services:</b><br><br>
+			<div class="container">
+				<div class="row">
+					<div class="col"><strong>Service Name</strong></div>
+					<div class="col"><strong>Service ID</strong></div>
+					<div class="col-5"><strong>Service URL</strong></div>
+					<div class="col-3"><strong>Service Status</strong></div>
+				</div>
+				<div class="row" id="website">
+					<div class="col">Homepage</div>
+				</div>
+				<div class="row" id="api">
+					<div class="col">Dunkelmann-API</div>
+				</div>
+				<div class="row" id="matrix">
+					<div class="col">Chat-Server (Synapse)</div>
+				</div>
+				<div class="row" id="insomnium">
+					<div class="col">Chat-Server (Insomnium)</div>
+				</div>
+				<div class="row" id="cloud">
+					<div class="col">Dunkelmann-Cloud</div>
+				</div>
+			</div>
+		</div>
+			<br>
+			<div id="legend"><b>Legend:</b><br><br>
+			<img src='assets/circle_green.png' alt='Circle (green)'> 2xx - Success<br>
+			<img src='assets/circle_orange.png' alt='Circle (orange)'> 3xx - Redirection<br>
+			<img src='assets/circle_yellow.png' alt='Circle (yellow)'> 4xx - Client Error<br>
+			<img src='assets/circle_red.png' alt='Circle (red)'> 5xx - Server Error<br>
+			<img src='assets/circle_blue.png' alt='Circle (blue)'> 6xx - Dunkelmann Error<br>
+			<img src='assets/circle_grey.png' alt='Circle (grey)'> Other/Unknown<br>
+			</div>
+			<br>
+			<div id="maintenance"><b>Scheduled Maintenances:</b><br><br>
+				<div class="ratio ratio-21x9">
+					<iframe src="https://embed.dunkelmann.eu/events/" title="Maintenances"></iframe>
+				</div>
+			</div>
+		<script src="https://cdn.dunkelmann.eu/frameworks/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+		<script>
 
-.embedded-content {
-width: 100%;
-height: 100%;
-border: none;
-}
-
-b {
-	text-decoration: underline;
-	text-decoration-color: var(--accent-color);
-	font-weight: bolder;
-	font-size: 14pt;
-}
-
-body {
-	font-family: 'Raleway', sans-serif;
-}
-
-@media (prefers-color-scheme: dark) {
-	body {
-		color: var(--font-color-dark);
-		background-color: var(--bg-color-dark);
-	}
-}
-</style>
-</head>
-<body>
-<div id="status_table"><b>Services:</b><br><br>
-<table>
-<tr>
-<th>Service Name</th>
-<th>Service ID</th>
-<th>Service URL</th>
-<th>Service Status</th>
-</tr>
-<tr id="website">
-<td>Homepage</td>
-</tr>
-<tr id="api">
-<td>Dunkelmann-API</td>
-</tr>
-<tr id="matrix">
-<td>Chat-Server (Synapse)</td>
-</tr>
-<tr id="insomnium">
-<td>Chat-Server (Insomnium)</td>
-</tr>
-<tr id="cloud">
-<td>Dunkelmann-Cloud</td>
-</tr>
-</table>
-</div>
-<br>
-<div id="legend"><b>Legend:</b><br><br>
-<img src='assets/circle_green.png' alt='Circle (green)'> 2xx - Success<br>
-<img src='assets/circle_orange.png' alt='Circle (orange)'> 3xx - Redirection<br>
-<img src='assets/circle_yellow.png' alt='Circle (yellow)'> 4xx - Client Error<br>
-<img src='assets/circle_red.png' alt='Circle (red)'> 5xx - Server Error<br>
-<img src='assets/circle_blue.png' alt='Circle (blue)'> 6xx - Dunkelmann Error<br>
-<img src='assets/circle_grey.png' alt='Circle (grey)'> Other/Unknown<br>
-</div>
-<br>
-<div id="maintenance"><b>Scheduled Maintenances:</b><br><br>
-<iframe class="embedded-content" src="https://embed.dunkelmann.eu/events/" title="Maintenances"></iframe>
-</div>
-<script>
-
-function appendImage(obj, name) {
-document.getElementById(obj.id).innerHTML += "<td><img src='assets/circle_"+name+".png' alt='Circle ("+name+")'> "+obj.statusCode+" "+obj.statusDesc+"</td>"
-}
-
-var req = new XMLHttpRequest();
-req.onreadystatechange = function() {
-if(req.readyState === 4 && req.status === 200){
-var resp = JSON.parse(req.responseText);
-
-resp.forEach(function(obj) {
-document.getElementById(obj.id).innerHTML += "<td>"+obj.id+"</td>"
-					  +  "<td>"+obj.url+"</td>";
-
-if(200 <= obj.statusCode && obj.statusCode <= 299){
-appendImage(obj, "green");
-} else if(300 <= obj.statusCode && obj.statusCode <= 399) {
-appendImage(obj, "orange");
-} else if(400 <= obj.statusCode && obj.statusCode <= 499) {
-appendImage(obj, "yellow");
-} else if(500 <= obj.statusCode && obj.statusCode <= 599) {
-appendImage(obj, "red");
-} else if(600 <= obj.statusCode && obj.statusCode <= 699) {
-appendImage(obj, "blue");
-} else {
-appendImage(obj, "grey");
-}
-
-});
-
-} else if (req.readyState === 4) {
-
-}
-}
-req.open("GET", "https://api.dunkelmann.eu/status");
-req.send();
-</script>
-</body>
+			function appendImage(obj, name) {
+			document.getElementById(obj.id).innerHTML += "<div class=\"col-3\"><img src='assets/circle_"+name+".png' alt='Circle ("+name+")'> "+obj.statusCode+" "+obj.statusDesc+"</div>"
+			}
+			
+			var req = new XMLHttpRequest();
+			req.onreadystatechange = function() {
+			if(req.readyState === 4 && req.status === 200){
+			var resp = JSON.parse(req.responseText);
+			
+			resp.forEach(function(obj) {
+			document.getElementById(obj.id).innerHTML += "<div class=\"col\">"+obj.id+"</div>"
+								  +  "<div class=\"col-5\">"+obj.url+"</div>";
+			
+			if(200 <= obj.statusCode && obj.statusCode <= 299){
+			appendImage(obj, "green");
+			} else if(300 <= obj.statusCode && obj.statusCode <= 399) {
+			appendImage(obj, "orange");
+			} else if(400 <= obj.statusCode && obj.statusCode <= 499) {
+			appendImage(obj, "yellow");
+			} else if(500 <= obj.statusCode && obj.statusCode <= 599) {
+			appendImage(obj, "red");
+			} else if(600 <= obj.statusCode && obj.statusCode <= 699) {
+			appendImage(obj, "blue");
+			} else {
+			appendImage(obj, "grey");
+			}
+			
+			});
+			
+			} else if (req.readyState === 4) {
+			
+			}
+			}
+			req.open("GET", "https://api.dunkelmann.eu/status");
+			req.send();
+			</script>
+	</body>
+	
 </html>
