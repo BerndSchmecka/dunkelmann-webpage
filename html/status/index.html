@@ -10,51 +10,71 @@
 	</head>
     
 	<body>
-		<div id="status_table"><b>Services:</b><br><br>
-			<div class="container">
-				<div class="row">
-					<div class="col"><strong>Service Name</strong></div>
-					<div class="col"><strong>Service ID</strong></div>
-					<div class="col-5"><strong>Service URL</strong></div>
-					<div class="col-3"><strong>Service Status</strong></div>
+		<div class="container-fluid">
+			<div class="row">
+				<div class="col">
+					<h1>Status Page</h1>
 				</div>
-				<div class="row" id="website">
-					<div class="col">Homepage</div>
+			</div>
+			<div class="row">
+				<div class="col-8">
+					<h2>Services</h2>
+					<table class="table table-striped table-bordered">
+						<thead>
+							<tr>
+								<th scope="col">Service Name</th>
+								<th scope="col">Service ID</th>
+								<th scope="col">Service URL</th>
+								<th scope="col">Service Status</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr id="website">
+								<th scope="col">Homepage</th>
+							</tr>
+							<tr id="api">
+								<th scope="col">Dunkelmann-API</th>
+							</tr>
+							<tr id="matrix">
+								<th scope="col">Chat-Server (Synapse)</th>
+							</tr>
+							<tr id="insomnium">
+								<th scope="col">Chat-Server (Insomnium)</th>
+							</tr>
+							<tr id="cloud">
+								<th scope="col">Dunkelmann-Cloud</th>
+							</tr>
+						</tbody>
+					</table>
 				</div>
-				<div class="row" id="api">
-					<div class="col">Dunkelmann-API</div>
+			</div>
+			<div class="row">
+				<div class="col-2">
+					<h2>Legend</h2>
+					<ul class="list-group">
+						<li class="list-group-item"><img src='assets/circle_green.png' alt='Circle (green)'> 2xx - Success</li>
+						<li class="list-group-item"><img src='assets/circle_orange.png' alt='Circle (orange)'> 3xx - Redirection</li>
+						<li class="list-group-item"><img src='assets/circle_yellow.png' alt='Circle (yellow)'> 4xx - Client Error</li>
+						<li class="list-group-item"><img src='assets/circle_red.png' alt='Circle (red)'> 5xx - Server Error</li>
+						<li class="list-group-item"><img src='assets/circle_blue.png' alt='Circle (blue)'> 6xx - Dunkelmann Error</li>
+						<li class="list-group-item"><img src='assets/circle_grey.png' alt='Circle (grey)'> Other/Unknown</li>
+					</ul>
 				</div>
-				<div class="row" id="matrix">
-					<div class="col">Chat-Server (Synapse)</div>
-				</div>
-				<div class="row" id="insomnium">
-					<div class="col">Chat-Server (Insomnium)</div>
-				</div>
-				<div class="row" id="cloud">
-					<div class="col">Dunkelmann-Cloud</div>
+			</div>
+			<div class="row">
+				<div class="col">
+					<h2>Scheduled Maintenances</h2>
+					<div class="ratio ratio-21x9">
+						<iframe src="https://embed.dunkelmann.eu/events/" title="Maintenances"></iframe>
+					</div>
 				</div>
 			</div>
 		</div>
-			<br>
-			<div id="legend"><b>Legend:</b><br><br>
-			<img src='assets/circle_green.png' alt='Circle (green)'> 2xx - Success<br>
-			<img src='assets/circle_orange.png' alt='Circle (orange)'> 3xx - Redirection<br>
-			<img src='assets/circle_yellow.png' alt='Circle (yellow)'> 4xx - Client Error<br>
-			<img src='assets/circle_red.png' alt='Circle (red)'> 5xx - Server Error<br>
-			<img src='assets/circle_blue.png' alt='Circle (blue)'> 6xx - Dunkelmann Error<br>
-			<img src='assets/circle_grey.png' alt='Circle (grey)'> Other/Unknown<br>
-			</div>
-			<br>
-			<div id="maintenance"><b>Scheduled Maintenances:</b><br><br>
-				<div class="ratio ratio-21x9">
-					<iframe src="https://embed.dunkelmann.eu/events/" title="Maintenances"></iframe>
-				</div>
-			</div>
 		<script src="https://cdn.dunkelmann.eu/frameworks/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
 		<script>
 
 			function appendImage(obj, name) {
-			document.getElementById(obj.id).innerHTML += "<div class=\"col-3\"><img src='assets/circle_"+name+".png' alt='Circle ("+name+")'> "+obj.statusCode+" "+obj.statusDesc+"</div>"
+			document.getElementById(obj.id).innerHTML += "<td><img src='assets/circle_"+name+".png' alt='Circle ("+name+")'> "+obj.statusCode+" "+obj.statusDesc+"</td>"
 			}
 			
 			var req = new XMLHttpRequest();
@@ -63,8 +83,8 @@
 			var resp = JSON.parse(req.responseText);
 			
 			resp.forEach(function(obj) {
-			document.getElementById(obj.id).innerHTML += "<div class=\"col\">"+obj.id+"</div>"
-								  +  "<div class=\"col-5\">"+obj.url+"</div>";
+			document.getElementById(obj.id).innerHTML += "<td>"+obj.id+"</td>"
+								  +  "<td>"+obj.url+"</td>";
 			
 			if(200 <= obj.statusCode && obj.statusCode <= 299){
 			appendImage(obj, "green");
