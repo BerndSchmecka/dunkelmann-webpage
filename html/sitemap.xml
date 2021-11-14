@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+    <url>
+        <loc>https://www.dunkelmann.eu</loc>
+        <changefreq>daily</changefreq>
+        <priority>1.00</priority>
+    </url>
+    <url>
+        <loc>https://www.dunkelmann.eu/api.html</loc>
+        <changefreq>daily</changefreq>
+        <priority>0.80</priority>
+    </url>
+    <url>
+        <loc>https://www.dunkelmann.eu/gaestebuch.html</loc>
+        <changefreq>daily</changefreq>
+        <priority>0.80</priority>
+    </url>
+    <url>
+        <loc>https://www.dunkelmann.eu/index.html</loc>
+        <changefreq>daily</changefreq>
+        <priority>0.80</priority>
+    </url>
+    <url>
+        <loc>https://www.dunkelmann.eu/teamspeak.html</loc>
+        <changefreq>daily</changefreq>
+        <priority>0.80</priority>
+    </url>
+</urlset>
