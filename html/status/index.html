@@ -6,6 +6,8 @@
 		<meta name="author" content="Dunkelmann">
 		<meta name="keywords" content="Dunkelmann,Status,Statuspage">
 		<link rel="stylesheet" href="https://cdn.dunkelmann.eu/frameworks/bootstrap@5.0.2/dist/css/bootstrap.min.css">
+		<link rel="stylesheet" href="https://cdn.dunkelmann.eu/frameworks/fontawesome@5.15.4/css/all.css">
+		<link rel="stylesheet" href="style.css">
 		<title>Dunkelmann Status</title>
 	</head>
     
@@ -17,7 +19,7 @@
 				</div>
 			</div>
 			<div class="row">
-				<div class="col-8">
+				<div class="col-md-auto">
 					<h2>Services</h2>
 					<table class="table table-striped table-bordered">
 						<thead>
@@ -49,15 +51,15 @@
 				</div>
 			</div>
 			<div class="row">
-				<div class="col-2">
+				<div class="col-md-auto">
 					<h2>Legend</h2>
 					<ul class="list-group">
-						<li class="list-group-item"><img src='assets/circle_green.png' alt='Circle (green)'> 2xx - Success</li>
-						<li class="list-group-item"><img src='assets/circle_orange.png' alt='Circle (orange)'> 3xx - Redirection</li>
-						<li class="list-group-item"><img src='assets/circle_yellow.png' alt='Circle (yellow)'> 4xx - Client Error</li>
-						<li class="list-group-item"><img src='assets/circle_red.png' alt='Circle (red)'> 5xx - Server Error</li>
-						<li class="list-group-item"><img src='assets/circle_blue.png' alt='Circle (blue)'> 6xx - Dunkelmann Error</li>
-						<li class="list-group-item"><img src='assets/circle_grey.png' alt='Circle (grey)'> Other/Unknown</li>
+						<li class="list-group-item"><i class="fas fa-circle text-success"></i> 2xx - Success</li>
+						<li class="list-group-item"><i class="fas fa-circle text-redirection"></i> 3xx - Redirection</li>
+						<li class="list-group-item"><i class="fas fa-circle text-warning"></i> 4xx - Client Error</li>
+						<li class="list-group-item"><i class="fas fa-circle text-danger"></i> 5xx - Server Error</li>
+						<li class="list-group-item"><i class="fas fa-circle text-primary"></i> 6xx - Dunkelmann Error</li>
+						<li class="list-group-item"><i class="fas fa-circle text-secondary"></i> Other/Unknown</li>
 					</ul>
 				</div>
 			</div>
@@ -74,7 +76,7 @@
 		<script>
 
 			function appendImage(obj, name) {
-			document.getElementById(obj.id).innerHTML += "<td><img src='assets/circle_"+name+".png' alt='Circle ("+name+")'> "+obj.statusCode+" "+obj.statusDesc+"</td>"
+			document.getElementById(obj.id).innerHTML += "<td><i class=\"fas fa-circle text-" + name + "\"></i> "+obj.statusCode+" "+obj.statusDesc+"</td>"
 			}
 			
 			var req = new XMLHttpRequest();
@@ -87,17 +89,17 @@
 								  +  "<td>"+obj.url+"</td>";
 			
 			if(200 <= obj.statusCode && obj.statusCode <= 299){
-			appendImage(obj, "green");
+			appendImage(obj, "success");
 			} else if(300 <= obj.statusCode && obj.statusCode <= 399) {
-			appendImage(obj, "orange");
+			appendImage(obj, "redirection");
 			} else if(400 <= obj.statusCode && obj.statusCode <= 499) {
-			appendImage(obj, "yellow");
+			appendImage(obj, "warning");
 			} else if(500 <= obj.statusCode && obj.statusCode <= 599) {
-			appendImage(obj, "red");
+			appendImage(obj, "danger");
 			} else if(600 <= obj.statusCode && obj.statusCode <= 699) {
-			appendImage(obj, "blue");
+			appendImage(obj, "primary");
 			} else {
-			appendImage(obj, "grey");
+			appendImage(obj, "secondary");
 			}
 			
 			});
