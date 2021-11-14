@@ -35,13 +35,36 @@
                         Auf dieser Seite wird die Dunkelmann-API erkl&auml;rt.
                         Diese ist unter <code>api.dunkelmann.eu</code> zu erreichen und es existieren folgende Endpoints:
                     </p>
-                    <code>GET /ts3version</code>
-                    <p>Dieser Endpoint liefert beispielsweise folgende Antwort:</p>
-                    <code>{"value":5,"versions":[{"channel":"server","timestamp":1547625010,"version":"3.6.0"},{"channel":"stable","timestamp":1606312422,"version":"3.5.6"},{"channel":"beta","timestamp":1608224421,"version":"3.5.7"},{"channel":"alpha","timestamp":1613066709,"version":"3.5.7"}],"value2":4}</code>
-                    <p>Dabei sind <code>value</code> <abbr title="beziehungsweise">bzw.</abbr> <code>value2</code> unbekannte Werte.</p>
-                    <p>Der Wert <code>versions</code> hingegen ist ein Array, welches aus Objekten f&uuml;r jeden Update-Channel von TeamSpeak 3 besteht.</p>
-                    <p>Dabei steht <code>channel</code> f&uuml;r den <abbr title="entsprechenden">entspr.</abbr> Channel, <code>timestamp</code> f&uuml;r die Versionsnummer (UNIX-Zeit des Buildzeitpunktes) und <code>version</code> f&uuml;r die Versionsnummer.</p>
-                    <p>W&auml;hrend <code>alpha</code>, <code>beta</code> und <code>stable</code> immer aktuelle Werte beinhalten, ist <code>server</code> nicht die aktuelle Server-Version, sondern nur die letzte Server-Version, die alle aktuellen Clients noch unterst&uuml;tzt. Somit wird dieser Wert nur bei kritischen Updates angehoben.</p>
+                    <nav>
+                        <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                          <button class="nav-link active" id="nav-ts3version-tab" data-bs-toggle="tab" data-bs-target="#nav-ts3version" type="button" role="tab" aria-controls="nav-ts3version" aria-selected="true"><code>GET /ts3version</code></button>
+                          <button class="nav-link" id="nav-ts5version-tab" data-bs-toggle="tab" data-bs-target="#nav-ts5version" type="button" role="tab" aria-controls="nav-ts5version" aria-selected="false"><code>GET /ts5version</code></button>
+                          <button class="nav-link" id="nav-status-tab" data-bs-toggle="tab" data-bs-target="#nav-status" type="button" role="tab" aria-controls="nav-status" aria-selected="false"><code>GET /status</code></button>
+                        </div>
+                      </nav>
+                      <div class="tab-content" id="nav-tabContent">
+                        <div class="tab-pane fade show active" id="nav-ts3version" role="tabpanel" aria-labelledby="nav-ts3version-tab">
+                            <p>Dieser Endpoint liefert <abbr title="zum Beispiel">z.B.</abbr> folgende Antwort:</p>
+                            <code>{"value":5,"versions":[{"channel":"server","timestamp":1547625010,"version":"3.6.0"},{"channel":"stable","timestamp":1606312422,"version":"3.5.6"},{"channel":"beta","timestamp":1608224421,"version":"3.5.7"},{"channel":"alpha","timestamp":1613066709,"version":"3.5.7"}],"value2":4}</code>
+                            <p>Dabei sind <code>value</code> <abbr title="beziehungsweise">bzw.</abbr> <code>value2</code> unbekannte Werte.</p>
+                            <p>Der Wert <code>versions</code> hingegen ist ein Array, welches aus Objekten f&uuml;r jeden Update-Channel von TeamSpeak 3 besteht.</p>
+                            <p>Dabei steht <code>channel</code> f&uuml;r den <abbr title="entsprechenden">entspr.</abbr> Channel, <code>timestamp</code> f&uuml;r die Versionsnummer (UNIX-Zeit des Buildzeitpunktes) und <code>version</code> f&uuml;r die Versionsnummer.</p>
+                            <p>W&auml;hrend <code>alpha</code>, <code>beta</code> und <code>stable</code> immer aktuelle Werte beinhalten, ist <code>server</code> nicht die aktuelle Server-Version, sondern nur die letzte Server-Version, die alle aktuellen Clients noch unterst&uuml;tzt. Somit wird dieser Wert nur bei kritischen Updates angehoben.</p>
+                        </div>
+                        <div class="tab-pane fade" id="nav-ts5version" role="tabpanel" aria-labelledby="nav-ts5version-tab">
+                            <p>Dieser Endpoint liefert <abbr title="zum Beispiel">z.B.</abbr> folgende Antwort:</p>
+                            <p><code>{"versionInfo":[{"platformName":"windows","platformInfo":{"version":"5.0.0","timestamp":1635340287,"version_string":"beta66"}},{"platformName":"linux","platformInfo":{"version":"5.0.0","timestamp":1635340287,"version_string":"beta66"}},{"platformName":"mac","platformInfo":{"version":"5.0.0","timestamp":1635340287,"version_string":"beta66"}}]}</code></p>
+                            <p>Dabei ist <code>versionInfo</code> ein Array bestehend aus Objekten f&uuml;r jede Plattform.</p>
+                            <p>Diese bestehen wiederum aus dem <code>platformName</code>, der den Namen der Plattform beinhaltet, und der <code>platformInfo</code>.</p>
+                            <p>Die <code>platformInfo</code> besteht aus der <code>version</code>, dem <code>timestamp</code> sowie dem zugeh&ouml;rigen <code>version_string</code>.</p>
+                        </div>
+                        <div class="tab-pane fade" id="nav-status" role="tabpanel" aria-labelledby="nav-status-tab">
+                            <p>Dieser Endpoint liefert <abbr title="zum Beispiel">z.B.</abbr> folgende Antwort:</p>
+                            <p><code>[{"id":"website","url":"https://dunkelmann.eu","statusCode":200,"statusDesc":"OK"},{"id":"api","url":"https://api.dunkelmann.eu/test","statusCode":200,"statusDesc":"OK"},{"id":"matrix","url":"https://matrix.dunkelmann.eu/_matrix/federation/v1/version","statusCode":200,"statusDesc":"OK"},{"id":"insomnium","url":"https://dev-matrix.dunkelmann.eu/_matrix/federation/v1/version","statusCode":502,"statusDesc":"Bad Gateway"},{"id":"cloud","url":"https://cloud.dunkelmann.eu","statusCode":503,"statusDesc":"Service Temporarily Unavailable"}]</code></p>
+                            <p>Man erh&auml;lt also ein Array, welches aus Objekten f&uuml;r jeden Service besteht.</p>
+                            <p>Dabei ist <code>id</code> ein eindeutiger Name f&uuml;r diesen Service, <code>url</code> die Adresse, die von der API gepr&uuml;ft wird, <code>statusCode</code> der zur&uuml;ckgegebene Status-Code sowie <code>statusDesc</code> die zum Status-Code geh&ouml;rende Beschreibung.</p>
+                        </div>
+                      </div>
                 </div>
             </div>
         </div>
