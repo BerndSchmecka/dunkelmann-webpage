@@ -160,19 +160,6 @@
 
         <script src="https://cdn.dunkelmann.eu/frameworks/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
         <script>
-            function getDownloadExtension(platformName) {
-                switch(platformName.toLowerCase()){
-                    case "windows":
-                        return "msi";
-                    case "mac":
-                        return "dmg";
-                    case "linux":
-                        return "tar.gz";
-                    default:
-                        return "html"; //Bad Case
-                }
-            }
-
             var tRequest = new XMLHttpRequest();
             tRequest.onreadystatechange = function() {
                 if(tRequest.readyState === 4 && tRequest.status === 200){
@@ -190,7 +177,7 @@
                 if(fRequest.readyState === 4 && fRequest.status === 200){
                     var obj = JSON.parse(fRequest.responseText);
                     obj.versionInfo.forEach(element => {
-                        document.getElementById('ts5version').innerHTML += "<tr><th scope=\"row\">"+element.platformName[0].toUpperCase()+element.platformName.substring(1)+"</th><td>"+element.platformInfo.version+"-"+element.platformInfo.version_string + " [Build: "+element.platformInfo.timestamp+"]</td><td><button type=\"button\" class=\"btn btn-primary\" onclick=\"window.open('"+ "https://files.teamspeak-services.com/pre_releases/client/" + element.platformInfo.version+"-"+element.platformInfo.version_string + "/teamspeak-client." + getDownloadExtension(element.platformName) +"', '_blank').focus();\">Download</button></td></tr>";
+                        document.getElementById('ts5version').innerHTML += "<tr><th scope=\"row\">"+element.platformName[0].toUpperCase()+element.platformName.substring(1)+"</th><td>"+element.platformInfo.version+"-"+element.platformInfo.version_string + " [Build: "+element.platformInfo.timestamp+"]</td><td><button type=\"button\" class=\"btn btn-primary\" onclick=\"window.open('"+ "https://www.teamspeak.com/de/downloads/#ts5" + "', '_blank').focus();\">Download</button></td></tr>";
                     });
                 }
             }
