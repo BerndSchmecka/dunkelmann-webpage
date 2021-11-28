@@ -8,15 +8,7 @@ jebaited=function(){
 el[i].className += " special";
 }
 
-    var all = document.getElementsByClassName('bg-primary');
-for (var i = 0; i < all.length; i++) {
-all[i].style.setProperty("background-image", "url(assets/special/rainbow.gif)", "important");
-}
-var all = document.getElementsByClassName('btn-primary');
-for (var i = 0; i < all.length; i++) {
-all[i].style.setProperty("background-image", "url(assets/special/rainbow.gif)", "important");
-}
-var all = document.getElementsByClassName('btn-danger');
+    var all = document.querySelectorAll(".bg-primary,.accordion-button,.btn-primary,.btn-danger");
 for (var i = 0; i < all.length; i++) {
 all[i].style.setProperty("background-image", "url(assets/special/rainbow.gif)", "important");
 }
