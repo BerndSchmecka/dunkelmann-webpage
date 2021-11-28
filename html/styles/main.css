@@ -38,3 +38,15 @@ video {
     -webkit-background-clip: text!important;
     color: transparent!important;
 }
+
+.blur_span {
+    backdrop-filter: blur(10px);
+    z-index: -99;
+    position: fixed;
+    width: 100vw;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    top: 0;
+    height: 100vh;
+}
