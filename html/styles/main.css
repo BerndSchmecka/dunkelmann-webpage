@@ -31,3 +31,10 @@ h1, h2:not(.accordion-header) {
 video {
     object-fit: fill;
 }
+
+.special {
+    background-image: url(../assets/special/rainbow.gif)!important;
+    background-clip: text!important;
+    -webkit-background-clip: text!important;
+    color: transparent!important;
+}
