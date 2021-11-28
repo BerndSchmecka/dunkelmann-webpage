@@ -5,3 +5,7 @@ code {
 h1, h2:not(.accordion-header) {
     text-decoration: underline solid var(--bs-primary) 0.07em !important;
 }
+
+.cursor-not-allowed {
+    cursor: not-allowed!important;
+}

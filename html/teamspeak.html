@@ -133,6 +133,7 @@
                             <tr>
                                 <th scope="col">Update Channel</th>
                                 <th scope="col">Current Version</th>
+                                <th scope="col">Download</th>
                             </tr>
                         </thead>
                         <tbody id="ts3version">
@@ -157,19 +158,58 @@
                 </div>
             </div>
         </div>
+  
+  <div class="modal fade" id="modalBeta" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="modalBetaLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="modalBetaLabel">TeamSpeak 3 Beta</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <p>F&uuml;r die <code>Beta</code>-Version von TeamSpeak 3 gibt es keinen direkten Download-Link, stattdessem muss eine existierende Installation von TeamSpeak 3 auf den Empfang von <code>Beta</code>-Versionen konfiguriert werden. Wie das geht, findest du in der Anleitung auf dieser Seite.</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Schlie&szlig;en</button>
+          <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Verstanden</button>
+        </div>
+      </div>
+    </div>
+  </div>
 
         <script src="https://cdn.dunkelmann.eu/frameworks/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
         <script>
+            let TS3_EP = "aHR0cHM6Ly9hcGkuZHVua2VsbWFubi5ldS90czN2ZXJzaW9u";
+            let TS5_EP = "aHR0cHM6Ly9hcGkuZHVua2VsbWFubi5ldS90czV2ZXJzaW9u";
+
+            let STABLE_URL = "aHR0cHM6Ly90ZWFtc3BlYWsuY29tL2VuL2Rvd25sb2Fkcy8jY2xpZW50";
+            let SERVER_URL = "aHR0cHM6Ly90ZWFtc3BlYWsuY29tL2VuL2Rvd25sb2Fkcy8jc2VydmVy";
+            let BETA_URL = "";
+            let ALPHA_URL = "aHR0cHM6Ly93d3cueW91dHViZS5jb20vd2F0Y2g/dj1kMVlCdjJtV2xsMA==";
+
+            let TS5_URL = "aHR0cHM6Ly93d3cudGVhbXNwZWFrLmNvbS9kZS9kb3dubG9hZHMvI3RzNQ==";
+            decodeBase64=function(f){var g={},b=65,d=0,a,c=0,h,e="",k=String.fromCharCode,l=f.length;for(a="";91>b;)a+=k(b++);a+=a.toLowerCase()+"0123456789+/";for(b=0;64>b;b++)g[a.charAt(b)]=b;for(a=0;a<l;a++)for(b=g[f.charAt(a)],d=(d<<6)+b,c+=6;8<=c;)((h=d>>>(c-=8)&255)||a<l-2)&&(e+=k(h));return e};
+
+            getDownloadButton=function(f){
+                if(f.toLowerCase() == "beta"){
+                    return "<td><button type=\"button\" class=\"btn btn-primary\" data-bs-toggle=\"modal\" data-bs-target=\"#modalBeta\">Download</button></td>";
+                } else if (f.toLowerCase() == "alpha"){
+                    return "<td><button type=\"button\" class=\"btn btn-danger cursor-not-allowed\" onclick=\"window.open(decodeBase64(ALPHA_URL), '_blank').focus();\">Download</button></td>";
+                } else {
+                    return "<td><button type=\"button\" class=\"btn btn-primary\" onclick=\"window.open(decodeBase64("+ f.toUpperCase() +"_URL), '_blank').focus();\">Download</button></td>";
+                }
+            }
+
             var tRequest = new XMLHttpRequest();
             tRequest.onreadystatechange = function() {
                 if(tRequest.readyState === 4 && tRequest.status === 200){
                     var obj = JSON.parse(tRequest.responseText);
                     obj.versions.forEach(element => {
-                        document.getElementById('ts3version').innerHTML += "<tr><th scope=\"row\">"+element.channel[0].toUpperCase()+element.channel.substring(1)+"</th><td>"+element.version+" [Build: "+element.timestamp+"]</td></tr>";
+                        document.getElementById('ts3version').innerHTML += "<tr><th scope=\"row\">"+element.channel[0].toUpperCase()+element.channel.substring(1)+"</th><td>"+element.version+" [Build: "+element.timestamp+"]</td>" + getDownloadButton(element.channel) + "</tr>";
                     });
                 }
             }
-            tRequest.open("GET", "https://api.dunkelmann.eu/ts3version");
+            tRequest.open("GET", decodeBase64(TS3_EP));
             tRequest.send();
 
             var fRequest = new XMLHttpRequest();
@@ -177,11 +217,11 @@
                 if(fRequest.readyState === 4 && fRequest.status === 200){
                     var obj = JSON.parse(fRequest.responseText);
                     obj.versionInfo.forEach(element => {
-                        document.getElementById('ts5version').innerHTML += "<tr><th scope=\"row\">"+element.platformName[0].toUpperCase()+element.platformName.substring(1)+"</th><td>"+element.platformInfo.version+"-"+element.platformInfo.version_string + " [Build: "+element.platformInfo.timestamp+"]</td><td><button type=\"button\" class=\"btn btn-primary\" onclick=\"window.open('"+ "https://www.teamspeak.com/de/downloads/#ts5" + "', '_blank').focus();\">Download</button></td></tr>";
+                        document.getElementById('ts5version').innerHTML += "<tr><th scope=\"row\">"+element.platformName[0].toUpperCase()+element.platformName.substring(1)+"</th><td>"+element.platformInfo.version+"-"+element.platformInfo.version_string + " [Build: "+element.platformInfo.timestamp+"]</td><td><button type=\"button\" class=\"btn btn-primary\" onclick=\"window.open(decodeBase64(TS5_URL), '_blank').focus();\">Download</button></td></tr>";
                     });
                 }
             }
-            fRequest.open("GET", "https://api.dunkelmann.eu/ts5version");
+            fRequest.open("GET", decodeBase64(TS5_EP));
             fRequest.send();
         </script>
     </body>
