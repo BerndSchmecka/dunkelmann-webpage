@@ -36,12 +36,24 @@ getDownloadButton=function(f){
     }
 }
 
+parseUnixTime=function(t){
+    var date = new Date(t * 1000);
+    var curr_date = "0" + date.getDate();
+    var curr_month = "0" + (date.getMonth() + 1); //Months are zero based
+    var curr_year = date.getFullYear();
+    var hours = "0" + date.getHours();
+    var minutes = "0" + date.getMinutes();
+    var seconds = "0" + date.getSeconds();
+    var formattedTime = curr_date.substr(-2) + '.' + curr_month.substr(-2)  + '.' + curr_year + ' ' + hours.substr(-2) + ':' + minutes.substr(-2) + ':' + seconds.substr(-2);
+    return formattedTime;
+}
+
 var tRequest = new XMLHttpRequest();
 tRequest.onreadystatechange = function() {
     if(tRequest.readyState === 4 && tRequest.status === 200){
         var obj = JSON.parse(tRequest.responseText);
         obj.versions.forEach(element => {
-            document.getElementById('ts3version').innerHTML += "<tr><th scope=\"row\">"+element.channel[0].toUpperCase()+element.channel.substring(1)+"</th><td>"+element.version+" [Build: "+element.timestamp+"]</td>" + getDownloadButton(element.channel) + "</tr>";
+            document.getElementById('ts3version').innerHTML += "<tr><th scope=\"row\">"+element.channel[0].toUpperCase()+element.channel.substring(1)+"</th><td>"+element.version+" [Build: <abbr title=\"" + parseUnixTime(element.timestamp) + "\">"+element.timestamp+"</abbr>]</td>" + getDownloadButton(element.channel) + "</tr>";
         });
     }
 }
@@ -53,7 +65,7 @@ fRequest.onreadystatechange = function() {
     if(fRequest.readyState === 4 && fRequest.status === 200){
         var obj = JSON.parse(fRequest.responseText);
         obj.versionInfo.forEach(element => {
-            document.getElementById('ts5version').innerHTML += "<tr><th scope=\"row\">"+element.platformName[0].toUpperCase()+element.platformName.substring(1)+"</th><td>"+element.platformInfo.version+"-"+element.platformInfo.version_string + " [Build: "+element.platformInfo.timestamp+"]</td><td><button type=\"button\" class=\"btn btn-primary\" onclick=\"window.open(decodeBase64(TS5_URL), '_blank').focus();\">Download</button></td></tr>";
+            document.getElementById('ts5version').innerHTML += "<tr><th scope=\"row\">"+element.platformName[0].toUpperCase()+element.platformName.substring(1)+"</th><td>"+element.platformInfo.version+"-"+element.platformInfo.version_string + " [Build: <abbr title=\"" + parseUnixTime(element.platformInfo.timestamp) + "\">"+element.platformInfo.timestamp+"</abbr>]</td><td><button type=\"button\" class=\"btn btn-primary\" onclick=\"window.open(decodeBase64(TS5_URL), '_blank').focus();\">Download</button></td></tr>";
         });
     }
 }
