@@ -101,7 +101,7 @@ video {
     height: 64px;
     right: 4px;
     top: 32px;
-    background: linear-gradient(180deg, rgb(4 110 213) 0%, rgb(2 141 225) 25%, rgba(0,212,255,1) 50%);
+    background: black;/*linear-gradient(180deg, rgb(4 110 213) 0%, rgb(2 141 225) 25%, rgba(0,212,255,1) 50%);*/
     mask: url(../assets/discovery/mask_circle.svg);
     mask-position: center center;
     mask-repeat: no-repeat;
