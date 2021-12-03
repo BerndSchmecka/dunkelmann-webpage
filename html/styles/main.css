@@ -88,6 +88,24 @@ video {
     font-size: 13px;
 }
 
+@media (prefers-color-scheme:dark) {
+    .discovery-object {
+        border: 1px solid #515151;
+        border-radius: 10px;
+        display: flex;
+        background: #111;
+        width: 280px;
+        height: 300px;
+        padding: 0.6em;
+        position: relative;
+    }
+
+    .discovery-object .discovery-small-text {
+        color: #777;
+        font-size: 13px;
+    }
+}
+
 .discovery-object .discovery-banner {
     position: absolute;
     top: 0;

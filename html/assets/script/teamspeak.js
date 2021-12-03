@@ -48,6 +48,22 @@ parseUnixTime=function(t){
     return formattedTime;
 }
 
+var video = document.getElementById('vid');
+if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+    video.poster = "assets/thumbnails/gray.png";
+} else {
+    video.poster = "assets/thumbnails/white.png";
+}
+
+window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', e => {
+    const newColorScheme = e.matches ? "dark" : "light";
+    if(newColorScheme === "dark"){
+        video.poster = "assets/thumbnails/gray.png";
+    } else {
+        video.poster = "assets/thumbnails/white.png";
+    }
+});
+
 var tRequest = new XMLHttpRequest();
 tRequest.onreadystatechange = function() {
     if(tRequest.readyState === 4 && tRequest.status === 200){
