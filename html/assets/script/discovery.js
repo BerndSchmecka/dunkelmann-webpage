@@ -16,9 +16,9 @@ parseUnixTime=function(t){
 discoveryCard=function(obj){
     return `<div class="col-md-auto">
                 <div class="discovery-object">
-                    <div class="discovery-banner" style="background-image: url(${"assets/special/rainbow.gif"});"></div>
+                    <div class="discovery-banner" style="background: linear-gradient(180deg, rgba(2,0,36,1) 0%, rgba(39,39,200,1) 33%, rgba(2,117,215,1) 63%, rgba(0,212,255,1) 100%);"></div>
                     <div class="discovery-icon">
-                        <span style="background-image: url(${"assets/special/nyan_cat.gif"})"></span>
+                        <span style="background: url(${"assets/discovery/icon_placeholder.jpeg"});"></span>
                     </div>
                     <div class="discovery-name">
                         <div class="discovery-name-text"> ${obj.name} </div>
