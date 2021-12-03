@@ -11,6 +11,11 @@
         <priority>0.80</priority>
     </url>
     <url>
+        <loc>https://www.dunkelmann.eu/discovery.html</loc>
+        <changefreq>hourly</changefreq>
+        <priority>0.80</priority>
+    </url>
+    <url>
         <loc>https://www.dunkelmann.eu/gaestebuch.html</loc>
         <changefreq>daily</changefreq>
         <priority>0.80</priority>
