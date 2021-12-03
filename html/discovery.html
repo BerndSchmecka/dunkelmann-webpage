@@ -39,41 +39,25 @@
         <div class="container-fluid" style="margin-top:75px;">
             <div class="row">
                 <div class="col-md-auto col-centered">
-                    <form>
+                    <!--<form>-->
                         <div class="row">
                             <div class="col-md-auto">
-                                <input class="form-control form-control-lg" type="search" placeholder="Suchen">
+                                <input class="form-control form-control-lg" type="text" placeholder="Suchen" id="searchbox">
                             </div>
                             <div class="col-md-auto">
-                                <select class="form-select form-select-lg">
-                                    <option value="volvo">Alle</option>
-                                    <option value="saab">R&auml;ume</option>
-                                    <option value="opel">Server</option>
+                                <select class="form-select form-select-lg" id="filter">
+                                    <option value="">Alle</option>
+                                    <option value="%20%2Btype%3A1">R&auml;ume</option>
+                                    <option value="%20%2Btype%3A2">Server</option>
                                 </select>
                             </div>
                         </div>
-                    </form>
+                    <!--</form>-->
                 </div>
             </div>
-            <div class="row" id="results">
-                <!-- SAMPLE -->
-                <div class="col-md-auto">
-                    <div class="discovery-object" id="!dsada:matrix.org">
-                        <div class="discovery-banner"></div>
-                        <div class="discovery-name">
-                            <div class="discovery-name-text">Beta Test</div>
-                        </div>
-                        <div class="discovery-people">
-                            <div class="discovery-people-icon"><i class="fas fa-user fa-discovery-icon"></i></div>
-                            <div class="discovery-small-text discovery-people-text">1000</div>
-                        </div>
-                        <div class="discovery-desc">
-                            <div class="discovery-small-text">Welcome to our Beta Test!</div>
-                        </div>
-                        <div class="discovery-created discovery-small-text">First seen: Heute</div>
-                    </div>
+            <div class="row">
+                <div class="discovery-objects" id="results">
                 </div>
-                <!-- SAMPLE -->
             </div>
         </div>
         <span class="blur_span"></span>
