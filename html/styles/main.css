@@ -76,7 +76,7 @@ video {
     border: 1px solid black;
     border-radius: 10px;
     display: flex;
-    background: white;
+    background: linear-gradient(180deg, rgba(255,255,255,1) 0%, rgba(222,222,222,1) 54%, rgba(186,186,186,1) 100%);
     width: 280px;
     height: 300px;
     padding: 0.6em;
