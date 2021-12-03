@@ -21,7 +21,7 @@ discoveryCard=function(obj){
                         <span style="background: url(${"assets/discovery/icon_placeholder.png"}); background-size: 64px 64px;"></span>
                     </div>
                     <div class="discovery-name">
-                        <div class="discovery-name-text"> ${obj.name} </div>
+                        <div class="discovery-name-text" title="${obj.name}"> ${obj.name} </div>
                     </div>
                     <div class="discovery-people">
                         <div class="discovery-people-icon"><i class="fas fa-user fa-discovery-icon"></i></div>
@@ -33,17 +33,17 @@ discoveryCard=function(obj){
                     <div class="discovery-created discovery-small-text"> First seen: ${parseUnixTime(obj.created)} </div>
                     <div class="discovery-footer">
                         <div class="discovery-connect">
-                            <div class="discovery-small-text discovery-link"> Join ${obj.type.toLowerCase()} </div>
+                            <div class="discovery-small-text discovery-link" title="${obj.type.toLowerCase() === "server" ? "Open a connection to this server" : "Join this " + obj.type.toLowerCase()}"> Join ${obj.type.toLowerCase()} </div>
                         </div>
                         ${
                             obj.type.toLowerCase() === "server" ? 
-                            `<div class="discovery-bookmark">
+                            `<div class="discovery-bookmark" title="Bookmark this server">
                                 <i class="fas fa-bookmark fa-bookmark-icon"></i>
                             </div>
-                            <div class="discovery-channel">
+                            <div class="discovery-channel" title="${obj.canCreateChannel ? "Guests can create channels" : "Guests can't create channels"}">
                                 <i class="fas fa-plus-square ${obj.canCreateChannel ? "fa-channel-icon text-primary" : "fa-channel-icon"}"></i>
                             </div>
-                            <div class="discovery-homebase">
+                            <div class="discovery-homebase" title="${obj.canCreateHomebase ? "Guests can use this server as homebase" : "Guests can't use this server as homebase"}">
                                 <i class="fas fa-home ${obj.canCreateHomebase ? "fa-homebase-icon text-primary" : "fa-homebase-icon"}"></i>
                             </div>`
                             : ""
@@ -57,11 +57,13 @@ doQuery=function(q){
     var query = new XMLHttpRequest();
     query.onreadystatechange = function() {
         if(query.readyState === 4 && query.status === 200){
-           var obj = JSON.parse(query.responseText);
-           document.getElementById('results').innerHTML = "";
-           obj.entries.forEach(element => {
-               document.getElementById('results').innerHTML += discoveryCard(element);
-           });
+            var obj = JSON.parse(query.responseText);
+
+            document.getElementById('results').innerHTML = "";
+
+            obj.entries.forEach(element => {
+                document.getElementById('results').innerHTML += discoveryCard(element);
+            });
         }
     }
     query.open("GET", decodeBase64(DISCOVERY_ENDPOINT) + "?q=" + q + "&start=0&rows=30&sort_by=members&sort_order=desc");
