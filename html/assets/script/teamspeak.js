@@ -50,7 +50,8 @@ parseUnixTime=function(t){
 
 var video = document.getElementById('vid');
 if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
-    video.poster = "assets/thumbnails/gray.png";
+    //video.poster = "assets/thumbnails/gray.png";
+    video.poster = "assets/thumbnails/white.png";
 } else {
     video.poster = "assets/thumbnails/white.png";
 }
@@ -58,7 +59,8 @@ if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').match
 window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', e => {
     const newColorScheme = e.matches ? "dark" : "light";
     if(newColorScheme === "dark"){
-        video.poster = "assets/thumbnails/gray.png";
+        //video.poster = "assets/thumbnails/gray.png";
+        video.poster = "assets/thumbnails/white.png";
     } else {
         video.poster = "assets/thumbnails/white.png";
     }
