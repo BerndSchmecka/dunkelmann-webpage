@@ -1,6 +1,6 @@
 User-agent: *
 Disallow: /error_pages/
 Disallow: /status/
-Disallow: /styles/
+Disallow: /assets/special/
 
 Sitemap: https://www.dunkelmann.eu/sitemap.xml
