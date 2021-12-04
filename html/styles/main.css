@@ -1,3 +1,16 @@
+/*! *****************************************************************************
+Copyright (c) Dunkelmann 2021. All rights reserved.
+
+This code is licensed under the BSD License
+You should have received a copy of the BSD License
+with this code and it is also available through
+the world-wide-web at <https://files.dunkelmann.eu/license.txt>.
+If you did not receive a copy of the BSD License
+and are unable to obtain it through the world-wide-web,
+please send a note to <business@dunkelmann.eu> so we can mail you a copy
+immediately.
+***************************************************************************** */
+
 :root {
     --discovery-mask: url("data:image/svg+xml;base64,PHN2ZyB2ZXJzaW9uPSIxLjEiIHZpZXdCb3g9IjAgMCA2MDAgNTU4IiB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPgogICAgPGNpcmNsZSBjeD0iMzAwIiBjeT0iMjc5IiByPSIyNDAiIGZpbGw9ImJsYWNrIiAvPgo8L3N2Zz4=");
 }
