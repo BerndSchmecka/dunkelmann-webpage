@@ -78,6 +78,8 @@ video {
     flex: 1 1 auto;
     display: flex;
     flex-wrap: wrap;
+    user-select: none;
+    margin-top: 10px;
 }
 
 .discovery-objects .discovery-object {
