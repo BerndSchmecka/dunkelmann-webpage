@@ -41,26 +41,64 @@
             <div class="row">
                 <div class="col-md-auto col-centered">
                     <div class="row">
-                        <div class="col-md-auto">
-                            <input class="form-control form-control-lg" type="text" placeholder="Suchen" id="searchbox">
-                        </div>
-                        <div class="col-md-auto">
-                            <select class="form-select form-select-lg" id="filter">
-                                <option value="">Alle</option>
-                                <option value="%20%2Btype%3A1">R&auml;ume</option>
-                                <option value="%20%2Btype%3A2">Server</option>
-                            </select>
+                        <div id="control_elements">
+                            <div class="col-md-auto">
+                                <input class="form-control form-control-lg" type="text" placeholder="Suchen" v-model="nodeValue" v-on:keyup.enter="queryWithFilter()">
+                            </div>
+                            <div class="col-md-auto">
+                                <select class="form-select form-select-lg" v-model="filterValue">
+                                    <option value="">Alle</option>
+                                    <option value="%20%2Btype%3A1">R&auml;ume</option>
+                                    <option value="%20%2Btype%3A2">Server</option>
+                                </select>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
             <div class="row">
-                <div class="discovery-objects" id="results">
-                </div>
+                    <div class="discovery-objects" id="cardsDiv">
+                        <div class="col-md-auto" v-for="card in cards">
+                            <div class="discovery-object">
+                                <div class="discovery-banner" style="background: linear-gradient(180deg, rgba(2,0,36,1) 0%, rgba(39,39,200,1) 33%, rgba(2,117,215,1) 63%, rgba(0,212,255,1) 100%);"></div>
+                                <div class="discovery-icon">
+                                    <span style="background: url('assets/discovery/icon_placeholder.png'); background-size: 64px 64px;"></span>
+                                </div>
+                                <div class="discovery-name">
+                                    <div class="discovery-name-text" :title="card.name"> {{ card.name }} </div>
+                                </div>
+                                <div class="discovery-people">
+                                    <div class="discovery-people-icon"><i class="fas fa-user fa-discovery-icon"></i></div>
+                                    <div class="discovery-small-text discovery-people-text"> {{ card.people }} </div>
+                                </div>
+                                <div class="discovery-desc">
+                                    <div class="discovery-small-text"> {{ card.topic }} </div>
+                                </div>
+                                <div class="discovery-created discovery-small-text"> {{ card.created }} </div>
+                                <div class="discovery-footer">
+                                    <div class="discovery-connect">
+                                        <div class="discovery-small-text discovery-link" :title="card.tooltips.join"> {{ card.join }} </div>
+                                    </div>
+                                        <div class="discovery-bookmark" title="Bookmark this server" v-if="card.isServer">
+                                            <i class="fas fa-bookmark fa-bookmark-icon"></i>
+                                        </div>
+                                        <div class="discovery-channel" :title="card.tooltips.channel" v-if="card.isServer">
+                                            <i :class="card.classes.channel"></i>
+                                        </div>
+                                        <div class="discovery-homebase" :title="card.tooltips.homebase" v-if="card.isServer">
+                                            <i :class="card.classes.homebase"></i>
+                                        </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
             </div>
         </div>
         <span class="blur_span"></span>
         <script src="assets/frameworks/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+        <script src="assets/frameworks/vue@2.6.14/vue.min.js"></script>
         <script src="assets/script/discovery.min.js"></script>
+        <!--<script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
+        <script src="assets/script/discovery.js"></script>-->
     </body>
 </html>
