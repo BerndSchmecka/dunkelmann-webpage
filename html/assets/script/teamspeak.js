@@ -34,7 +34,7 @@ parseUnixTime=function(t){
     return formattedTime;
 }
 
-requestJSON = function(url, callback){
+requestJSON = function(encodedUrl, callback){
     var request = new XMLHttpRequest();
     request.onreadystatechange = function() {
         if(request.readyState === 4 && request.status === 200){
@@ -42,7 +42,7 @@ requestJSON = function(url, callback){
             callback(obj);
         }
     }
-    request.open("GET", decodeBase64(url));
+    request.open("GET", decodeBase64(encodedUrl));
     request.send();
 }
 
