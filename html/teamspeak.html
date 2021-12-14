@@ -166,7 +166,6 @@
                                     <th scope="col">Download (<abbr title="Version from the 'latest' Update Channel">latest</abbr>)</th>
                                 </tr>
                             </thead>
-                            <tbody>
                                 <tbody>
                                     <tr v-for="ch in channels">
                                         <td>
@@ -179,7 +178,6 @@
                                             <button type="button" :class="ch.download.class" :onclick="ch.download.onclick" :data-bs-toggle="ch.download.toggle" :data-bs-target="ch.download.target">Download</button>
                                         </td>
                                     </tr>
-                                </tbody>
                             </tbody>
                         </table>
                     </div>

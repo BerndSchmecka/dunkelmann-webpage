@@ -34,6 +34,18 @@ parseUnixTime=function(t){
     return formattedTime;
 }
 
+requestJSON = function(url, callback){
+    var request = new XMLHttpRequest();
+    request.onreadystatechange = function() {
+        if(request.readyState === 4 && request.status === 200){
+            var obj = JSON.parse(request.responseText);
+            callback(obj);
+        }
+    }
+    request.open("GET", decodeBase64(url));
+    request.send();
+}
+
 var TS3Table = new Vue({
     el: '#ts3version',
     data: {
@@ -44,23 +56,21 @@ var TS3Table = new Vue({
     },
     methods: {
         request: function() {
-            var tRequest = new XMLHttpRequest();
-            tRequest.onreadystatechange = function() {
-                if(tRequest.readyState === 4 && tRequest.status === 200){
-                    var obj = JSON.parse(tRequest.responseText);
-                    obj.versions.forEach(element => {
-                        TS3Table.channels.push({
-                            channel: element.channel[0].toUpperCase()+element.channel.substring(1),
-                            version: element.version,
-                            timestamp: element.timestamp,
-                            time: parseUnixTime(element.timestamp),
-                            download: getDownloadButton(element.channel)
-                        });
-                    });
-                }
-            }
-            tRequest.open("GET", decodeBase64(TS3_EP));
-            tRequest.send();
+            requestJSON(TS3_EP, this.pushAllElements)
+        },
+        pushAllElements: function(obj){
+            obj.versions.forEach((element) => {
+                this.pushElement(element);
+            })
+        },
+        pushElement: function(element) {
+            TS3Table.channels.push({
+                channel: element.channel[0].toUpperCase()+element.channel.substring(1),
+                version: element.version,
+                timestamp: element.timestamp,
+                time: parseUnixTime(element.timestamp),
+                download: getDownloadButton(element.channel)
+            });
         }
     }
 });
@@ -75,26 +85,24 @@ var TS5Table = new Vue({
     },
     methods: {
         request: function() {
-            var fRequest = new XMLHttpRequest();
-            fRequest.onreadystatechange = function() {
-                if(fRequest.readyState === 4 && fRequest.status === 200){
-                    var obj = JSON.parse(fRequest.responseText);
-                    obj.versionInfo.forEach(element => {
-                        TS5Table.channels.push({
-                            channel: element.platformName[0].toUpperCase()+element.platformName.substring(1),
-                            version: element.platformInfo.version,
-                            timestamp: element.platformInfo.timestamp,
-                            time: parseUnixTime(element.platformInfo.timestamp),
-                            download: {
-                                class: 'btn btn-primary',
-                                onclick: 'window.open(decodeBase64(TS5_URL), \'_blank\').focus();'
-                            }
-                        });
-                    });
+            requestJSON(TS5_EP, this.pushAllElements)
+        },
+        pushAllElements: function(obj){
+            obj.versionInfo.forEach((element) => {
+                this.pushElement(element);
+            })
+        },
+        pushElement: function(element) {
+            TS5Table.channels.push({
+                channel: element.platformName[0].toUpperCase()+element.platformName.substring(1),
+                version: element.platformInfo.version,
+                timestamp: element.platformInfo.timestamp,
+                time: parseUnixTime(element.platformInfo.timestamp),
+                download: {
+                    class: 'btn btn-primary',
+                    onclick: 'window.open(decodeBase64(TS5_URL), \'_blank\').focus();'
                 }
-            }
-            fRequest.open("GET", decodeBase64(TS5_EP));
-            fRequest.send();
+            });
         }
     }
 });
