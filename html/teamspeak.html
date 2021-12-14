@@ -141,9 +141,9 @@
                             </thead>
                             <tbody>
                                 <tr v-for="ch in channels">
-                                    <td>
+                                    <th scope="row">
                                         {{ ch.channel }}
-                                    </td>
+                                    </th>
                                     <td>
                                         {{ ch.version }} [Build: <abbr :title='ch.time'>{{ ch.timestamp }}</abbr>]
                                     </td>
@@ -168,9 +168,9 @@
                             </thead>
                                 <tbody>
                                     <tr v-for="ch in channels">
-                                        <td>
+                                        <th scope="row">
                                             {{ ch.channel }}
-                                        </td>
+                                        </th>
                                         <td>
                                             {{ ch.version }} [Build: <abbr :title='ch.time'>{{ ch.timestamp }}</abbr>]
                                         </td>

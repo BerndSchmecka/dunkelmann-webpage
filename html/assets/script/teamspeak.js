@@ -95,7 +95,7 @@ var TS5Table = new Vue({
         pushElement: function(element) {
             TS5Table.channels.push({
                 channel: element.platformName[0].toUpperCase()+element.platformName.substring(1),
-                version: element.platformInfo.version,
+                version: element.platformInfo.version+'-'+element.platformInfo.version_string,
                 timestamp: element.platformInfo.timestamp,
                 time: parseUnixTime(element.platformInfo.timestamp),
                 download: {
