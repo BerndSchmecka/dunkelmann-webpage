@@ -130,33 +130,57 @@
             <div class="row">
                 <div class="col-md-auto">
                     <h2>TeamSpeak 3</h2>
-                    <table class="table table-striped table-bordered">
-                        <thead>
-                            <tr>
-                                <th scope="col">Update Channel</th>
-                                <th scope="col">Current Version</th>
-                                <th scope="col">Download</th>
-                            </tr>
-                        </thead>
-                        <tbody id="ts3version">
-        
-                        </tbody>
-                    </table>
+                    <div id="ts3version">
+                        <table class="table table-striped table-bordered">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Update Channel</th>
+                                    <th scope="col">Current Version</th>
+                                    <th scope="col">Download</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr v-for="ch in channels">
+                                    <th scope="row">
+                                        {{ ch.channel }}
+                                    </th>
+                                    <td>
+                                        {{ ch.version }} [Build: <abbr :title='ch.time'>{{ ch.timestamp }}</abbr>]
+                                    </td>
+                                    <td>
+                                        <button type="button" :class="ch.download.class" :onclick="ch.download.onclick" :data-bs-toggle="ch.download.toggle" :data-bs-target="ch.download.target">Download</button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
                 <div class="col-md-auto">
                     <h2>TeamSpeak 5</h2>
-                    <table class="table table-striped table-bordered">
-                        <thead>
-                            <tr>
-                                <th scope="col">Platform</th>
-                                <th scope="col">Current Version (<abbr title="Version from the 'latest' Update Channel">latest</abbr>)</th>
-                                <th scope="col">Download (<abbr title="Version from the 'latest' Update Channel">latest</abbr>)</th>
-                            </tr>
-                        </thead>
-                        <tbody id="ts5version">
-        
-                        </tbody>
-                    </table>
+                    <div id="ts5version">
+                        <table class="table table-striped table-bordered">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Platform</th>
+                                    <th scope="col">Current Version (<abbr title="Version from the 'latest' Update Channel">latest</abbr>)</th>
+                                    <th scope="col">Download (<abbr title="Version from the 'latest' Update Channel">latest</abbr>)</th>
+                                </tr>
+                            </thead>
+                                <tbody>
+                                    <tr v-for="ch in channels">
+                                        <th scope="row">
+                                            {{ ch.channel }}
+                                        </th>
+                                        <td>
+                                            {{ ch.version }} [Build: <abbr :title='ch.time'>{{ ch.timestamp }}</abbr>]
+                                        </td>
+                                        <td>
+                                            <button type="button" :class="ch.download.class" :onclick="ch.download.onclick" :data-bs-toggle="ch.download.toggle" :data-bs-target="ch.download.target">Download</button>
+                                        </td>
+                                    </tr>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
         </div>
@@ -180,12 +204,15 @@
   </div>
   <span class="blur_span"></span>
 <div id="bg_vid" class="fullscreen-bg">
-    <video loop id="vid" class="fullscreen-bg__video">
+    <video loop id="vid" v-bind:poster="poster" class="fullscreen-bg__video">
         <source src="assets/special/77413130775afa2d4899e06c9c4661584288e7d8.mp4" type="video/mp4">
     </video>
 </div>
 
         <script src="assets/frameworks/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+        <script src="assets/frameworks/vue@2.6.14/vue.min.js"></script>
         <script src="assets/script/teamspeak.min.js"></script>
+        <!--<script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
+        <script src="assets/script/teamspeak.js"></script>-->
     </body>
 </html>

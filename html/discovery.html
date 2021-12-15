@@ -37,30 +37,34 @@
             </div>
         </nav>
     
-        <div class="container-fluid" style="margin-top:75px;">
+        <div class="container-fluid" style="margin-top:75px;" id="discoveryApp">
             <div class="row">
                 <div class="col-md-auto col-centered">
                     <div class="row">
-                        <div class="col-md-auto">
-                            <input class="form-control form-control-lg" type="text" placeholder="Suchen" id="searchbox">
-                        </div>
-                        <div class="col-md-auto">
-                            <select class="form-select form-select-lg" id="filter">
-                                <option value="">Alle</option>
-                                <option value="%20%2Btype%3A1">R&auml;ume</option>
-                                <option value="%20%2Btype%3A2">Server</option>
-                            </select>
-                        </div>
+                            <div class="col-md-auto">
+                                <input class="form-control form-control-lg" type="text" placeholder="Suchen" v-model="nodeValue" v-on:keyup.enter="queryWithFilter()">
+                            </div>
+                            <div class="col-md-auto">
+                                <select class="form-select form-select-lg" v-model="filterValue">
+                                    <option value="">Alle</option>
+                                    <option value="%20%2Btype%3A1">R&auml;ume</option>
+                                    <option value="%20%2Btype%3A2">Server</option>
+                                </select>
+                            </div>
                     </div>
                 </div>
             </div>
             <div class="row">
-                <div class="discovery-objects" id="results">
+                <div class="discovery-objects">
+                    <discovery-card v-for="card in cards" v-bind:key="card.id" v-bind:card="card"></discovery-card>
                 </div>
             </div>
         </div>
         <span class="blur_span"></span>
         <script src="assets/frameworks/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+        <script src="assets/frameworks/vue@2.6.14/vue.min.js"></script>
         <script src="assets/script/discovery.min.js"></script>
+        <!--<script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
+        <script src="assets/script/discovery.js"></script>-->
     </body>
 </html>
