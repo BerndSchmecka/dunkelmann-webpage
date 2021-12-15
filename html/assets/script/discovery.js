@@ -26,25 +26,70 @@ parseUnixTime=function(t){
     return formattedTime;
 }
 
-var DiscoveryCards = new Vue({
-    el: '#cardsDiv',
+Vue.component('discovery-card', {
+    props: ['card'],
+    template: `
+    <div class="col-md-auto">
+    <div class="discovery-object">
+        <div class="discovery-banner" style="background: linear-gradient(180deg, rgba(2,0,36,1) 0%, rgba(39,39,200,1) 33%, rgba(2,117,215,1) 63%, rgba(0,212,255,1) 100%);"></div>
+        <div class="discovery-icon">
+            <span style="background: url('assets/discovery/icon_placeholder.png'); background-size: 64px 64px;"></span>
+        </div>
+        <div class="discovery-name">
+            <div class="discovery-name-text" :title="card.name"> {{ card.name }} </div>
+        </div>
+        <div class="discovery-people">
+            <div class="discovery-people-icon"><i class="fas fa-user fa-discovery-icon"></i></div>
+            <div class="discovery-small-text discovery-people-text"> {{ card.people }} </div>
+        </div>
+        <div class="discovery-desc">
+            <div class="discovery-small-text"> {{ card.topic }} </div>
+        </div>
+        <div class="discovery-created discovery-small-text"> {{ card.created }} </div>
+        <div class="discovery-footer">
+            <div class="discovery-connect">
+                <div class="discovery-small-text discovery-link" :title="card.tooltips.join"> {{ card.join }} </div>
+            </div>
+                <div class="discovery-bookmark" title="Bookmark this server" v-if="card.isServer">
+                    <i class="fas fa-bookmark fa-bookmark-icon"></i>
+                </div>
+                <div class="discovery-channel" :title="card.tooltips.channel" v-if="card.isServer">
+                    <i :class="card.classes.channel"></i>
+                </div>
+                <div class="discovery-homebase" :title="card.tooltips.homebase" v-if="card.isServer">
+                    <i :class="card.classes.homebase"></i>
+                </div>
+        </div>
+    </div>
+</div>
+    `
+});
+
+var app = new Vue({
+    el: '#discoveryApp',
     data: {
-        cards: []
+        cards: [],
+        nodeValue: '',
+        filterValue: ''
     },
     created: function() {
         this.doQuery("*%3A*");
     },
     methods: {
+        queryWithFilter: function() {
+            app.doQuery((this.nodeValue ? `%2B*${encodeURIComponent(this.nodeValue)}*` : "*%3A*") + this.filterValue);
+        },
         doQuery: function(q) {
             var query = new XMLHttpRequest();
             query.onreadystatechange = function() {
                 if(query.readyState === 4 && query.status === 200){
                     var obj = JSON.parse(query.responseText);
         
-                    DiscoveryCards.cards = [];
+                    app.cards = [];
         
                     obj.entries.forEach(element => {
-                        DiscoveryCards.cards.push({
+                        app.cards.push({
+                            id: element.id,
                             name: element.name,
                             topic: element.topic ?? 'No description available',
                             people: element.members + (element.type.toLowerCase() === 'server' ? ' - ' + element.address : ''),
@@ -66,19 +111,6 @@ var DiscoveryCards = new Vue({
             }
             query.open("GET", decodeBase64(DISCOVERY_ENDPOINT) + "?q=" + q + "&start=0&rows=30&sort_by=members&sort_order=desc");
             query.send();
-        }
-    }
-});
-
-var control = new Vue({
-    el: '#control_elements',
-    data: {
-        nodeValue: '',
-        filterValue: ''
-    },
-    methods: {
-        queryWithFilter: function() {
-            DiscoveryCards.doQuery((this.nodeValue ? `%2B*${encodeURIComponent(this.nodeValue)}*` : "*%3A*") + this.filterValue);
         }
     },
     watch: {
