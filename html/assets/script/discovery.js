@@ -26,14 +26,62 @@ parseUnixTime=function(t){
     return formattedTime;
 }
 
+randomBanner=function(id){
+    const colors = [
+        [//green
+            "rgba(2,25,0,1)",
+            "rgba(28,97,20,1)",
+            "rgba(16,173,2,1)",
+            "rgba(31,255,0,1)"
+        ],
+        [//blue (default)
+            "rgba(2,0,36,1)",
+            "rgba(39,39,200,1)",
+            "rgba(2,117,215,1)",
+            "rgba(0,212,255,1)"
+        ],
+        [//red
+            "rgba(25,0,0,1)",
+            "rgba(97,20,20,1)",
+            "rgba(173,2,2,1)",
+            "rgba(255,0,0,1)"
+        ],
+        [//yellow
+            "rgba(25,25,0,1)",
+            "rgba(97,97,20,1)",
+            "rgba(169,173,2,1)",
+            "rgba(254,255,0,1)"
+        ],
+        [//purple
+            "rgba(23,0,25,1)",
+            "rgba(88,20,97,1)",
+            "rgba(157,2,173,1)",
+            "rgba(226,0,255,1)"
+        ],
+        [//orange
+            "rgba(25,14,0,1)",
+            "rgba(97,60,20,1)",
+            "rgba(173,94,2,1)",
+            "rgba(255,128,0,1)"
+        ]
+    ]
+
+    const choosen = colors[id.charCodeAt(3) % colors.length];
+    return `linear-gradient(180deg, ${choosen[0]} 0%, ${choosen[1]} 33%, ${choosen[2]} 63%, ${choosen[3]} 100%);`;
+}
+
+randomIcon=function(id){
+    return `https://www.gravatar.com/avatar/${CryptoJS.MD5(id)}?s=128&d=identicon`
+}
+
 Vue.component('discovery-card', {
     props: ['card'],
     template: `
     <div class="col-md-auto">
     <div class="discovery-object">
-        <div class="discovery-banner" style="background: linear-gradient(180deg, rgba(2,0,36,1) 0%, rgba(39,39,200,1) 33%, rgba(2,117,215,1) 63%, rgba(0,212,255,1) 100%);"></div>
+        <div class="discovery-banner" :style="card.banner"></div>
         <div class="discovery-icon">
-            <span style="background: url('assets/discovery/icon_placeholder.png'); background-size: 64px 64px;"></span>
+            <span :style="card.icon"></span>
         </div>
         <div class="discovery-name">
             <div class="discovery-name-text" :title="card.name"> {{ card.name }} </div>
@@ -95,6 +143,8 @@ var app = new Vue({
                             people: element.members + (element.type.toLowerCase() === 'server' ? ' - ' + element.address : ''),
                             created: `First seen: ${parseUnixTime(element.created)}`,
                             join: `Join ${element.type.toLowerCase()}`,
+                            banner: `background: ${randomBanner(element.id)}`,
+                            icon: `background: url('${randomIcon(element.id)}'); background-size: 64px 64px;`,
                             tooltips: {
                                 join: element.type.toLowerCase() === 'server' ? 'Open a connection to this server' : `Join this ${element.type.toLowerCase()}`,
                                 channel: element.canCreateChannel ? 'Guests can create channels' : "Guests can't create channels",
