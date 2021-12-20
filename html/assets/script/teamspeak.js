@@ -46,54 +46,41 @@ requestJSON = function(encodedUrl, callback){
     request.send();
 }
 
-var TS3Table = new Vue({
-    el: '#ts3version',
+var app = new Vue({
+    el: '#teamspeakApp',
     data: {
-        channels: []
+        ts3channels: [],
+        ts5channels: []
     },
     created: function () {
         this.request();
     },
     methods: {
         request: function() {
-            requestJSON(TS3_EP, this.pushAllElements)
+            requestJSON(TS3_EP, this.pushAll3Elements)
+            requestJSON(TS5_EP, this.pushAll5Elements)
         },
-        pushAllElements: function(obj){
+        pushAll3Elements: function(obj){
             obj.versions.forEach((element) => {
-                this.pushElement(element);
+                this.push3Element(element);
             })
         },
-        pushElement: function(element) {
-            TS3Table.channels.push({
+        push3Element: function(element) {
+            app.ts3channels.push({
                 channel: element.channel[0].toUpperCase()+element.channel.substring(1),
                 version: element.version,
                 timestamp: element.timestamp,
                 time: parseUnixTime(element.timestamp),
                 download: getDownloadButton(element.channel)
             });
-        }
-    }
-});
-
-var TS5Table = new Vue({
-    el: '#ts5version',
-    data: {
-        channels: []
-    },
-    created: function () {
-        this.request();
-    },
-    methods: {
-        request: function() {
-            requestJSON(TS5_EP, this.pushAllElements)
         },
-        pushAllElements: function(obj){
+        pushAll5Elements: function(obj){
             obj.versionInfo.forEach((element) => {
-                this.pushElement(element);
+                this.push5Element(element);
             })
         },
-        pushElement: function(element) {
-            TS5Table.channels.push({
+        push5Element: function(element) {
+            app.ts5channels.push({
                 channel: element.platformName[0].toUpperCase()+element.platformName.substring(1),
                 version: element.platformInfo.version+'-'+element.platformInfo.version_string,
                 timestamp: element.platformInfo.timestamp,

@@ -36,7 +36,7 @@
             </div>
         </nav>
     
-        <div class="container-fluid" style="margin-top:75px;">
+        <div class="container-fluid" style="margin-top:75px;" id="teamspeakApp">
             <div class="row">
                 <div class="col">
                     <h1>Aktuelle TeamSpeak-Versionen</h1>
@@ -140,7 +140,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr v-for="ch in channels">
+                                <tr v-for="ch in ts3channels">
                                     <th scope="row">
                                         {{ ch.channel }}
                                     </th>
@@ -167,7 +167,7 @@
                                 </tr>
                             </thead>
                                 <tbody>
-                                    <tr v-for="ch in channels">
+                                    <tr v-for="ch in ts5channels">
                                         <th scope="row">
                                             {{ ch.channel }}
                                         </th>
