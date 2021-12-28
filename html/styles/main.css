@@ -273,3 +273,8 @@ video {
     left: 40px;
     bottom: 2px;
 }
+
+.annotation {
+    font-size: x-small;
+    color: #303030;
+}

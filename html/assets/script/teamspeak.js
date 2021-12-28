@@ -39,18 +39,34 @@ requestJSON = function(encodedUrl, callback){
     request.onreadystatechange = function() {
         if(request.readyState === 4 && request.status === 200){
             var obj = JSON.parse(request.responseText);
-            callback(obj);
+            var lastModified = Math.floor(Date.parse(request.getResponseHeader("Last-Modified")) / 1000);
+            callback(obj, lastModified);
         }
     }
     request.open("GET", decodeBase64(encodedUrl));
     request.send();
 }
 
+Vue.component('lm-annotation', {
+    props: ['lm'],
+    template: `<span class="annotation">Zuletzt geändert am: <abbr :title="lm.unix">{{ lm.text }}</abbr></span>`
+});
+
 var app = new Vue({
     el: '#teamspeakApp',
     data: {
         ts3channels: [],
-        ts5channels: []
+        ts5channels: [],
+        ts3lastModified: {
+            key: 0,
+            unix: 0,
+            text: ""
+        },
+        ts5lastModified: {
+            key: 1,
+            unix: 0,
+            text: ""
+        }
     },
     created: function () {
         this.request();
@@ -60,7 +76,9 @@ var app = new Vue({
             requestJSON(TS3_EP, this.pushAll3Elements)
             requestJSON(TS5_EP, this.pushAll5Elements)
         },
-        pushAll3Elements: function(obj){
+        pushAll3Elements: function(obj, lastModified){
+            this.ts3lastModified.unix = lastModified
+            this.ts3lastModified.text = parseUnixTime(lastModified)
             obj.versions.forEach((element) => {
                 this.push3Element(element);
             })
@@ -74,7 +92,9 @@ var app = new Vue({
                 download: getDownloadButton(element.channel)
             });
         },
-        pushAll5Elements: function(obj){
+        pushAll5Elements: function(obj, lastModified){
+            this.ts5lastModified.unix = lastModified
+            this.ts5lastModified.text = parseUnixTime(lastModified)
             obj.versionInfo.forEach((element) => {
                 this.push5Element(element);
             })
