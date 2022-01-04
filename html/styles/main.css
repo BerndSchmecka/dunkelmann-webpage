@@ -15,6 +15,57 @@ immediately.
     --discovery-mask: url("data:image/svg+xml;base64,PHN2ZyB2ZXJzaW9uPSIxLjEiIHZpZXdCb3g9IjAgMCA2MDAgNTU4IiB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPgogICAgPGNpcmNsZSBjeD0iMzAwIiBjeT0iMjc5IiByPSIyNDAiIGZpbGw9ImJsYWNrIiAvPgo8L3N2Zz4=");
 }
 
+html {
+    scroll-behavior: smooth;
+}
+
+.skip-link {
+    left: -9999em;
+    top: -9999em;
+}
+
+.skip-link:focus {
+    clip: auto;
+    left: 6px;
+    top: 7px;
+    z-index: 100000;
+    width: auto;
+    height: auto;
+}
+
+.screen-reader-text {
+    clip: rect(1px, 1px, 1px, 1px);
+    position: absolute !important;
+    height: 1px;
+    width: 1px;
+    overflow: hidden;
+}
+
+.screen-reader-text:focus {
+    clip: auto !important;
+    display: block;
+    height: auto;
+    left: 5px;
+    top: 5px;
+    width: auto;
+    z-index: 100000;
+}
+
+.screen-reader-text:focus {
+    background-color: var(--bs-danger);
+    border: 1px solid var(--bs-danger);
+    border-radius: 0.25rem;
+    color: var(--bs-white);
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5;
+    text-align: center;
+    vertical-align: middle;
+    user-select: none;
+    padding: 0.375rem 0.75rem;
+    text-decoration: none;
+}
+
 code {
     color: var(--bs-primary) !important;
 }
