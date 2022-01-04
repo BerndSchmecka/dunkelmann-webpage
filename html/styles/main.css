@@ -15,6 +15,10 @@ immediately.
     --discovery-mask: url("data:image/svg+xml;base64,PHN2ZyB2ZXJzaW9uPSIxLjEiIHZpZXdCb3g9IjAgMCA2MDAgNTU4IiB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPgogICAgPGNpcmNsZSBjeD0iMzAwIiBjeT0iMjc5IiByPSIyNDAiIGZpbGw9ImJsYWNrIiAvPgo8L3N2Zz4=");
 }
 
+html {
+    scroll-behavior: smooth;
+}
+
 code {
     color: var(--bs-primary) !important;
 }
