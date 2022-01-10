@@ -74,11 +74,17 @@ randomIcon=function(id){
     return `https://www.gravatar.com/avatar/${CryptoJS.MD5(id)}?s=128&d=identicon`
 }
 
+Vue.directive('emoji', {
+    inserted (el) {
+        twemoji.parse(el, {  size: 'svg', ext: '.svg' })
+    }
+})
+
 Vue.component('discovery-card', {
     props: ['card'],
     template: `
     <div class="col-md-auto">
-    <div class="discovery-object">
+    <div class="discovery-object" v-emoji>
         <div class="discovery-banner" :style="card.banner"></div>
         <div class="discovery-icon">
             <span :style="card.icon"></span>

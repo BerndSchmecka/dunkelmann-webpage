@@ -19,6 +19,23 @@ html {
     scroll-behavior: smooth;
 }
 
+img.emoji {
+    height: 1em;
+    width: 1em;
+    margin: 0 .05em 0 .1em;
+    vertical-align: -0.1em;
+}
+
+/* This approach is pretty hacky, don't judge me :( */
+a img.emoji {
+    border-bottom: 1px solid #0d6efd;
+    margin-right: -1px;
+}
+
+a:hover img.emoji {
+    border-bottom: 1px solid #0a58ca;
+}
+
 .skip-link {
     left: -9999em;
     top: -9999em;
