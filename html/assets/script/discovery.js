@@ -163,7 +163,7 @@ var app = new Vue({
                             id: element.id,
                             name: element.name,
                             topic: element.topic ?? 'No description available',
-                            people: element.members + (element.type.toLowerCase() === 'server' ? ' - ' + element.address : ''),
+                            people: (element.members ?? 0) + (element.type.toLowerCase() === 'server' ? ' - ' + element.address : ''),
                             created: `First seen: ${parseUnixTime(element.created)}`,
                             join: `Join ${element.type.toLowerCase()}`,
                             banner: `background: ${randomBanner(element.id)}`,
