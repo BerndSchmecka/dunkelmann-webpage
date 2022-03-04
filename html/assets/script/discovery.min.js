@@ -1,5 +1,5 @@
 /*! *****************************************************************************
-Copyright (c) Dunkelmann 2021. All rights reserved.
+Copyright (c) Dunkelmann 2022. All rights reserved.
 
 This code is licensed under the BSD License
 You should have received a copy of the BSD License
