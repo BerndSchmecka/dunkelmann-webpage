@@ -342,6 +342,100 @@ video {
     bottom: 2px;
 }
 
+.badge-objects {
+    display: flex;
+    flex: 1 1 auto;
+    flex-wrap: wrap;
+    user-select: none;
+    margin-top: 10px;
+}
+
+.badge-objects .badge-object {
+    flex: 0 0 auto;
+    margin: 10px;
+}
+
+.badge-object {
+    position: relative;
+    border: 1px solid black;
+    display: flex;
+    background: linear-gradient(180deg, rgba(255,255,255,1) 0%, rgba(222,222,222,1) 54%, rgba(186,186,186,1) 100%);
+    border-radius: 25px;
+    width: 640px;
+    height: 80px;
+    padding: 0.5em 0.1em;
+}
+
+.badge-object .badge-small-text {
+    color: #333;
+    font-size: 13px;
+}
+
+.badge-object .badge-guid-text {
+    color: white;
+    font-family:'Courier New', Courier, monospace;
+    font-weight: 400;
+    background-color: #333;
+    padding: 0 5px;
+    border-radius: 5px;
+    font-size: 13px;
+}
+
+.badge-object .badge-icon {
+    width: 75px;
+    padding: 0 0.4em;
+    border-right: 1px solid black;
+}
+
+.badge-object .badge-icon .badge-image {
+    width: 64px;
+}
+
+.badge-object .badge-name {
+    position: absolute;
+    white-space: nowrap;
+    top: 5px;
+    left: 155px;
+    height: 24px;
+    width: 340px;
+}
+
+.badge-object .badge-name .badge-name-text {
+    position: absolute;
+    left: 5px;
+    width: 340px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.badge-object .badge-desc {
+    position: absolute;
+    white-space: nowrap;
+    top: 22px;
+    left: 160px;
+    height: 30px;
+    width: 340px;
+}
+
+.badge-object .badge-uuid {
+    position: absolute;
+    white-space: nowrap;
+    bottom: 0px;
+    left: 160px;
+    border-radius: 5px;
+    height: 24px;
+    width: 290px;
+}
+
+.badge-object .badge-date {
+    position: absolute;
+    white-space: nowrap;
+    bottom: 0px;
+    right: -55px;
+    height: 24px;
+    width: 200px;
+}
+
 .annotation {
     font-size: x-small;
     color: #303030;
