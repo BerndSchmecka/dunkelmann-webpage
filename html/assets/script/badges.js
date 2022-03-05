@@ -57,6 +57,8 @@ Vue.component('badge-card', {
 var app = new Vue({
     el: '#badgesApp',
     data: {
+        rev: 0,
+        lastMod: 0,
         cards: []
     },
     created: function() {
@@ -70,6 +72,8 @@ var app = new Vue({
                     var obj = JSON.parse(query.responseText);
         
                     app.cards = [];
+                    app.rev = obj.value;
+                    app.lastMod = obj.timestamp;
         
                     obj.badges.forEach(element => {
                         app.cards.push({

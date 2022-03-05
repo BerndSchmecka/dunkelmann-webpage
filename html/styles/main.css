@@ -343,7 +343,10 @@ video {
 }
 
 .badge-objects {
+    justify-content: center;
     display: flex;
+    flex-direction: column-reverse;
+    align-items: center;
     flex: 1 1 auto;
     flex-wrap: wrap;
     user-select: none;
@@ -434,6 +437,17 @@ video {
     right: -55px;
     height: 24px;
     width: 200px;
+}
+
+.badge-info-text {
+    display: flex;
+    flex-direction: column;
+}
+
+.badge-info-text-element {
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 10pt;
+    font-weight: bold;
 }
 
 .annotation {
