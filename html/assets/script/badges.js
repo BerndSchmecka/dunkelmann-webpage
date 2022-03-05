@@ -32,10 +32,10 @@ Vue.component('badge-card', {
     <div class="col-md-auto">
     <div class="badge-object">
         <div class="badge-icon">
-            <img class="badge-image" :src="card.url.svg_detailed" :alt="card.name">
+            <img class="badge-image" :src="card.base_url + '_details.svg'" :alt="card.name">
         </div>
         <div class="badge-icon">
-            <img class="badge-image" :src="card.url.svg" :alt="card.name">
+            <img class="badge-image" :src="card.base_url + '.svg'" :alt="card.name">
         </div>
         <div class="badge-name">
             <div class="badge-name-text">{{ card.name }}</div>
@@ -79,11 +79,7 @@ var app = new Vue({
                         app.cards.push({
                             uuid: element.uuid,
                             name: element.name,
-                            url: {
-                                base_url: element.url,
-                                svg: `${element.url}.svg`,
-                                svg_detailed: `${element.url}_details.svg`
-                            },
+                            base_url: element.url,
                             description: element.description,
                             date: parseUnixTime(element.timestamp),
                             value: element.value
