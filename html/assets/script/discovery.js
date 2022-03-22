@@ -13,21 +13,24 @@ immediately.
 
 let DISCOVERY_ENDPOINT = "aHR0cHM6Ly9jb3JzLXByb3h5LmR1bmtlbG1hbm4uZXUvNjg3NDc0NzA3MzNhMmYyZjY0Njk3MzYzNmY3NjY1NzI3OTJlNzQ2NTYxNmQ3MzcwNjU2MTZiMmU2MzZmNmQyZjcxNzU2NTcyNzkyZi8=";
 let DEV_DISCOVERY_ENDPOINT = "aHR0cHM6Ly9jb3JzLXByb3h5LmR1bmtlbG1hbm4uZXUvNjg3NDc0NzA3MzNhMmYyZjY0NjU3NjJkNjQ2OTczNjM2Zjc2NjU3Mjc5MmU3NDY1NjE2ZDczNzA2NTYxNmIyZTYzNmY2ZDJmNzE3NTY1NzI3OTJmLw==";
+let DUNKELMANN_DISCOVERY_ENDPOINT = "aHR0cHM6Ly9kaXNjb3ZlcnkuZHVua2VsbWFubi5ldS8=";
 decodeBase64=function(f){var g={},b=65,d=0,a,c=0,h,e="",k=String.fromCharCode,l=f.length;for(a="";91>b;)a+=k(b++);a+=a.toLowerCase()+"0123456789+/";for(b=0;64>b;b++)g[a.charAt(b)]=b;for(a=0;a<l;a++)for(b=g[f.charAt(a)],d=(d<<6)+b,c+=6;8<=c;)((h=d>>>(c-=8)&255)||a<l-2)&&(e+=k(h));return e};
 
-isDevMode=function(){
+getEndpoint=function(){
     const queryString = window.location.search;
     const urlParams = new URLSearchParams(queryString);
     if(urlParams.has('mode')) {
         if(urlParams.get('mode') === 'dev'){
-            return true;
+            return DEV_DISCOVERY_ENDPOINT;
         } else if (urlParams.get('mode') === 'prod') {
-            return false;
+            return DISCOVERY_ENDPOINT;
+        } else if (urlParams.get('mode') === 'dunkelmann') {
+            return DUNKELMANN_DISCOVERY_ENDPOINT;
         } else {
-            return false;
+            return DISCOVERY_ENDPOINT;
         }
     } else {
-        return false;
+        return DISCOVERY_ENDPOINT;
     }
 }
 
@@ -182,7 +185,7 @@ var app = new Vue({
                     });
                 }
             }
-            query.open("GET", decodeBase64(isDevMode() ? DEV_DISCOVERY_ENDPOINT : DISCOVERY_ENDPOINT) + "?q=" + q + "&start=0&rows=30&sort_by=members&sort_order=desc");
+            query.open("GET", decodeBase64(getEndpoint()) + "?q=" + q + "&start=0&rows=30&sort_by=members&sort_order=desc");
             query.send();
         }
     },
