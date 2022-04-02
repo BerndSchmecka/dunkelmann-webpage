@@ -72,10 +72,10 @@ var app = new Vue({
                     var obj = JSON.parse(query.responseText);
         
                     app.cards = [];
-                    app.rev = obj.value;
-                    app.lastMod = obj.timestamp;
+                    app.rev = obj.body.value;
+                    app.lastMod = obj.body.timestamp;
         
-                    obj.badges.forEach(element => {
+                    obj.body.badges.forEach(element => {
                         app.cards.push({
                             uuid: element.uuid,
                             name: element.name,
@@ -89,6 +89,17 @@ var app = new Vue({
             }
             query.open("GET", decodeBase64(BADGES_EP));
             query.send();
+        },
+        parseUnixTime: function(t){
+            var date = new Date(t * 1000);
+            var curr_date = "0" + date.getDate();
+            var curr_month = "0" + (date.getMonth() + 1); //Months are zero based
+            var curr_year = date.getFullYear();
+            var hours = "0" + date.getHours();
+            var minutes = "0" + date.getMinutes();
+            var seconds = "0" + date.getSeconds();
+            var formattedTime = curr_date.substr(-2) + '.' + curr_month.substr(-2)  + '.' + curr_year + ' - ' + hours.substr(-2) + ':' + minutes.substr(-2) + ':' + seconds.substr(-2);
+            return formattedTime;
         }
     }
 });

@@ -34,13 +34,20 @@ parseUnixTime=function(t){
     return formattedTime;
 }
 
-requestJSON = function(encodedUrl, callback){
+requestJSON = function(version, encodedUrl, callback){
     var request = new XMLHttpRequest();
     request.onreadystatechange = function() {
         if(request.readyState === 4 && request.status === 200){
             var obj = JSON.parse(request.responseText);
-            var lastModified = Math.floor(Date.parse(request.getResponseHeader("Last-Modified")) / 1000);
-            callback(obj, lastModified);
+            if(version === 3){
+                var date = obj.headers["Last-Modified"][0];
+                var lastModified = Math.floor(Date.parse(date) / 1000);
+                callback(obj.body, lastModified);
+            } else if (version === 5){
+                var date = obj.versionInfo[0].headers["Last-Modified"][0];
+                var lastModified = Math.floor(Date.parse(date) / 1000);
+                callback(obj, lastModified);
+            }
         }
     }
     request.open("GET", decodeBase64(encodedUrl));
@@ -73,8 +80,8 @@ var app = new Vue({
     },
     methods: {
         request: function() {
-            requestJSON(TS3_EP, this.pushAll3Elements)
-            requestJSON(TS5_EP, this.pushAll5Elements)
+            requestJSON(3, TS3_EP, this.pushAll3Elements)
+            requestJSON(5, TS5_EP, this.pushAll5Elements)
         },
         pushAll3Elements: function(obj, lastModified){
             this.ts3lastModified.unix = lastModified
