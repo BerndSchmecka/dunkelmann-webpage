@@ -4,8 +4,8 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="author" content="Dunkelmann">
-        <meta name="keywords" content="Dunkelmann,G&auml;stebuch">
-        <meta name="description" content="Hier hat man die M&ouml;glichkeit, sich in mein G&auml;stebuch einzutragen.">
+        <meta name="keywords" content="Dunkelmann,Twitter,Tweets,TweetDecryptor,Decrypt,AES">
+        <meta name="description" content="Hier kann man meine Tweets entschl&uuml;sseln.">
         <meta name="color-scheme" content="light">
         <link rel="shortcut icon" href="/favicon.ico">
         <link rel="icon" type="image/png" href="/favicon.png" sizes="32x32">
@@ -15,7 +15,7 @@
         <meta name="msapplication-TileImage" content="/mstile-144x144.png">
         <link rel="stylesheet" href="assets/frameworks/bootstrap@5.1.3/dist/css/bootstrap.min.css">
         <link rel="stylesheet" href="styles/main.min.css">
-        <title>G&auml;stebuch - Dunkelmann</title>
+        <title>TweetDecryptor - Dunkelmann</title>
         <!-- Matomo -->
 <script>
     var _paq = window._paq = window._paq || [];
@@ -59,10 +59,10 @@
                             </ul>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="tweet-decryptor.html">TweetDecryptor</a>
+                            <a class="nav-link active" aria-current="page" href="tweet-decryptor.html">TweetDecryptor</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="gaestebuch.html">G&auml;stebuch</a>
+                            <a class="nav-link" href="gaestebuch.html">G&auml;stebuch</a>
                         </li>
                     </ul>
                 </div>
@@ -70,18 +70,41 @@
         </nav>
     
     <div id="content" tabindex="-1">
-        <div class="container-fluid" style="margin-top:75px;">
+        <div class="container-fluid" style="margin-top:75px;" id="tweetDecryptorApp">
             <div class="row">
                 <div class="col">
-                    <div class="ratio ratio-1x1">
-                        <iframe src="https://embed.dunkelmann.eu/gaestebuch/" title="G&auml;stebuch"></iframe>
+                    <!-- Bootstrap 5 Form with 3 Text Inputs for IV, Message and Sign -->
+                    <!-- Connect the inputs to the vue variables -->
+                    <form class="form-inline" id="tweetDecryptorForm">
+                        <div class="form-group mb-2">
+                            <label for="tweetDecryptorIV" class="sr-only">IV</label>
+                            <input type="text" class="form-control" id="tweetDecryptorIV" placeholder="IV" v-model="iv">
+                        </div>
+                        <div class="form-group mx-sm-3 mb-2">
+                            <label for="tweetDecryptorMessage" class="sr-only">Message</label>
+                            <input type="text" class="form-control" id="tweetDecryptorMessage" placeholder="Message" v-model="msg">
+                        </div>
+                        <div class="form-group mx-sm-3 mb-2">
+                            <label for="tweetDecryptorSign" class="sr-only">Sign</label>
+                            <input type="text" class="form-control" id="tweetDecryptorSign" placeholder="Sign" v-model="sign">
+                        </div>
+                        <button type="button" class="btn btn-primary mb-2" @click="decrypt">Decrypt</button>
+                    </form>
+                    <!-- Textbox with cleartext -->
+                    <div class="form-group">
+                        <label for="tweetDecryptorCleartext">Cleartext</label>
+                        <textarea class="form-control" id="tweetDecryptorCleartext" rows="3" v-model="cleartext"></textarea>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-        <span class="blur_span"></span>
-        <script src="https://twemoji.maxcdn.com/v/latest/twemoji.min.js" crossorigin="anonymous"></script>
-        <script src="assets/frameworks/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+    <span class="blur_span"></span>
+    <script src="https://twemoji.maxcdn.com/v/latest/twemoji.min.js" crossorigin="anonymous"></script>
+    <script src="assets/frameworks/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="assets/frameworks/vue@2.6.14/vue.min.js"></script>
+    <script src="assets/script/tweet-decryptor.min.js"></script>
+    <!--<script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
+    <script src="assets/script/tweet-decryptor.js"></script>-->
     </body>
 </html>
