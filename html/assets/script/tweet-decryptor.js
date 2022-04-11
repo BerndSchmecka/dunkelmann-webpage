@@ -34,6 +34,7 @@ var app = new Vue({
             request.onreadystatechange = function() {
                 if(request.readyState === 4 && request.status === 200){
                     var obj = JSON.parse(request.responseText);
+                    document.getElementById('tweetDecryptorCleartext').value = obj.cleartext;
                     this.cleartext = obj.cleartext;
                 } else if(request.readyState === 4 && request.status === 500) {
                     var obj = JSON.parse(request.responseText);
