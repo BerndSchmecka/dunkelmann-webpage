@@ -11,8 +11,8 @@ please send a note to <business@dunkelmann.eu> so we can mail you a copy
 immediately.
 ***************************************************************************** */
 
-let TS3_EP = "aHR0cHM6Ly9hcGkuZHVua2VsbWFubi5ldS90czN2ZXJzaW9u";
-let TS5_EP = "aHR0cHM6Ly9hcGkuZHVua2VsbWFubi5ldS90czV2ZXJzaW9u";
+let TS3_EP = "aHR0cHM6Ly9hcGkuZHVua2VsbWFubi5ldS92MS9nZXRUZWFtU3BlYWtWZXJzaW9ucy8z";
+let TS5_EP = "aHR0cHM6Ly9hcGkuZHVua2VsbWFubi5ldS92MS9nZXRUZWFtU3BlYWtWZXJzaW9ucy81";
 
 let STABLE_URL = "aHR0cHM6Ly90ZWFtc3BlYWsuY29tL2VuL2Rvd25sb2Fkcy8jY2xpZW50";
 let SERVER_URL = "aHR0cHM6Ly90ZWFtc3BlYWsuY29tL2VuL2Rvd25sb2Fkcy8jc2VydmVy";
