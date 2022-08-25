@@ -76,6 +76,14 @@
                 <div class="col-md-auto col-centered">
                     <div class="row">
                         <div class="col-md-auto">
+                            <select class="form-select form-select-lg" v-model="revisionValue">
+                                <option value="latest">Neueste</option>
+                                <option :key="revision.id" :value="revision.id"  v-for="revision in revisionList"> {{revision.name}}</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-auto">
                             <div class="badge-info-text">
                                 <span class="badge-info-text-element">Revisionsnummer: {{ rev }}</span>
                                 <span class="badge-info-text-element">Letzte Änderung: {{ parseUnixTime(lastMod) }}</span>
