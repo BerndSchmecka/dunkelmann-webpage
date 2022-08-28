@@ -298,11 +298,6 @@ video {
     right: 0;
 }
 
-.discovery-object .discovery-link {
-    color: var(--bs-primary);
-    cursor: pointer;
-}
-
 .discovery-object .discovery-bookmark {
     float: left;
     width: 24px;
@@ -470,6 +465,11 @@ video {
         color: black;
         background-color: #999;
     }
+
+    .discovery-object .discovery-link {
+        color: var(--bs-primary);
+        cursor: pointer;
+    }
 }
   
 @media (prefers-color-scheme: light) {
@@ -499,5 +499,10 @@ video {
     .badge-object .badge-guid-text {
         color: white;
         background-color: #333;
+    }
+
+    .discovery-object .discovery-link {
+        color: var(--bs-primary);
+        cursor: pointer;
     }
 }
