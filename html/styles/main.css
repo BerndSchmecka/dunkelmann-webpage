@@ -581,3 +581,7 @@ video {
   td[colspan="3"] {
     text-align: center;
   }
+
+  .badgeRow {
+    margin: 10px;
+  }

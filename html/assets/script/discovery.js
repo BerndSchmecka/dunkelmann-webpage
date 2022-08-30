@@ -134,7 +134,8 @@ var app = new Vue({
     data: {
         cards: [],
         nodeValue: '',
-        filterValue: ''
+        filterValue: '',
+        isLoading: true
     },
     created: function() {
         this.doQuery("*%3A*");
@@ -144,12 +145,13 @@ var app = new Vue({
             app.doQuery((this.nodeValue ? `%2B*${encodeURIComponent(this.nodeValue)}*` : "*%3A*") + this.filterValue);
         },
         doQuery: function(q) {
+            this.isLoading = true;
+            this.cards = [];
+
             var query = new XMLHttpRequest();
             query.onreadystatechange = function() {
                 if(query.readyState === 4 && query.status === 200){
                     var obj = JSON.parse(query.responseText);
-        
-                    app.cards = [];
         
                     obj.entries.forEach(element => {
                         app.cards.push({
@@ -173,6 +175,8 @@ var app = new Vue({
                             isServer: element.type.toLowerCase() === 'server'
                         });
                     });
+
+                    app.isLoading = false;
                 }
             }
             query.open("POST", decodeBase64(DISCOVERY_ENDPOINT));

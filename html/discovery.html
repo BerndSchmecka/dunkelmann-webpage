@@ -73,6 +73,15 @@
                     </div>
                 </div>
             </div>
+            <div class="row badgeRow" :hidden="!isLoading">
+                <div class="semipolar-spinner">
+                    <div class="ring"></div>
+                    <div class="ring"></div>
+                    <div class="ring"></div>
+                    <div class="ring"></div>
+                    <div class="ring"></div>
+                </div>
+            </div>
             <div class="row">
                 <div class="discovery-objects">
                     <discovery-card v-for="card in cards" v-bind:key="card.id" v-bind:card="card"></discovery-card>

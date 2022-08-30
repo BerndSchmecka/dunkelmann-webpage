@@ -62,7 +62,8 @@ var app = new Vue({
         revisionList: [],
         rev: 0,
         lastMod: 0,
-        cards: []
+        cards: [],
+        isLoading: true
     },
     created: function() {
         this.queryBadges();
@@ -89,12 +90,14 @@ var app = new Vue({
             query.send();
         },
         queryBadges: function() {
+            app.isLoading = true;
+            app.cards = [];
+            
             var query = new XMLHttpRequest();
             query.onreadystatechange = function() {
                 if(query.readyState === 4 && query.status === 200){
                     var obj = JSON.parse(query.responseText);
-        
-                    app.cards = [];
+
                     app.rev = obj.body.revision;
                     app.lastMod = obj.body.timestamp;
         
@@ -108,6 +111,8 @@ var app = new Vue({
                             value: element.value
                         });
                     });
+
+                    app.isLoading = false;
                 }
             }
             query.open("POST", decodeBase64(BADGES_EP));
