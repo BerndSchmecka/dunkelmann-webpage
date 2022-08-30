@@ -160,6 +160,17 @@
                                 </tr>
                             </thead>
                             <tbody>
+                                <tr :hidden="!isLoading3">
+                                    <td colspan="3">
+                                        <div class="semipolar-spinner">
+                                            <div class="ring"></div>
+                                            <div class="ring"></div>
+                                            <div class="ring"></div>
+                                            <div class="ring"></div>
+                                            <div class="ring"></div>
+                                          </div>
+                                    </td>
+                                </tr>
                                 <tr v-for="ch in ts3channels">
                                     <th scope="row">
                                         {{ ch.channel }}
@@ -188,6 +199,17 @@
                                 </tr>
                             </thead>
                                 <tbody>
+                                    <tr :hidden="!isLoading5">
+                                        <td colspan="3">
+                                            <div class="semipolar-spinner">
+                                                <div class="ring"></div>
+                                                <div class="ring"></div>
+                                                <div class="ring"></div>
+                                                <div class="ring"></div>
+                                                <div class="ring"></div>
+                                              </div>
+                                        </td>
+                                    </tr>
                                     <tr v-for="ch in ts5channels">
                                         <th scope="row">
                                             {{ ch.channel }}

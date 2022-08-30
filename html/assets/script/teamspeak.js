@@ -73,7 +73,9 @@ var app = new Vue({
             key: 1,
             unix: 0,
             text: ""
-        }
+        },
+        isLoading3: true,
+        isLoading5: true
     },
     created: function () {
         this.request();
@@ -89,6 +91,7 @@ var app = new Vue({
             obj.versions.forEach((element) => {
                 this.push3Element(element);
             })
+            this.isLoading3 = false;
         },
         push3Element: function(element) {
             app.ts3channels.push({
@@ -105,6 +108,7 @@ var app = new Vue({
             obj.versionInfo.forEach((element) => {
                 this.push5Element(element);
             })
+            this.isLoading5 = false;
         },
         push5Element: function(element) {
             app.ts5channels.push({
