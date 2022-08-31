@@ -90,9 +90,9 @@ var app = new Vue({
             query.send();
         },
         queryBadges: function() {
-            app.isLoading = true;
-            app.cards = [];
-            
+            this.isLoading = true;
+            this.cards = [];
+
             var query = new XMLHttpRequest();
             query.onreadystatechange = function() {
                 if(query.readyState === 4 && query.status === 200){
