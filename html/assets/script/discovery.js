@@ -135,7 +135,9 @@ var app = new Vue({
         cards: [],
         nodeValue: '',
         filterValue: '',
-        isLoading: true
+        isLoading: true,
+        totalCount: 0,
+        startCount: 0
     },
     created: function() {
         this.doQuery("*%3A*");
@@ -147,6 +149,8 @@ var app = new Vue({
         doQuery: function(q) {
             this.isLoading = true;
             this.cards = [];
+            this.totalCount = 0;
+            this.startCount = 0;
 
             var query = new XMLHttpRequest();
             query.onreadystatechange = function() {
@@ -176,6 +180,8 @@ var app = new Vue({
                         });
                     });
 
+                    app.totalCount = obj.total;
+                    app.startCount = obj.start;
                     app.isLoading = false;
                 }
             }
