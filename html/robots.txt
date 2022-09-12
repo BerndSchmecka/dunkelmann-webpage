@@ -2,5 +2,6 @@ User-agent: *
 Disallow: /error_pages/
 Disallow: /status/
 Disallow: /assets/special/
+Disallow: /cdn-cgi/
 
 Sitemap: https://www.dunkelmann.eu/sitemap.xml
