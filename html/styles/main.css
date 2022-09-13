@@ -470,6 +470,10 @@ video {
         color: var(--bs-primary);
         cursor: pointer;
     }
+
+    .halloween-spider1, .halloween-spider2 {
+        filter: invert(100%);
+    }
 }
   
 @media (prefers-color-scheme: light) {
@@ -584,4 +588,31 @@ video {
 
   .badgeRow {
     margin: 10px;
+  }
+
+  .halloween-spider1, .halloween-spider2 {
+    position: fixed;
+    bottom: 0;
+    display: block;
+    width: 15vh;
+    height: 15vh;
+    z-index: 1;
+  }
+
+  .halloween-spider1 {
+    left: 0;
+    background: url(../assets/special/spider1.png);
+    background-size: cover;
+    rotate: 270deg;
+  }
+
+  .halloween-spider2 {
+    right: 0;
+    background: url(../assets/special/spider2.png);
+    background-size: cover;
+    rotate: 90deg;
+  }
+
+  .halloween {
+    display: none;
   }
