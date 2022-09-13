@@ -16,6 +16,10 @@ let today = new Date();
 // check whether current date is in october
 if (today.getMonth() == 9) {
     // make elements with class "halloween" visible
+    enableHalloween();
+}
+
+function enableHalloween() {
     document.querySelectorAll(".halloween").forEach(function (el) {
         el.style.display = "block";
     }
