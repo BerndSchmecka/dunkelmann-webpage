@@ -65,7 +65,7 @@
                     <!-- Bootstrap 5 Form with 3 Text Inputs for IV, Message and Sign -->
                     <!-- Connect the inputs to the vue variables -->
                     <form class="form-inline" id="tweetDecryptorForm">
-                        <div class="form-group mb-2">
+                        <div class="form-group mx-sm-3 mb-2">
                             <label for="tweetDecryptorIV" class="sr-only">IV</label>
                             <input type="text" class="form-control" id="tweetDecryptorIV" placeholder="IV" v-model="iv">
                         </div>
@@ -77,10 +77,10 @@
                             <label for="tweetDecryptorSign" class="sr-only">Sign</label>
                             <input type="text" class="form-control" id="tweetDecryptorSign" placeholder="Sign" v-model="sign">
                         </div>
-                        <button type="button" class="btn btn-primary mb-2" @click="decrypt">Decrypt</button>
+                        <button type="button" class="btn btn-primary mx-sm-3 mb-2" @click="decrypt">Decrypt</button>
                     </form>
                     <!-- Textbox with cleartext -->
-                    <div class="form-group">
+                    <div class="form-group mx-sm-3 mb-2">
                         <label for="tweetDecryptorCleartext">Cleartext</label>
                         <textarea class="form-control" id="tweetDecryptorCleartext" rows="3" v-model="cleartext"></textarea>
                     </div>
