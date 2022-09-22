@@ -4,8 +4,8 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="author" content="Dunkelmann">
-        <meta name="keywords" content="Dunkelmann,G&auml;stebuch">
-        <meta name="description" content="Hier hat man die M&ouml;glichkeit, sich in mein G&auml;stebuch einzutragen.">
+        <meta name="keywords" content="Dunkelmann,TeamSpeak 3,TeamSpeak 5,versions,list,versionlist">
+        <meta name="description" content="Hier findet man eine Liste der TeamSpeak-Versionen.">
         <meta name="color-scheme" content="light dark">
         <link rel="shortcut icon" href="/favicon.ico">
         <link rel="icon" type="image/png" href="/favicon.png" sizes="32x32">
@@ -14,8 +14,9 @@
         <meta name="msapplication-TileColor" content="#212529">
         <meta name="msapplication-TileImage" content="/mstile-144x144.png">
         <link rel="stylesheet" href="assets/frameworks/bootstrap-dark-5@1.1.3/dist/css/bootstrap-dark.min.css">
+        <link rel="stylesheet" href="assets/frameworks/fontawesome@5.15.4/css/all.min.css">
         <link rel="stylesheet" href="styles/main.min.css">
-        <title>G&auml;stebuch - Dunkelmann</title>
+        <title>Versionsliste - Dunkelmann</title>
     </head>
     <body>
         <a class="skip-link screen-reader-text" href="#content" tabindex="0" aria-disabled="false" aria-label="Navigation überspringen">Navigation überspringen</a>
@@ -44,14 +45,14 @@
                                 <li><a class="dropdown-item" href="teamspeak.html">TeamSpeak</a></li>
                                 <li><a class="dropdown-item" href="discovery.html">Discovery</a></li>
                                 <li><a class="dropdown-item" href="badges.html">Badges</a></li>
-                                <li><a class="dropdown-item" href="version-list.html">Versionsliste</a></li>
+                                <li><a class="dropdown-item active" aria-current="page" href="version-list.html">Versionsliste</a></li>
                             </ul>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="tweet-decryptor.html">TweetDecryptor</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="gaestebuch.html">G&auml;stebuch</a>
+                            <a class="nav-link" href="gaestebuch.html">G&auml;stebuch</a>
                         </li>
                     </ul>
                 </div>
@@ -59,12 +60,37 @@
         </nav>
     
     <div id="content" tabindex="-1">
-        <div class="container-fluid" style="margin-top:75px;">
+        <div class="container-fluid" style="margin-top:75px;" id="versionListApp">
             <div class="row">
-                <div class="col">
-                    <div class="ratio ratio-1x1">
-                        <iframe src="https://www.guestbook-free.com/books3/dunkelmann/" title="G&auml;stebuch"></iframe>
+                <div class="col-md-auto">
+                    <h1>Versionsliste</h1>
+                    <p>
+                        Diese Seite zeigt eine Liste der TeamSpeak-Versionen an. Die Liste wird automatisch aktualisiert.
+                    </p>
+                    <div class="semipolar-spinner" :hidden="!isLoading">
+                        <div class="ring"></div>
+                        <div class="ring"></div>
+                        <div class="ring"></div>
+                        <div class="ring"></div>
+                        <div class="ring"></div>
                     </div>
+                    <lm-annotation v-bind:key="vllastModified.key" v-bind:lm="vllastModified" :hidden="isLoading"></lm-annotation>
+                    <table class="table table-striped table-bordered" :hidden="isLoading">
+                        <thead>
+                            <tr>
+                                <th v-for="h in headers" scope="col">
+                                    {{ h }}
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr v-for="ver in versions">
+                                <td v-for="v in ver">
+                                    {{ v }}
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>
@@ -74,8 +100,12 @@
         <span class="halloween-spider2"></span>
     </div>
         <span class="blur_span"></span>
-        <script src="https://twemoji.maxcdn.com/v/latest/twemoji.min.js" crossorigin="anonymous"></script>
         <script src="assets/frameworks/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+        <script src="assets/frameworks/vue@2.6.14/vue.min.js"></script>
+        <script src="assets/frameworks/papaparse@5.3.2/dist/js/papaparse.min.js"></script>
+        <script src="assets/script/version-list.min.js"></script>
         <script src="assets/script/halloween.min.js"></script>
+        <!--<script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
+        <script src="assets/script/version-list.js"></script>-->
     </body>
 </html>
