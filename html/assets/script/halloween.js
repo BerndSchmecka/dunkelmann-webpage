@@ -13,8 +13,8 @@ immediately.
 
 let today = new Date();
 
-// check whether current date is in october
-if (today.getMonth() == 9) {
+// check whether current date is in october or the 1st of november
+if (today.getMonth() === 9 || (today.getMonth() === 10 && today.getDate() === 1)) {
     // make elements with class "halloween" visible
     enableHalloween();
 }
@@ -22,6 +22,13 @@ if (today.getMonth() == 9) {
 function enableHalloween() {
     document.querySelectorAll(".halloween").forEach(function (el) {
         el.style.display = "block";
+    }
+    );
+}
+
+function disableHalloween() {
+    document.querySelectorAll(".halloween").forEach(function (el) {
+        el.style.display = "none";
     }
     );
 }
