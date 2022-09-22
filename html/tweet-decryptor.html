@@ -61,7 +61,14 @@
     <div id="content" tabindex="-1">
         <div class="container-fluid" style="margin-top:75px;" id="tweetDecryptorApp">
             <div class="row">
-                <div class="col">
+                <div class="col-md-auto">
+                    <h1>TweetDecryptor</h1>
+                    <p>
+                        Mithilfe des folgenden Formulars kannst du meine Tweets entschl&uuml;sseln.
+                        Dazu müssen nur die Felder für IV, Message und Sign entsprechend ausgefüllt werden.
+                        Anschließend kann durch einen Klick auf den Button "Entschlüsseln" der Inhalt des Tweets entschlüsselt werden.
+                        Dieser wird dann im Feld "Entschlüsselter Text" angezeigt.
+                    </p>
                     <!-- Bootstrap 5 Form with 3 Text Inputs for IV, Message and Sign -->
                     <!-- Connect the inputs to the vue variables -->
                     <form class="form-inline" id="tweetDecryptorForm">
@@ -77,11 +84,11 @@
                             <label for="tweetDecryptorSign" class="sr-only">Sign</label>
                             <input type="text" class="form-control" id="tweetDecryptorSign" placeholder="Sign" v-model="sign">
                         </div>
-                        <button type="button" class="btn btn-primary mx-sm-3 mb-2" @click="decrypt">Decrypt</button>
+                        <button type="button" class="btn btn-primary mx-sm-3 mb-2" @click="decrypt">Entschlüsseln</button>
                     </form>
                     <!-- Textbox with cleartext -->
                     <div class="form-group mx-sm-3 mb-2">
-                        <label for="tweetDecryptorCleartext">Cleartext</label>
+                        <label for="tweetDecryptorCleartext">Entschlüsselter Text</label>
                         <textarea class="form-control" id="tweetDecryptorCleartext" rows="3" v-model="cleartext"></textarea>
                     </div>
                 </div>
