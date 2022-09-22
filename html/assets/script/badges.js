@@ -78,7 +78,7 @@ var app = new Vue({
 
                     app.revisionList = [];
 
-                    obj.cachedRevisions.forEach(e => {
+                    obj.cachedRevisions.slice().reverse().forEach(e => {
                         app.revisionList.push({
                             name: e,
                             id: e
