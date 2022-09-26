@@ -388,6 +388,7 @@ video {
     left: 155px;
     height: 24px;
     width: 340px;
+    font-weight: 500;
 }
 
 .badge-object .badge-name .badge-name-text {
