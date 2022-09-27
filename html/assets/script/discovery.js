@@ -141,6 +141,9 @@ var app = new Vue({
             this.isLoading = true;
             this.cards = [];
 
+            this.backwardButton = false;
+            this.forwardButton = false;
+
             var query = new XMLHttpRequest();
             query.onreadystatechange = function() {
                 if(query.readyState === 4 && query.status === 200){
