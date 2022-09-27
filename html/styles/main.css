@@ -476,6 +476,10 @@ video {
     .halloween-spider1, .halloween-spider2 {
         filter: invert(100%);
     }
+
+    .blurFooter {
+        background-color: rgba(0,0,0,0.7);
+    }
 }
   
 @media (prefers-color-scheme: light) {
