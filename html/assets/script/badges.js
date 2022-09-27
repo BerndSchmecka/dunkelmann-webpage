@@ -70,7 +70,7 @@ var app = new Vue({
                     });
                 }
             }
-            query.open("GET", window.GLOBAL_ENV.BADGE_REVISIONS_ENDPOINT);
+            query.open("GET", window.GLOBAL_ENV.BADGE_REVISIONS_ENDPOINT, true);
             query.send();
         },
         queryBadges: function() {
@@ -99,7 +99,7 @@ var app = new Vue({
                     app.isLoading = false;
                 }
             }
-            query.open("POST", window.GLOBAL_ENV.BADGE_ENDPOINT);
+            query.open("POST", window.GLOBAL_ENV.BADGE_ENDPOINT, true);
             query.send(
                 JSON.stringify({
                     "revision": this.revisionValue
