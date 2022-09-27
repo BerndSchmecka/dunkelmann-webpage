@@ -65,7 +65,7 @@
                 <div class="col-md-auto col-centered">
                     <div class="row">
                         <div class="col-md-auto">
-                            <input class="form-control form-control-lg" type="text" placeholder="Suchen" v-model="searchValue" v-on:keyup.enter="queryBadges()" disabled>
+                            <input class="form-control form-control-lg" type="text" placeholder="Suchen" v-model="searchValue" v-on:keyup.enter="queryBadges()">
                         </div>
                         <div class="col-md-auto">
                             <select class="form-select form-select-lg" v-model="revisionValue">
@@ -77,6 +77,7 @@
                     <div class="row">
                         <div class="col-md-auto">
                             <div class="badge-info-text">
+                                <span class="badge-info-text-element">{{ countText }}</span>
                                 <span class="badge-info-text-element">{{ revText }}</span>
                                 <span class="badge-info-text-element">{{ lmText }}</span>
                             </div>

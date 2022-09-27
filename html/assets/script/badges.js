@@ -46,6 +46,7 @@ var app = new Vue({
         revisionList: [],
         revText: 'Laden ...',
         lmText: 'Laden ...',
+        countText: 'Laden ...',
         searchValue: '',
         cards: [],
         isLoading: true
@@ -80,6 +81,7 @@ var app = new Vue({
 
             this.revText = 'Laden ...';
             this.lmText = 'Laden ...';
+            this.countText = 'Laden ...';
 
             var query = new XMLHttpRequest();
             query.onreadystatechange = function() {
@@ -90,18 +92,21 @@ var app = new Vue({
                     var lastModified = Math.floor(Date.parse(date) / 1000);
         
                     obj.body.badges.forEach(element => {
-                        app.cards.push({
-                            uuid: element.uuid,
-                            name: element.name,
-                            base_url: element.url,
-                            description: element.description,
-                            date: parseUnixTime(element.timestamp),
-                            value: element.value
-                        });
+                        if(element.name.toLowerCase().includes(app.searchValue.toLowerCase()) || app.searchValue == '') {
+                            app.cards.push({
+                                uuid: element.uuid,
+                                name: element.name,
+                                base_url: element.url,
+                                description: element.description,
+                                date: parseUnixTime(element.timestamp),
+                                value: element.value
+                            });
+                        }
                     });
 
                     app.revText = `Revisionsnummer: ${obj.body.revision} [${parseUnixTime(obj.body.timestamp)}]`;
                     app.lmText = `Letzte Änderung: ${parseUnixTime(lastModified)}`;
+                    app.countText = `Zeige ${app.cards.length} von ${obj.body.badges.length} Abzeichen`;
 
                     app.isLoading = false;
                 }
