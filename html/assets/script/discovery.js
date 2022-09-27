@@ -136,8 +136,6 @@ var app = new Vue({
         nodeValue: '',
         filterValue: '',
         isLoading: true,
-        totalCount: 0,
-        startCount: 0,
         pagination: {
             elementsPerPage: 30,
             currentStart: 0,
@@ -157,8 +155,6 @@ var app = new Vue({
         doQuery: function(q) {
             this.isLoading = true;
             this.cards = [];
-            this.totalCount = 0;
-            this.startCount = 0;
 
             var query = new XMLHttpRequest();
             query.onreadystatechange = function() {
@@ -188,10 +184,7 @@ var app = new Vue({
                         });
                     });
 
-                    app.totalCount = obj.total;
-                    app.startCount = obj.start;
-
-                    app.annotationText = app.cards.length > 0 ? `Zeige ${app.cards.length} (${app.startCount + 1} - ${app.startCount + app.cards.length }) von ${app.totalCount} Einträgen` : 'Keine Einträge gefunden';
+                    app.annotationText = app.cards.length > 0 ? `Zeige ${app.cards.length} (${obj.start + 1} - ${obj.start + app.cards.length }) von ${obj.total} Einträgen` : 'Keine Einträge gefunden';
 
                     if(obj.total > obj.start + obj.entries.length){
                         app.pagination.forwardButton = true;
