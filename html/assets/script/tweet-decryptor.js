@@ -22,7 +22,7 @@ var app = new Vue({
     },
     methods: {
         decrypt: function(){
-            //make XHR request to https://api.dunkelmann.eu/v1/decryptAes with the following data:
+            //make XHR request to window.GLOBAL_ENV.AES_ENDPOINT with the following data:
             //iv: this.iv
             //msg: this.msg
             //sign: this.sign
@@ -41,7 +41,7 @@ var app = new Vue({
                     alert(obj.errorMessage);
                 }
             };
-            request.open('POST', 'https://api.dunkelmann.eu/v1/decryptAes', true);
+            request.open('POST', window.GLOBAL_ENV.AES_ENDPOINT, true);
             request.setRequestHeader('Content-Type', 'application/json');
             request.send(JSON.stringify({
                 iv: this.iv,

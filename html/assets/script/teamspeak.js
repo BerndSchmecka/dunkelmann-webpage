@@ -11,30 +11,14 @@ please send a note to <business@dunkelmann.eu> so we can mail you a copy
 immediately.
 ***************************************************************************** */
 
-let TS3_EP = "aHR0cHM6Ly9hcGkuZHVua2VsbWFubi5ldS92MS9nZXRUZWFtU3BlYWtWZXJzaW9ucy8z";
-let TS5_EP = "aHR0cHM6Ly9hcGkuZHVua2VsbWFubi5ldS92MS9nZXRUZWFtU3BlYWtWZXJzaW9ucy81";
-
 let STABLE_URL = "aHR0cHM6Ly90ZWFtc3BlYWsuY29tL2VuL2Rvd25sb2Fkcy8jY2xpZW50";
 let SERVER_URL = "aHR0cHM6Ly90ZWFtc3BlYWsuY29tL2VuL2Rvd25sb2Fkcy8jc2VydmVy";
 let BETA_URL = "";
 let ALPHA_URL = "";
 
 let TS5_URL = "aHR0cHM6Ly93d3cudGVhbXNwZWFrLmNvbS9kZS9kb3dubG9hZHMvI3RzNQ==";
-decodeBase64=function(f){var g={},b=65,d=0,a,c=0,h,e="",k=String.fromCharCode,l=f.length;for(a="";91>b;)a+=k(b++);a+=a.toLowerCase()+"0123456789+/";for(b=0;64>b;b++)g[a.charAt(b)]=b;for(a=0;a<l;a++)for(b=g[f.charAt(a)],d=(d<<6)+b,c+=6;8<=c;)((h=d>>>(c-=8)&255)||a<l-2)&&(e+=k(h));return e};
 
-parseUnixTime=function(t){
-    var date = new Date(t * 1000);
-    var curr_date = "0" + date.getDate();
-    var curr_month = "0" + (date.getMonth() + 1); //Months are zero based
-    var curr_year = date.getFullYear();
-    var hours = "0" + date.getHours();
-    var minutes = "0" + date.getMinutes();
-    var seconds = "0" + date.getSeconds();
-    var formattedTime = curr_date.substr(-2) + '.' + curr_month.substr(-2)  + '.' + curr_year + ' ' + hours.substr(-2) + ':' + minutes.substr(-2) + ':' + seconds.substr(-2);
-    return formattedTime;
-}
-
-requestJSON = function(version, encodedUrl, callback){
+requestJSON = function(version, endpoint, callback){
     var request = new XMLHttpRequest();
     request.onreadystatechange = function() {
         if(request.readyState === 4 && request.status === 200){
@@ -50,7 +34,7 @@ requestJSON = function(version, encodedUrl, callback){
             }
         }
     }
-    request.open("GET", decodeBase64(encodedUrl));
+    request.open("GET", endpoint);
     request.send();
 }
 
@@ -82,8 +66,8 @@ var app = new Vue({
     },
     methods: {
         request: function() {
-            requestJSON(3, TS3_EP, this.pushAll3Elements)
-            requestJSON(5, TS5_EP, this.pushAll5Elements)
+            requestJSON(3, window.GLOBAL_ENV.TEAMSPEAK3_ENDPOINT, this.pushAll3Elements)
+            requestJSON(5, window.GLOBAL_ENV.TEAMSPEAK5_ENDPOINT, this.pushAll5Elements)
         },
         pushAll3Elements: function(obj, lastModified){
             this.ts3lastModified.unix = lastModified

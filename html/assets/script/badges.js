@@ -11,22 +11,6 @@ please send a note to <business@dunkelmann.eu> so we can mail you a copy
 immediately.
 ***************************************************************************** */
 
-let BADGES_EP = "aHR0cHM6Ly9hcGkuZHVua2VsbWFubi5ldS92Mi9nZXRUZWFtU3BlYWtCYWRnZXM=";
-let REVISIONS_EP = "aHR0cHM6Ly9hcGkuZHVua2VsbWFubi5ldS92Mi9nZXRDYWNoZWRCYWRnZVJldmlzaW9ucw==";
-decodeBase64=function(f){var g={},b=65,d=0,a,c=0,h,e="",k=String.fromCharCode,l=f.length;for(a="";91>b;)a+=k(b++);a+=a.toLowerCase()+"0123456789+/";for(b=0;64>b;b++)g[a.charAt(b)]=b;for(a=0;a<l;a++)for(b=g[f.charAt(a)],d=(d<<6)+b,c+=6;8<=c;)((h=d>>>(c-=8)&255)||a<l-2)&&(e+=k(h));return e};
-
-parseUnixTime=function(t){
-    var date = new Date(t * 1000);
-    var curr_date = "0" + date.getDate();
-    var curr_month = "0" + (date.getMonth() + 1); //Months are zero based
-    var curr_year = date.getFullYear();
-    var hours = "0" + date.getHours();
-    var minutes = "0" + date.getMinutes();
-    var seconds = "0" + date.getSeconds();
-    var formattedTime = curr_date.substr(-2) + '.' + curr_month.substr(-2)  + '.' + curr_year + ' - ' + hours.substr(-2) + ':' + minutes.substr(-2) + ':' + seconds.substr(-2);
-    return formattedTime;
-}
-
 Vue.component('badge-card', {
     props: ['card'],
     template: `
@@ -86,7 +70,7 @@ var app = new Vue({
                     });
                 }
             }
-            query.open("GET", decodeBase64(REVISIONS_EP), true);
+            query.open("GET", window.GLOBAL_ENV.BADGE_REVISIONS_ENDPOINT);
             query.send();
         },
         queryBadges: function() {
@@ -115,7 +99,7 @@ var app = new Vue({
                     app.isLoading = false;
                 }
             }
-            query.open("POST", decodeBase64(BADGES_EP));
+            query.open("POST", window.GLOBAL_ENV.BADGE_ENDPOINT);
             query.send(
                 JSON.stringify({
                     "revision": this.revisionValue

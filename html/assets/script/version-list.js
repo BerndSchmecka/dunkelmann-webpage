@@ -11,20 +11,6 @@ please send a note to <business@dunkelmann.eu> so we can mail you a copy
 immediately.
 ***************************************************************************** */
 
-let VERSIONLIST_EP = 'https://raw.githubusercontent.com/ReSpeak/tsdeclarations/master/Versions.csv';
-
-parseUnixTime=function(t){
-    var date = new Date(t * 1000);
-    var curr_date = "0" + date.getDate();
-    var curr_month = "0" + (date.getMonth() + 1); //Months are zero based
-    var curr_year = date.getFullYear();
-    var hours = "0" + date.getHours();
-    var minutes = "0" + date.getMinutes();
-    var seconds = "0" + date.getSeconds();
-    var formattedTime = curr_date.substr(-2) + '.' + curr_month.substr(-2)  + '.' + curr_year + ' ' + hours.substr(-2) + ':' + minutes.substr(-2) + ':' + seconds.substr(-2);
-    return formattedTime;
-}
-
 Vue.component('lm-annotation', {
     props: ['lm'],
     template: `<span class="annotation">Zuletzt geändert am: <abbr :title="lm.unix">{{ lm.text }}</abbr></span>`
@@ -71,7 +57,7 @@ var app = new Vue({
                     });
                 }
             };
-            request.open('GET', VERSIONLIST_EP, true);
+            request.open('GET', window.GLOBAL_ENV.VERSIONLIST_ENDPOINT, true);
             request.send();
         }
     }
