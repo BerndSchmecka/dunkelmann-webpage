@@ -34,7 +34,7 @@ requestJSON = function(version, endpoint, callback){
             }
         }
     }
-    request.open("GET", endpoint);
+    request.open("GET", endpoint, true);
     request.send();
 }
 

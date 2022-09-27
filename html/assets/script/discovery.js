@@ -186,7 +186,7 @@ var app = new Vue({
                     app.isLoading = false;
                 }
             }
-            query.open("POST", window.GLOBAL_ENV.DISCOVERY_ENDPOINT);
+            query.open("POST", window.GLOBAL_ENV.DISCOVERY_ENDPOINT, true);
             query.setRequestHeader("Content-type", "application/json");
             query.send(
                 JSON.stringify({
