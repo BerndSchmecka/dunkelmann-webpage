@@ -622,14 +622,16 @@ video {
   .blurFooter {
     width: 90%;
     height: 3rem;
-    background-color: #ffffff88;
+    background-color: rgba(255, 255, 255, 0.5);
     position: fixed;
-    backdrop-filter: blur(3px);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
     bottom: 0.5rem;
     left: 50%;
     transform: translateX(-50%);
-    border-radius: 10px;
-    border: 1px solid gray;
+    border-radius: 16px;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.25);
     justify-content: center;
   }
 
