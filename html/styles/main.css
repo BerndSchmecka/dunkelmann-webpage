@@ -652,3 +652,8 @@ video {
     color: var(--bs-secondary);
     cursor: not-allowed;
   }
+
+  #discoveryCount {
+    user-select: none;
+    margin-top: 2px;
+  }
