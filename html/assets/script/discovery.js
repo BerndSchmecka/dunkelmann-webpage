@@ -143,6 +143,7 @@ var app = new Vue({
 
             this.pagination.backwardButton = false;
             this.pagination.forwardButton = false;
+            this.annotationText = 'Laden ...';
 
             var query = new XMLHttpRequest();
             query.onreadystatechange = function() {
