@@ -478,7 +478,7 @@ video {
     }
 
     .blurFooter {
-        background-color: rgba(0,0,0,0.7);
+        background-color: rgba(20,20,20,0.7);
     }
 }
   
@@ -655,7 +655,7 @@ video {
   }
 
   .blurFooter .footerLinks .footerLink[disabled] {
-    color: var(--bs-secondary);
+    color: var(--bs-gray-500);
     cursor: not-allowed;
   }
 
