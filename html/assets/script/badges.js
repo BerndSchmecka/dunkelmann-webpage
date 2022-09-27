@@ -92,7 +92,7 @@ var app = new Vue({
                     var lastModified = Math.floor(Date.parse(date) / 1000);
         
                     obj.body.badges.forEach(element => {
-                        if(element.name.toLowerCase().includes(app.searchValue.toLowerCase()) || app.searchValue == '') {
+                        if(app.searchValue == '' || element.name.toLowerCase().includes(app.searchValue.toLowerCase()) || element.description.toLowerCase().includes(app.searchValue.toLowerCase()) || element.url.toLowerCase().includes(app.searchValue.toLowerCase())) {
                             app.cards.push({
                                 uuid: element.uuid,
                                 name: element.name,
