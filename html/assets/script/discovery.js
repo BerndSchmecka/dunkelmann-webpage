@@ -215,13 +215,13 @@ var app = new Vue({
             );
         },
         goForward: function() {
-            if(this.pagination.forwardButton) {
+            if(this.pagination.forwardButton && !this.isLoading) {
                 this.pagination.currentStart += this.pagination.elementsPerPage;
                 this.doQuery((this.nodeValue ? `%2B*${encodeURIComponent(this.nodeValue)}*` : "*%3A*") + this.filterValue);
             }
         },
         goBackward: function() {
-            if(this.pagination.backwardButton) {
+            if(this.pagination.backwardButton && !this.isLoading) {
                 this.pagination.currentStart -= this.pagination.elementsPerPage;
                 this.doQuery((this.nodeValue ? `%2B*${encodeURIComponent(this.nodeValue)}*` : "*%3A*") + this.filterValue);
             }
