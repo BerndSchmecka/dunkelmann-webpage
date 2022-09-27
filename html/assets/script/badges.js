@@ -44,8 +44,9 @@ var app = new Vue({
     data: {
         revisionValue: 'latest',
         revisionList: [],
-        rev: 0,
-        lastMod: 0,
+        revText: 'Laden ...',
+        lmText: 'Laden ...',
+        searchValue: '',
         cards: [],
         isLoading: true
     },
@@ -77,13 +78,16 @@ var app = new Vue({
             this.isLoading = true;
             this.cards = [];
 
+            this.revText = 'Laden ...';
+            this.lmText = 'Laden ...';
+
             var query = new XMLHttpRequest();
             query.onreadystatechange = function() {
                 if(query.readyState === 4 && query.status === 200){
                     var obj = JSON.parse(query.responseText);
 
-                    app.rev = obj.body.revision;
-                    app.lastMod = obj.body.timestamp;
+                    var date = obj.headers["Last-Modified"][0];
+                    var lastModified = Math.floor(Date.parse(date) / 1000);
         
                     obj.body.badges.forEach(element => {
                         app.cards.push({
@@ -96,6 +100,9 @@ var app = new Vue({
                         });
                     });
 
+                    app.revText = `Revisionsnummer: ${obj.body.revision} [${parseUnixTime(obj.body.timestamp)}]`;
+                    app.lmText = `Letzte Änderung: ${parseUnixTime(lastModified)}`;
+
                     app.isLoading = false;
                 }
             }
@@ -105,17 +112,6 @@ var app = new Vue({
                     "revision": this.revisionValue
                 })
             );
-        },
-        parseUnixTime: function(t){
-            var date = new Date(t * 1000);
-            var curr_date = "0" + date.getDate();
-            var curr_month = "0" + (date.getMonth() + 1); //Months are zero based
-            var curr_year = date.getFullYear();
-            var hours = "0" + date.getHours();
-            var minutes = "0" + date.getMinutes();
-            var seconds = "0" + date.getSeconds();
-            var formattedTime = curr_date.substr(-2) + '.' + curr_month.substr(-2)  + '.' + curr_year + ' - ' + hours.substr(-2) + ':' + minutes.substr(-2) + ':' + seconds.substr(-2);
-            return formattedTime;
         }
     },
     watch: {
