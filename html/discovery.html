@@ -74,9 +74,9 @@
                                     <option value="%20%2Btype%3A2">Server</option>
                                 </select>
                             </div>
-                            <div class="col-md-auto">
-                                <span>Zeige {{ cards.length }} ({{ startCount }} - {{ startCount + cards.length }}) von {{ totalCount }} Einträgen</span>
-                            </div>
+                    </div>
+                    <div class="row">
+                        <span class="annotation" id="discoveryCount">{{ annotationText }}</span>
                     </div>
                 </div>
             </div>
@@ -92,6 +92,14 @@
             <div class="row">
                 <div class="discovery-objects">
                     <discovery-card v-for="card in cards" v-bind:key="card.id" v-bind:card="card"></discovery-card>
+                </div>
+            </div>
+            <div class="row">
+                <div class="blurFooter">
+                    <div class="footerLinks">
+                        <span class="footerLink" :disabled="!pagination.backwardButton" v-on:click="goBackward()">Zurück</span>
+                        <span class="footerLink" :disabled="!pagination.forwardButton" v-on:click="goForward()">Weiter</span>
+                    </div>
                 </div>
             </div>
         </div>

@@ -136,21 +136,25 @@ var app = new Vue({
         nodeValue: '',
         filterValue: '',
         isLoading: true,
-        totalCount: 0,
-        startCount: 0
+        pagination: {
+            elementsPerPage: 30,
+            currentStart: 0,
+            backwardButton: false,
+            forwardButton: false
+        },
+        annotationText: 'Laden ...'
     },
     created: function() {
         this.doQuery("*%3A*");
     },
     methods: {
         queryWithFilter: function() {
+            app.pagination.currentStart = 0;
             app.doQuery((this.nodeValue ? `%2B*${encodeURIComponent(this.nodeValue)}*` : "*%3A*") + this.filterValue);
         },
         doQuery: function(q) {
             this.isLoading = true;
             this.cards = [];
-            this.totalCount = 0;
-            this.startCount = 0;
 
             var query = new XMLHttpRequest();
             query.onreadystatechange = function() {
@@ -180,8 +184,20 @@ var app = new Vue({
                         });
                     });
 
-                    app.totalCount = obj.total;
-                    app.startCount = obj.start;
+                    app.annotationText = app.cards.length > 0 ? `Zeige ${app.cards.length} (${obj.start + 1} - ${obj.start + app.cards.length }) von ${obj.total} Einträgen` : 'Keine Einträge gefunden';
+
+                    if(obj.total > obj.start + obj.entries.length){
+                        app.pagination.forwardButton = true;
+                    } else {
+                        app.pagination.forwardButton = false;
+                    }
+
+                    if(obj.start > 0){
+                        app.pagination.backwardButton = true;
+                    } else {
+                        app.pagination.backwardButton = false;
+                    }
+
                     app.isLoading = false;
                 }
             }
@@ -191,12 +207,24 @@ var app = new Vue({
                 JSON.stringify({
                     "endpointMode": getEndpointMode(),
                     "queryString": q,
-                    "startCount": 0,
-                    "rowCount": 30,
+                    "startCount": this.pagination.currentStart,
+                    "rowCount": this.pagination.elementsPerPage,
                     "sortBy": "members",
                     "sortOrder": "desc"
                 })
             );
+        },
+        goForward: function() {
+            if(this.pagination.forwardButton) {
+                this.pagination.currentStart += this.pagination.elementsPerPage;
+                this.doQuery((this.nodeValue ? `%2B*${encodeURIComponent(this.nodeValue)}*` : "*%3A*") + this.filterValue);
+            }
+        },
+        goBackward: function() {
+            if(this.pagination.backwardButton) {
+                this.pagination.currentStart -= this.pagination.elementsPerPage;
+                this.doQuery((this.nodeValue ? `%2B*${encodeURIComponent(this.nodeValue)}*` : "*%3A*") + this.filterValue);
+            }
         }
     },
     watch: {

@@ -148,6 +148,7 @@ video {
     flex-wrap: wrap;
     user-select: none;
     margin-top: 10px;
+    margin-bottom: 3.5rem;
 }
 
 .discovery-objects .discovery-object {
@@ -616,4 +617,43 @@ video {
 
   .halloween {
     display: none;
+  }
+
+  .blurFooter {
+    width: 90%;
+    height: 3rem;
+    background-color: #ffffff88;
+    position: fixed;
+    backdrop-filter: blur(3px);
+    bottom: 0.5rem;
+    left: 50%;
+    transform: translateX(-50%);
+    border-radius: 10px;
+    border: 1px solid gray;
+    justify-content: center;
+  }
+
+  .blurFooter .footerLinks {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    user-select: none;
+  }
+
+  .blurFooter .footerLinks .footerLink {
+    margin: 0 5px;
+    font-weight: 500;
+    color: var(--bs-primary);
+    cursor: pointer;
+  }
+
+  .blurFooter .footerLinks .footerLink[disabled] {
+    color: var(--bs-secondary);
+    cursor: not-allowed;
+  }
+
+  #discoveryCount {
+    user-select: none;
+    margin-top: 2px;
   }
