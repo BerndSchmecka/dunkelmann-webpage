@@ -16,7 +16,7 @@ window.GLOBAL_ENV = {
     BADGE_REVISIONS_ENDPOINT: "https://api.dunkelmann.eu/v2/getCachedBadgeRevisions",
     DISCOVERY_ENDPOINT: "https://api.dunkelmann.eu/v1/getTeamSpeakRoomDiscovery",
     TEAMSPEAK3_ENDPOINT: "https://api.dunkelmann.eu/v1/getTeamSpeakVersions/3",
-    TEAMSPEAK5_ENDPOINT: "https://api.dunkelmann.eu/v1/getTeamSpeakVersions/5",
+    TEAMSPEAK5_ENDPOINT: "https://api.dunkelmann.eu/v2/getTeamSpeakVersions/5",
     AES_ENDPOINT: "https://api.dunkelmann.eu/v1/decryptAes",
     VERSIONLIST_ENDPOINT: "https://raw.githubusercontent.com/ReSpeak/tsdeclarations/master/Versions.csv",
 }
