@@ -198,8 +198,7 @@
                             <thead>
                                 <tr>
                                     <th scope="col">Platform</th>
-                                    <th scope="col">Current Version (<abbr title="Version from the 'latest' Update Channel">latest</abbr>)</th>
-                                    <th scope="col">Download (<abbr title="Version from the 'latest' Update Channel">latest</abbr>)</th>
+                                    <th v-for="ch in ts5channels" scope="col">Current Version (<abbr :title="'Version from the \'' + ch.channel + '\' Update Channel'">{{ ch.channel }}</abbr>)</th>
                                 </tr>
                             </thead>
                                 <tbody>
@@ -214,15 +213,12 @@
                                             </div>
                                         </td>
                                     </tr>
-                                    <tr v-for="ch in ts5channels">
+                                    <tr v-for="pl in ts5platforms" :hidden="isLoading5">
                                         <th scope="row">
-                                            {{ ch.channel }}
+                                            {{ pl[0].toUpperCase() + pl.slice(1) }}
                                         </th>
-                                        <td>
-                                            {{ ch.version }} [Build: <abbr :title='ch.time'>{{ ch.timestamp }}</abbr>]
-                                        </td>
-                                        <td>
-                                            <button type="button" :class="ch.download.class" :onclick="ch.download.onclick" :data-bs-toggle="ch.download.toggle" :data-bs-target="ch.download.target">Download</button>
+                                        <td v-for="ch in ts5channels">
+                                            {{ ch.versions[pl].version }} [Build: <abbr :title='ch.versions[pl].time'>{{ ch.versions[pl].timestamp }}</abbr>]
                                         </td>
                                     </tr>
                             </tbody>

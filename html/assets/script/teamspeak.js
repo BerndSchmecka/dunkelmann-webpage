@@ -28,9 +28,7 @@ requestJSON = function(version, endpoint, callback){
                 var lastModified = Math.floor(Date.parse(date) / 1000);
                 callback(obj.body, lastModified);
             } else if (version === 5){
-                var date = obj.versionInfo[0].headers["Last-Modified"][0];
-                var lastModified = Math.floor(Date.parse(date) / 1000);
-                callback(obj, lastModified);
+                callback(obj, 0);
             }
         }
     }
@@ -48,6 +46,7 @@ var app = new Vue({
     data: {
         ts3channels: [],
         ts5channels: [],
+        ts5platforms: ['windows', 'linux', 'mac'],
         ts3lastModified: {
             key: 0,
             unix: 0,
@@ -89,21 +88,24 @@ var app = new Vue({
         pushAll5Elements: function(obj, lastModified){
             this.ts5lastModified.unix = lastModified
             this.ts5lastModified.text = parseUnixTime(lastModified)
-            obj.versionInfo.forEach((element) => {
+            obj.forEach((element) => {
                 this.push5Element(element);
             })
             this.isLoading5 = false;
         },
         push5Element: function(element) {
-            app.ts5channels.push({
-                channel: element.platformName[0].toUpperCase()+element.platformName.substring(1),
-                version: element.platformInfo.version+'-'+element.platformInfo.version_string,
-                timestamp: element.platformInfo.timestamp,
-                time: parseUnixTime(element.platformInfo.timestamp),
-                download: {
-                    class: 'btn btn-primary',
-                    onclick: 'window.open(decodeBase64(TS5_URL), \'_blank\').focus();'
+            var ver = {};
+            element.versionInfo.forEach((version) => {
+                ver[version.platformName] = {
+                    version: version.platformInfo.version+'-'+version.platformInfo.version_string,
+                    timestamp: version.platformInfo.timestamp,
+                    time: parseUnixTime(version.platformInfo.timestamp),
                 }
+            })
+
+            app.ts5channels.push({
+                channel: element.channelName,
+                versions: ver
             });
         }
     }
