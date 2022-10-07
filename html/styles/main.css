@@ -338,7 +338,6 @@ video {
 .badge-objects {
     justify-content: center;
     display: flex;
-    flex-direction: column-reverse;
     align-items: center;
     flex: 1 1 auto;
     flex-wrap: wrap;
@@ -347,11 +346,26 @@ video {
 }
 
 .badge-objects .badge-object {
-    flex: 0 0 auto;
-    margin: 10px;
+    margin: 15px 25px;
+    transition: all 0.5s ease;
+    transform: scale3d(1,1,1);
 }
 
-.badge-object {
+.badge-objects .badge-object:hover {
+    transform: scale3d(1.25,1.25,1.25) perspective(1px);
+    cursor: pointer;
+}
+
+.badge-showcase-container {
+    justify-content: center;
+    display: flex;
+}
+
+[v-cloak].badge-showcase-container {
+    display: none;
+}
+
+.badge-showcase {
     position: relative;
     display: flex;
     border-radius: 25px;
@@ -360,11 +374,11 @@ video {
     padding: 0.5em 0.1em;
 }
 
-.badge-object .badge-small-text {
+.badge-showcase .badge-small-text {
     font-size: 13px;
 }
 
-.badge-object .badge-guid-text {
+.badge-showcase .badge-guid-text {
     font-family:'Courier New', Courier, monospace;
     font-weight: 400;
     padding: 0 5px;
@@ -372,17 +386,17 @@ video {
     font-size: 13px;
 }
 
-.badge-object .badge-icon {
+.badge-showcase .badge-icon {
     width: 75px;
     padding: 0 0.4em;
     border-right: 1px solid black;
 }
 
-.badge-object .badge-icon .badge-image {
+.badge-showcase .badge-icon .badge-image {
     width: 64px;
 }
 
-.badge-object .badge-name {
+.badge-showcase .badge-name {
     position: absolute;
     white-space: nowrap;
     top: 5px;
@@ -392,7 +406,7 @@ video {
     font-weight: 500;
 }
 
-.badge-object .badge-name .badge-name-text {
+.badge-showcase .badge-name .badge-name-text {
     position: absolute;
     left: 5px;
     width: 340px;
@@ -400,7 +414,7 @@ video {
     text-overflow: ellipsis;
 }
 
-.badge-object .badge-desc {
+.badge-showcase .badge-desc {
     position: absolute;
     white-space: nowrap;
     top: 22px;
@@ -409,7 +423,7 @@ video {
     width: 340px;
 }
 
-.badge-object .badge-uuid {
+.badge-showcase .badge-uuid {
     position: absolute;
     white-space: nowrap;
     bottom: 0px;
@@ -419,7 +433,7 @@ video {
     width: 290px;
 }
 
-.badge-object .badge-date {
+.badge-showcase .badge-date {
     position: absolute;
     white-space: nowrap;
     bottom: 0px;
@@ -596,7 +610,7 @@ td[colspan="3"] {
         background: linear-gradient(180deg, rgba(14,14,14,1) 0%, rgba(50,50,50,1) 54%, rgba(62,62,62,1) 100%);
     }
 
-    .badge-object {
+    .badge-showcase {
         border: 1px solid rgb(194, 194, 194);
         background: linear-gradient(180deg, rgba(14,14,14,1) 0%, rgba(50,50,50,1) 54%, rgba(62,62,62,1) 100%);
     }
@@ -605,11 +619,11 @@ td[colspan="3"] {
         color: #999;
     }
 
-    .badge-object .badge-small-text {
+    .badge-showcase .badge-small-text {
         color: #999;
     }
 
-    .badge-object .badge-guid-text {
+    .badge-showcase .badge-guid-text {
         color: black;
         background-color: #999;
     }
@@ -643,7 +657,7 @@ td[colspan="3"] {
         background: linear-gradient(180deg, rgba(255,255,255,1) 0%, rgba(222,222,222,1) 54%, rgba(186,186,186,1) 100%);
     }
 
-    .badge-object {
+    .badge-showcase {
         border: 1px solid black;
         background: linear-gradient(180deg, rgba(255,255,255,1) 0%, rgba(222,222,222,1) 54%, rgba(186,186,186,1) 100%);
     }
@@ -652,11 +666,11 @@ td[colspan="3"] {
         color: #333;
     }
 
-    .badge-object .badge-small-text {
+    .badge-showcase .badge-small-text {
         color: #333;
     }
 
-    .badge-object .badge-guid-text {
+    .badge-showcase .badge-guid-text {
         color: white;
         background-color: #333;
     }
