@@ -11,7 +11,7 @@ please send a note to <business@dunkelmann.eu> so we can mail you a copy
 immediately.
 ***************************************************************************** */
 
-Vue.component('badge-card', {
+/*Vue.component('badge-card', {
     props: ['card'],
     template: `
     <div class="col-md-auto">
@@ -37,6 +37,15 @@ Vue.component('badge-card', {
     </div>
 </div>
     `
+});*/
+
+Vue.component('badge-card', {
+    props: ['card'],
+    template: `
+    <div class="badge-object">
+            <img width="64px" height="64px" :src="card.base_url + '_details.svg'" :alt="card.name" :title="card.name" :onclick="'app.selectBadge(&quot;' + card.uuid + '&quot;)'">
+    </div>
+    `
 });
 
 var app = new Vue({
@@ -49,6 +58,14 @@ var app = new Vue({
         countText: 'Laden ...',
         searchValue: '',
         cards: [],
+        selectedBadge: {
+            uuid: "Laden ...",
+            name: "Laden ...",
+            base_url: "Laden ...",
+            description: "Laden ...",
+            date: parseUnixTime(0),
+            value: 0
+        },
         isLoading: true
     },
     created: function() {
@@ -107,6 +124,7 @@ var app = new Vue({
                     app.revText = `Revisionsnummer: ${obj.body.revision} [${parseUnixTime(obj.body.timestamp)}]`;
                     app.lmText = `Letzte Änderung: ${parseUnixTime(lastModified)}`;
                     app.countText = `Zeige ${app.cards.length} von ${obj.body.badges.length} Abzeichen`;
+                    app.selectedBadge = app.cards[app.cards.length - 1];
 
                     app.isLoading = false;
                 }
@@ -117,6 +135,13 @@ var app = new Vue({
                     "revision": this.revisionValue
                 })
             );
+        },
+        selectBadge: function(uuid) {
+            this.cards.forEach(element => {
+                if(element.uuid == uuid) {
+                    this.selectedBadge = element;
+                }
+            });
         }
     },
     watch: {

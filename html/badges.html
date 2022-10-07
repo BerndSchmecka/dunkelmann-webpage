@@ -94,6 +94,30 @@
                     <div class="ring"></div>
                 </div>
             </div>
+            <div class="row badgeRow" :hidden="isLoading">
+                <div class="badge-showcase-container" v-cloak>
+                    <div class="badge-showcase">
+                        <div class="badge-icon">
+                            <img class="badge-image" :src="selectedBadge.base_url + '_details.svg'" :alt="selectedBadge.name">
+                        </div>
+                        <div class="badge-icon">
+                            <img class="badge-image" :src="selectedBadge.base_url + '.svg'" :alt="selectedBadge.name">
+                        </div>
+                        <div class="badge-name">
+                            <div class="badge-name-text">{{ selectedBadge.name }}</div>
+                        </div>
+                        <div class="badge-desc">
+                            <div class="badge-small-text">{{ selectedBadge.description }}</div>
+                        </div>
+                        <div class="badge-uuid">
+                            <div class="badge-guid-text">{{ selectedBadge.uuid }}</div>
+                        </div>
+                        <div class="badge-date">
+                            <div class="badge-small-text">{{ selectedBadge.date }}</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
             <div class="row badgeRow">
                 <div class="badge-objects">
                     <badge-card v-for="card in cards" v-bind:key="card.id" v-bind:card="card"></badge-card>
