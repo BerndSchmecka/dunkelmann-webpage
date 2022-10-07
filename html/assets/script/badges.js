@@ -61,12 +61,13 @@ var app = new Vue({
         selectedBadge: {
             uuid: "Laden ...",
             name: "Laden ...",
-            base_url: "Laden ...",
+            base_url: null,
             description: "Laden ...",
             date: parseUnixTime(0),
             value: 0
         },
-        isLoading: true
+        isLoading: true,
+        showcaseHidden: false,
     },
     created: function() {
         this.queryBadges();
@@ -124,7 +125,20 @@ var app = new Vue({
                     app.revText = `Revisionsnummer: ${obj.body.revision} [${parseUnixTime(obj.body.timestamp)}]`;
                     app.lmText = `Letzte Änderung: ${parseUnixTime(lastModified)}`;
                     app.countText = `Zeige ${app.cards.length} von ${obj.body.badges.length} Abzeichen`;
-                    app.selectedBadge = app.cards[app.cards.length - 1];
+                    if(app.cards.length > 0){
+                        app.selectedBadge = app.cards[app.cards.length - 1];
+                        app.showcaseHidden = false;
+                    } else {
+                        app.showcaseHidden = true;
+                        app.selectedBadge = {
+                            uuid: "Laden ...",
+                            name: "Laden ...",
+                            base_url: null,
+                            description: "Laden ...",
+                            date: parseUnixTime(0),
+                            value: 0
+                        }
+                    }
 
                     app.isLoading = false;
                 }

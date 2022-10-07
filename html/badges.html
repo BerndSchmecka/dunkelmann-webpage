@@ -94,14 +94,14 @@
                     <div class="ring"></div>
                 </div>
             </div>
-            <div class="row badgeRow" :hidden="isLoading">
+            <div class="row badgeRow" :hidden="isLoading || showcaseHidden">
                 <div class="badge-showcase-container" v-cloak>
                     <div class="badge-showcase">
                         <div class="badge-icon">
-                            <img class="badge-image" :src="selectedBadge.base_url + '_details.svg'" :alt="selectedBadge.name">
+                            <img class="badge-image" :src="selectedBadge.base_url == null ? 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=' : selectedBadge.base_url + '_details.svg'" :alt="selectedBadge.name">
                         </div>
                         <div class="badge-icon">
-                            <img class="badge-image" :src="selectedBadge.base_url + '.svg'" :alt="selectedBadge.name">
+                            <img class="badge-image" :src="selectedBadge.base_url == null ? 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=' : selectedBadge.base_url + '.svg'" :alt="selectedBadge.name">
                         </div>
                         <div class="badge-name">
                             <div class="badge-name-text">{{ selectedBadge.name }}</div>
