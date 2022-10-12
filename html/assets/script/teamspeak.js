@@ -59,9 +59,11 @@ var app = new Vue({
             text: ""
         },
         isLoading3: true,
-        isLoading5: true
+        isLoading5: true,
+        browserPlatform: "win"
     },
     created: function () {
+        this.browserPlatform = this.getPlatform();
         this.request();
     },
     methods: {
@@ -105,6 +107,15 @@ var app = new Vue({
                     onclick: 'window.open(decodeBase64(TS5_URL), \'_blank\').focus();'
                 }
             });
+        },
+        getPlatform: function() {
+            // Use the user agent string to detect the platform
+            if (navigator.userAgent.indexOf("Win") != -1) {
+                return "win";
+            }
+            if (navigator.userAgent.indexOf("Mac") != -1) {
+                return "osx";
+            }
         }
     }
 });
