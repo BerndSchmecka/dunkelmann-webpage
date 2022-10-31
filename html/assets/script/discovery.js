@@ -172,7 +172,7 @@ var app = new Vue({
 
                     app.annotationText = app.cards.length > 0 ? `Zeige ${app.cards.length} (${payload.start + 1} - ${payload.start + app.cards.length }) von ${payload.total} Einträgen` : 'Keine Einträge gefunden';
 
-                    if(obj.total > payload.start + payload.entries.length){
+                    if(payload.total > payload.start + payload.entries.length){
                         app.pagination.forwardButton = true;
                     } else {
                         app.pagination.forwardButton = false;
