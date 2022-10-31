@@ -94,6 +94,11 @@
                     <div class="ring"></div>
                 </div>
             </div>
+            <div class="row badgeRow" :hidden="!isCaching">
+                <div class="badge-caching-label-container" v-cloak>
+                    <p>Caching new revision ...</p>
+                </div>
+            </div>
             <div class="row badgeRow" :hidden="isLoading || showcaseHidden">
                 <div class="badge-showcase-container" v-cloak>
                     <div class="badge-showcase">

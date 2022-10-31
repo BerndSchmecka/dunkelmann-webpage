@@ -365,6 +365,10 @@ video {
     display: none;
 }
 
+[v-cloak].badge-caching-label-container {
+    display: none;
+}
+
 .badge-showcase {
     position: relative;
     display: flex;

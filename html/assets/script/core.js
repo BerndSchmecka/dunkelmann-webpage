@@ -12,6 +12,7 @@ immediately.
 ***************************************************************************** */
 
 window.GLOBAL_ENV = {
+    WS_API_ENDPOINT: 'wss://api-ws.dunkelmann.eu/v1',
     BADGE_ENDPOINT: "https://api.dunkelmann.eu/v2/getTeamSpeakBadges",
     BADGE_REVISIONS_ENDPOINT: "https://api.dunkelmann.eu/v2/getCachedBadgeRevisions",
     DISCOVERY_ENDPOINT: "https://api.dunkelmann.eu/v1/getTeamSpeakRoomDiscovery",
@@ -33,4 +34,8 @@ parseUnixTime=function(t){
     var seconds = "0" + date.getSeconds();
     var formattedTime = curr_date.substr(-2) + '.' + curr_month.substr(-2)  + '.' + curr_year + ' - ' + hours.substr(-2) + ':' + minutes.substr(-2) + ':' + seconds.substr(-2);
     return formattedTime;
+}
+
+function webSocketLog(msg) {
+    console.log('%c[Dunkelmann WebSocket] ' + `%c${msg}`, 'color: #871F78; font-weight: bold', 'color: #000000');
 }

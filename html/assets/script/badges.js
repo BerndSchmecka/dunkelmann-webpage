@@ -67,10 +67,12 @@ var app = new Vue({
             value: 0
         },
         isLoading: true,
+        isCaching: false,
         showcaseHidden: false,
+        webSocket: null,
     },
     created: function() {
-        this.queryBadges();
+        this.initWebSocket();
         this.getCachedRevisions();
     },
     methods: {
@@ -93,23 +95,24 @@ var app = new Vue({
             query.open("GET", window.GLOBAL_ENV.BADGE_REVISIONS_ENDPOINT, true);
             query.send();
         },
-        queryBadges: function() {
-            this.isLoading = true;
-            this.cards = [];
+        initWebSocket: function() {
+            if(this.webSocket != null) {
+                this.webSocket.close();
+            }
+            this.webSocket = new WebSocket(window.GLOBAL_ENV.WS_API_ENDPOINT);
+            this.webSocket.onmessage = function(event) {
+                var obj = JSON.parse(event.data);
+                if(obj.error === 0) {
+                    app.isCaching = false;
+                    webSocketLog(obj.errorMsg);
 
-            this.revText = 'Laden ...';
-            this.lmText = 'Laden ...';
-            this.countText = 'Laden ...';
+                    // Get obj.payload (base64 encoded) and serialize it to a JSON object
+                    var payload = JSON.parse(atob(obj.payload));
 
-            var query = new XMLHttpRequest();
-            query.onreadystatechange = function() {
-                if(query.readyState === 4 && query.status === 200){
-                    var obj = JSON.parse(query.responseText);
-
-                    var date = obj.headers["Last-Modified"][0];
+                    var date = payload.headers["Last-Modified"][0];
                     var lastModified = Math.floor(Date.parse(date) / 1000);
         
-                    obj.body.badges.forEach(element => {
+                    payload.body.badges.forEach(element => {
                         if(app.searchValue == '' || element.name.toLowerCase().includes(app.searchValue.toLowerCase()) || element.description.toLowerCase().includes(app.searchValue.toLowerCase()) || element.url.toLowerCase().includes(app.searchValue.toLowerCase())) {
                             app.cards.push({
                                 uuid: element.uuid,
@@ -122,9 +125,9 @@ var app = new Vue({
                         }
                     });
 
-                    app.revText = `Revisionsnummer: ${obj.body.revision} [${parseUnixTime(obj.body.timestamp)}]`;
+                    app.revText = `Revisionsnummer: ${payload.body.revision} [${parseUnixTime(payload.body.timestamp)}]`;
                     app.lmText = `Letzte Änderung: ${parseUnixTime(lastModified)}`;
-                    app.countText = `Zeige ${app.cards.length} von ${obj.body.badges.length} Abzeichen`;
+                    app.countText = `Zeige ${app.cards.length} von ${payload.body.badges.length} Abzeichen`;
                     if(app.cards.length > 0){
                         app.selectedBadge = app.cards[app.cards.length - 1];
                         app.showcaseHidden = false;
@@ -141,14 +144,60 @@ var app = new Vue({
                     }
 
                     app.isLoading = false;
+                } else if (obj.error === 1) {
+                    app.isCaching = true;
+                    webSocketLog(obj.errorMsg);
+                } else if (obj.error === 2) {
+                    webSocketLog(`Error: ${obj.errorMsg}`);
+                } else {
+                    webSocketLog("WebSocket returned an unknown error code");
                 }
             }
-            query.open("POST", window.GLOBAL_ENV.BADGE_ENDPOINT, true);
-            query.send(
-                JSON.stringify({
-                    "revision": this.revisionValue
-                })
-            );
+
+            this.webSocket.onopen = function(event) {
+                webSocketLog("WebSocket connected");
+                app.queryBadges();
+            }
+
+            this.webSocket.onclose = function(event) {
+                webSocketLog("WebSocket disconnected");
+
+                setTimeout(function() {
+                    app.initWebSocket();
+                }, 1000);
+            }
+
+            this.webSocket.onerror = function(event) {
+                webSocketLog("WebSocket error");
+            }
+        },
+        queryBadges: function() {
+            this.isLoading = true;
+            this.cards = [];
+
+            this.revText = 'Laden ...';
+            this.lmText = 'Laden ...';
+            this.countText = 'Laden ...';
+
+            if (this.webSocket == null) {
+                this.initWebSocket();
+            }
+
+            if (this.webSocket.readyState !== WebSocket.OPEN) {
+                webSocketLog("WebSocket not ready");
+                return;
+            }
+
+
+            let payload = btoa(JSON.stringify({
+                revision: this.revisionValue
+            }));
+
+            this.webSocket.send(JSON.stringify({
+                command: "getTeamSpeakBadges",
+                version: 1,
+                payload: payload
+            }));
         },
         selectBadge: function(uuid) {
             this.cards.forEach(element => {
