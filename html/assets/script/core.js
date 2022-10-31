@@ -37,5 +37,5 @@ parseUnixTime=function(t){
 }
 
 function webSocketLog(msg) {
-    console.log('%c[Dunkelmann WebSocket] ' + `%c${msg}`, 'color: #871F78; font-weight: bold', 'color: #000000');
+    console.log('%c[Dunkelmann WebSocket] ' + `%c${msg}`, 'color: #871F78; font-weight: 900;', 'font-weight: 700;');
 }
