@@ -127,30 +127,27 @@ var app = new Vue({
             backwardButton: false,
             forwardButton: false
         },
-        annotationText: 'Laden ...'
+        annotationText: 'Laden ...',
+        webSocket: null
     },
     created: function() {
-        this.doQuery("*%3A*");
+        this.initWebSocket();
     },
     methods: {
-        queryWithFilter: function() {
-            app.pagination.currentStart = 0;
-            app.doQuery((this.nodeValue ? `%2B*${encodeURIComponent(this.nodeValue)}*` : "*%3A*") + this.filterValue);
-        },
-        doQuery: function(q) {
-            this.isLoading = true;
-            this.cards = [];
+        initWebSocket: function() {
+            if(this.webSocket != null) {
+                this.webSocket.close();
+            }
+            this.webSocket = new WebSocket(window.GLOBAL_ENV.WS_API_ENDPOINT);
+            this.webSocket.onmessage = function(event) {
+                var obj = JSON.parse(event.data);
+                if(obj.error === 0) {
+                    webSocketLog(obj.errorMsg);
 
-            this.pagination.backwardButton = false;
-            this.pagination.forwardButton = false;
-            this.annotationText = 'Laden ...';
+                    // Get obj.payload (base64 encoded) and serialize it to a JSON object
+                    var payload = JSON.parse(atob(obj.payload));
 
-            var query = new XMLHttpRequest();
-            query.onreadystatechange = function() {
-                if(query.readyState === 4 && query.status === 200){
-                    var obj = JSON.parse(query.responseText);
-        
-                    obj.entries.forEach(element => {
+                    payload.entries.forEach(element => {
                         app.cards.push({
                             id: element.id,
                             name: element.name,
@@ -173,35 +170,80 @@ var app = new Vue({
                         });
                     });
 
-                    app.annotationText = app.cards.length > 0 ? `Zeige ${app.cards.length} (${obj.start + 1} - ${obj.start + app.cards.length }) von ${obj.total} Einträgen` : 'Keine Einträge gefunden';
+                    app.annotationText = app.cards.length > 0 ? `Zeige ${app.cards.length} (${payload.start + 1} - ${payload.start + app.cards.length }) von ${payload.total} Einträgen` : 'Keine Einträge gefunden';
 
-                    if(obj.total > obj.start + obj.entries.length){
+                    if(obj.total > payload.start + payload.entries.length){
                         app.pagination.forwardButton = true;
                     } else {
                         app.pagination.forwardButton = false;
                     }
 
-                    if(obj.start > 0){
+                    if(payload.start > 0){
                         app.pagination.backwardButton = true;
                     } else {
                         app.pagination.backwardButton = false;
                     }
 
                     app.isLoading = false;
+                } else if (obj.error === 2) {
+                    webSocketLog(`Error: ${obj.errorMsg}`);
+                } else {
+                    webSocketLog("WebSocket returned an unknown error code");
                 }
             }
-            query.open("POST", window.GLOBAL_ENV.DISCOVERY_ENDPOINT, true);
-            query.setRequestHeader("Content-type", "application/json");
-            query.send(
-                JSON.stringify({
-                    "endpointMode": getEndpointMode(),
-                    "queryString": q,
-                    "startCount": this.pagination.currentStart,
-                    "rowCount": this.pagination.elementsPerPage,
-                    "sortBy": "members",
-                    "sortOrder": "desc"
-                })
-            );
+
+            this.webSocket.onopen = function(event) {
+                webSocketLog("WebSocket connected");
+                app.doQuery("*%3A*")
+            }
+
+            this.webSocket.onclose = function(event) {
+                webSocketLog("WebSocket disconnected");
+
+                setTimeout(function() {
+                    app.initWebSocket();
+                }, 1000);
+            }
+
+            this.webSocket.onerror = function(event) {
+                webSocketLog("WebSocket error");
+            }
+        },
+        queryWithFilter: function() {
+            app.pagination.currentStart = 0;
+            app.doQuery((this.nodeValue ? `%2B*${encodeURIComponent(this.nodeValue)}*` : "*%3A*") + this.filterValue);
+        },
+        doQuery: function(q) {
+            this.isLoading = true;
+            this.cards = [];
+
+            this.pagination.backwardButton = false;
+            this.pagination.forwardButton = false;
+            this.annotationText = 'Laden ...';
+
+            if (this.webSocket == null) {
+                this.initWebSocket();
+            }
+
+            if (this.webSocket.readyState !== WebSocket.OPEN) {
+                webSocketLog("WebSocket not ready");
+                return;
+            }
+
+            let payload = btoa(JSON.stringify({
+                endpointMode: getEndpointMode(),
+                queryString: q,
+                startCount: this.pagination.currentStart,
+                rowCount: this.pagination.elementsPerPage,
+                sortBy: "members",
+                sortOrder: "desc"
+            }));
+
+            this.webSocket.send(JSON.stringify({
+                command: "getTeamSpeakRoomDiscovery",
+                version: 1,
+                payload: payload
+            }));
         },
         goForward: function() {
             if(this.pagination.forwardButton && !this.isLoading) {

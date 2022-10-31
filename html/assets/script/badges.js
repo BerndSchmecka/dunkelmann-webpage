@@ -188,7 +188,6 @@ var app = new Vue({
                 return;
             }
 
-
             let payload = btoa(JSON.stringify({
                 revision: this.revisionValue
             }));
