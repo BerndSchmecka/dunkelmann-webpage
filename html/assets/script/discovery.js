@@ -145,7 +145,7 @@ var app = new Vue({
                     webSocketLog(obj.errorMsg);
 
                     // Get obj.payload (base64 encoded) and serialize it to a JSON object
-                    var payload = JSON.parse(atob(obj.payload));
+                    var payload = JSON.parse(decodeURIComponent(escape(window.atob((obj.payload)))));
 
                     payload.entries.forEach(element => {
                         app.cards.push({
