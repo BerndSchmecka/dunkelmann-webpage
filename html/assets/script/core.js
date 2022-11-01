@@ -40,8 +40,17 @@ function webSocketLog(msg) {
     console.log('%c[Dunkelmann WebSocket] ' + `%c${msg}`, 'color: #871F78; font-weight: 900;', 'font-weight: 700;');
 }
 
+function webSocketLogDebug(msg) {
+    console.debug('%c[Dunkelmann WebSocket] ' + `%c${msg}`, 'color: #006400; font-weight: 900;', 'font-weight: 700;');
+}
+
+function webSocketLogWarn(msg) {
+    console.warn('%c[Dunkelmann WebSocket] ' + `%c${msg}`, 'color: #ff8c00; font-weight: 900;', 'font-weight: 700;');
+}
+
+// Returns an uint32 number from a base64 string (4 bytes)
 function base64ToUint32(base64) {
-    var binaryString = atob(base64);
-    var result = (binaryString[0]<<24) + (binaryString[1] << 16) + (binaryString[2] << 8) + (binaryString[3] << 0);
-    return result;
+    return new Uint32Array(decodeBase64(base64).split('').map(function (c) {
+        return c.charCodeAt(0);
+    }))[0];
 }

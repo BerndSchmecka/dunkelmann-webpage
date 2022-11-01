@@ -188,15 +188,17 @@ var app = new Vue({
                 } else if (obj.type === 2) {
                     webSocketLog(`Error: ${obj.msg}`);
                 } else if (obj.type === 3) {
-                    webSocketLog(`Received PING request from server: "${obj.msg}"`);
+                    webSocketLogDebug(`Received PING request from server: "${obj.msg}"`);
                     app.webSocket.send(JSON.stringify({
                         command: "PONG",
                         version: 0,
                         payload: obj.payload
                     }));
-                    webSocketLog(`Sent PONG response to server: pongId="${base64ToUint32(obj.payload)}"`);
+                    webSocketLogDebug(`Sent PONG response to server: pongId=${base64ToUint32(obj.payload)}`);
+                } else if (obj.type === 4) {
+                    webSocketLogDebug(`Server acknowledged PONG response: "${obj.msg}"`);
                 } else {
-                    webSocketLog("WebSocket returned an response with an unknown type.");
+                    webSocketLogWarn("WebSocket returned an response with an unknown type.");
                 }
             }
 
