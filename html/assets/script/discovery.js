@@ -141,8 +141,8 @@ var app = new Vue({
             this.webSocket = new WebSocket(window.GLOBAL_ENV.WS_API_ENDPOINT);
             this.webSocket.onmessage = function(event) {
                 var obj = JSON.parse(event.data);
-                if(obj.error === 0) {
-                    webSocketLog(obj.errorMsg);
+                if(obj.type === 0) {
+                    webSocketLog(obj.msg);
 
                     // Get obj.payload (base64 encoded) and serialize it to a JSON object
                     var payload = JSON.parse(decodeURIComponent(escape(window.atob((obj.payload)))));
@@ -185,10 +185,18 @@ var app = new Vue({
                     }
 
                     app.isLoading = false;
-                } else if (obj.error === 2) {
-                    webSocketLog(`Error: ${obj.errorMsg}`);
+                } else if (obj.type === 2) {
+                    webSocketLog(`Error: ${obj.msg}`);
+                } else if (obj.type === 3) {
+                    webSocketLog(`Received PING request from server: "${obj.msg}"`);
+                    app.webSocket.send(JSON.stringify({
+                        command: "PONG",
+                        version: 0,
+                        payload: obj.payload
+                    }));
+                    webSocketLog(`Sent PONG response to server: pongId="${atob(obj.payload)}"`);
                 } else {
-                    webSocketLog("WebSocket returned an unknown error code");
+                    webSocketLog("WebSocket returned an response with an unknown type.");
                 }
             }
 
