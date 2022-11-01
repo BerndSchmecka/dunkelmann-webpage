@@ -194,7 +194,7 @@ var app = new Vue({
                         version: 0,
                         payload: obj.payload
                     }));
-                    webSocketLogDebug(`Sent PONG response to server: pongId=${base64ToUint32(obj.payload)}`);
+                    webSocketLogDebug(`Sent PONG response to server: pongId=${base64ToUuid(obj.payload)}`);
                 } else if (obj.type === 4) {
                     webSocketLogDebug(`Server acknowledged PONG response: "${obj.msg}"`);
                 } else {

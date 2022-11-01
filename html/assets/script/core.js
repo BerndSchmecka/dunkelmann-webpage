@@ -54,3 +54,8 @@ function base64ToUint32(base64) {
         return c.charCodeAt(0);
     }))[0];
 }
+
+// Returns a uuid from a base64 string, the uuid is at the beginning until the first '|'
+function base64ToUuid(base64) {
+    return decodeBase64(base64).split('|')[0];
+}
