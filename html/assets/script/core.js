@@ -39,3 +39,9 @@ parseUnixTime=function(t){
 function webSocketLog(msg) {
     console.log('%c[Dunkelmann WebSocket] ' + `%c${msg}`, 'color: #871F78; font-weight: 900;', 'font-weight: 700;');
 }
+
+function base64ToUint32(base64) {
+    var binaryString = atob(base64);
+    var result = (binaryString[0]<<24) + (binaryString[1] << 16) + (binaryString[2] << 8) + (binaryString[3] << 0);
+    return result;
+}

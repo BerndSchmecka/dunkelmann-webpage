@@ -156,7 +156,7 @@ var app = new Vue({
                         version: 0,
                         payload: obj.payload
                     }));
-                    webSocketLog(`Sent PONG response to server: pongId="${atob(obj.payload)}"`);
+                    webSocketLog(`Sent PONG response to server: pongId="${base64ToUint32(obj.payload)}"`);
                 } else {
                     webSocketLog("WebSocket returned an response with an unknown type.");
                 }
