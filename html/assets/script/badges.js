@@ -43,7 +43,7 @@ Vue.component('badge-card', {
     props: ['card'],
     template: `
     <div class="badge-object">
-            <img width="64px" height="64px" :src="card.base_url + '_details.svg'" :alt="card.name" :title="card.name" :onclick="'app.selectBadge(&quot;' + card.uuid + '&quot;)'">
+            <img width="64px" height="64px" :src="card.base_url + '_details.svg'" :alt="card.name" :title="card.name" v-on:click="app.selectBadge(card.uuid)">
     </div>
     `
 });
