@@ -603,6 +603,16 @@ td[colspan="3"] {
     margin-top: 2px;
 }
 
+.ts3index-viewer {
+    min-width: 25rem;
+    border-radius: 16px;
+    padding: 10px;
+}
+
+.ts3index-viewer .server {
+    border-radius: 16px !important;
+}
+
 @media (prefers-color-scheme: dark) {
     .annotation {
         font-size: x-small;
