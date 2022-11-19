@@ -22,7 +22,7 @@ window.addEventListener("message", receiveMessage, false);
     
 function receiveMessage(event) {
     // Let's make sure the sender of this message is who we think it is.
-    if (event.origin !== 'http://www.dunkelmann.eu') {
+    if (event.origin !== 'https://www.dunkelmann.eu') {
         return;
     }
 
@@ -38,7 +38,7 @@ $('#viewerFrame').load(function(){
         JSON.stringify({
             event: 'establishCommunication',
             message: 'Hello, world!'
-        }), 'http://www.dunkelmann.eu');
+        }), 'https://viewer.dunkelmann.eu');
 });
 
 requestJSON = function(version, endpoint, callback){
