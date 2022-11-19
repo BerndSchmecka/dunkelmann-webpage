@@ -118,8 +118,8 @@ var app = new Vue({
                             app.cards.push({
                                 uuid: element.uuid,
                                 name: element.name,
-                                svg_url: this.revisionValue == 'latest' ? element.url + '.svg' : `https://www.dunkelmann.eu/assets/dynamic/cached_badge.php?uuid=${element.uuid}&variant=svg&rev=${app.revisionValue}`,
-                                svg_details_url: this.revisionValue == 'latest' ? element.url + '_details.svg' : `https://www.dunkelmann.eu/assets/dynamic/cached_badge.php?uuid=${element.uuid}&variant=svg_detailed&rev=${app.revisionValue}`,
+                                svg_url: app.revisionValue == 'latest' ? element.url + '.svg' : `https://www.dunkelmann.eu/assets/dynamic/cached_badge.php?uuid=${element.uuid}&variant=svg&rev=${app.revisionValue}`,
+                                svg_details_url: app.revisionValue == 'latest' ? element.url + '_details.svg' : `https://www.dunkelmann.eu/assets/dynamic/cached_badge.php?uuid=${element.uuid}&variant=svg_detailed&rev=${app.revisionValue}`,
                                 description: element.description,
                                 date: parseUnixTime(element.timestamp),
                                 value: element.value
