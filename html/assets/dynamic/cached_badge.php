@@ -33,8 +33,9 @@ if ($httpcode == 200) {
     echo $badge;
 } else {
     // If the response code is not 200, the badge image could not be retrieved
-    // Set the content type to application/json
+    // Set the content type to application/json and the HTTP response code to $httpcode
     header('Content-Type: application/json');
+    http_response_code($httpcode);
     // Output the response code
     echo $badge;
 }
