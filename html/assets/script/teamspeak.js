@@ -18,31 +18,6 @@ let ALPHA_URL = "";
 
 let TS5_URL = "aHR0cHM6Ly93d3cudGVhbXNwZWFrLmNvbS9kZS9kb3dubG9hZHMvI3RzNQ==";
 
-window.addEventListener("message", receiveMessage, false);
-    
-function receiveMessage(event) {
-    // Let's make sure the sender of this message is who we think it is.
-    if (event.origin !== 'https://www.dunkelmann.eu') {
-        console.log("Message from unknown origin: " + event.origin);
-        return;
-    }
-    console.log("Message received: " + event.data);
-
-    var object = JSON.parse(event.data);
-    if (object.event === 'resize') {
-        $("#viewerFrame").height(object.height);
-    }
-};
-    
-$('#viewerFrame').on('load', function(){
-    var iframe = document.getElementById("viewerFrame").contentWindow;
-    iframe.postMessage(
-        JSON.stringify({
-            event: 'establishCommunication',
-            message: 'Hello, world!'
-        }), 'https://viewer.dunkelmann.eu');
-});
-
 requestJSON = function(version, endpoint, callback){
     var request = new XMLHttpRequest();
     request.onreadystatechange = function() {
