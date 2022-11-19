@@ -23,6 +23,7 @@ window.addEventListener("message", receiveMessage, false);
 function receiveMessage(event) {
     // Let's make sure the sender of this message is who we think it is.
     if (event.origin !== 'https://www.dunkelmann.eu') {
+        console.log("Message from unknown origin: " + event.origin);
         return;
     }
 
