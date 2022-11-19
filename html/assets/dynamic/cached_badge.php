@@ -14,8 +14,14 @@ curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 $server_output = curl_exec($ch);
 curl_close ($ch);
 
-// Output the badge image
-header('Content-Type: image/png');
-echo $server_output;
+// Output the badge image if the request was successful (HTTP status code 200)
+// Else output the json error message
+if (strpos($http_response_header[0], '200') !== false) {
+    header('Content-Type: image/png');
+    echo $server_output;
+} else {
+    header('Content-Type: application/json');
+    echo $server_output;
+}
 
 ?>
