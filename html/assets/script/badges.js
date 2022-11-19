@@ -43,7 +43,7 @@ Vue.component('badge-card', {
     props: ['card'],
     template: `
     <div class="badge-object">
-            <img width="64px" height="64px" :src="card.base_url + '_details.svg'" :alt="card.name" :title="card.name" v-on:click="app.selectBadge(card.uuid)">
+            <img width="64px" height="64px" :src="card.svg_details_url" :alt="card.name" :title="card.name" v-on:click="app.selectBadge(card.uuid)">
     </div>
     `
 });
@@ -61,7 +61,8 @@ var app = new Vue({
         selectedBadge: {
             uuid: "Laden ...",
             name: "Laden ...",
-            base_url: null,
+            svg_url: null,
+            svg_details_url: null,
             description: "Laden ...",
             date: parseUnixTime(0),
             value: 0
@@ -117,7 +118,8 @@ var app = new Vue({
                             app.cards.push({
                                 uuid: element.uuid,
                                 name: element.name,
-                                base_url: element.url,
+                                svg_url: this.revisionValue == 'latest' ? element.url + '.svg' : `https://www.dunkelmann.eu/assets/dynamic/cached_badge.php?uuid=${element.uuid}&variant=svg&rev=${this.revisionValue}`,
+                                svg_details_url: this.revisionValue == 'latest' ? element.url + '_details.svg' : `https://www.dunkelmann.eu/assets/dynamic/cached_badge.php?uuid=${element.uuid}&variant=svg_detailed&rev=${this.revisionValue}`,
                                 description: element.description,
                                 date: parseUnixTime(element.timestamp),
                                 value: element.value
