@@ -26,6 +26,7 @@ function receiveMessage(event) {
         console.log("Message from unknown origin: " + event.origin);
         return;
     }
+    console.log("Message received: " + event.data);
 
     var object = JSON.parse(event.data);
     if (object.event === 'resize') {
