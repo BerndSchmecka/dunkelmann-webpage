@@ -617,8 +617,12 @@ td[colspan="3"] {
     padding: 10px;
 }
 
-.ts3index-viewer .server {
-    border-radius: 16px !important;
+.ts3index-viewer #viewerFrame {
+    width: 100%;
+    height: 100%;
+    border: none;
+    margin: 0;
+    padding: 0;
 }
 
 @media (prefers-color-scheme: dark) {
