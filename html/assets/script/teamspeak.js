@@ -123,11 +123,13 @@ var app = new Vue({
 var video = new Vue({
     el: '#vid',
     data: {
-        poster: ''
+        poster: '',
+        v_hidden: true
     }
 });
 
 jebaited=function(){
+    video.v_hidden = false;
     video.$el.play();
 
     var el = document.querySelectorAll("div,table,p,code,tr,td,th");
