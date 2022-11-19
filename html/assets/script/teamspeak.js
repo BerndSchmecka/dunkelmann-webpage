@@ -32,7 +32,7 @@ function receiveMessage(event) {
     }
 };
     
-$('#viewerFrame').load(function(){
+$('#viewerFrame').on('load', function(){
     var iframe = document.getElementById("viewerFrame").contentWindow;
     iframe.postMessage(
         JSON.stringify({
