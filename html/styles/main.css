@@ -311,6 +311,7 @@ video {
     float: left;
     width: 24px;
     box-sizing: border-box;
+    cursor: pointer;
 }
 
 .discovery-object .discovery-bookmark .fa-bookmark-icon {
