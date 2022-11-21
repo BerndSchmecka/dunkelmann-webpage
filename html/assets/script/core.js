@@ -59,3 +59,35 @@ function base64ToUint32(base64) {
 function base64ToUuid(base64) {
     return decodeBase64(base64).split('|')[0];
 }
+
+// Checks if a server identified by an id is bookmarked
+// Bookmarks are stored in the local storage as a json string called 'bookmarkedServers'
+function isBookmarked(id) {
+    let bookmarks = JSON.parse(localStorage.getItem('bookmarkedServers'));
+    if (bookmarks == null) {
+        return false;
+    }
+    return bookmarks.includes(id);
+}
+
+// Adds a server to the bookmarks
+function addBookmark(id) {
+    let bookmarks = JSON.parse(localStorage.getItem('bookmarkedServers'));
+    if (bookmarks == null) {
+        bookmarks = [];
+    }
+    bookmarks.push(id);
+    localStorage.setItem('bookmarkedServers', JSON.stringify(bookmarks));
+}
+
+// Removes a server from the bookmarks
+function removeBookmark(id) {
+    let bookmarks = JSON.parse(localStorage.getItem('bookmarkedServers'));
+    if (bookmarks == null) {
+        bookmarks = [];
+    }
+    bookmarks = bookmarks.filter(function (value, index, arr) {
+        return value != id;
+    });
+    localStorage.setItem('bookmarkedServers', JSON.stringify(bookmarks));
+}

@@ -99,8 +99,8 @@ Vue.component('discovery-card', {
             <div class="discovery-connect">
                 <div class="discovery-small-text discovery-link" :title="card.tooltips.join"> {{ card.join }} </div>
             </div>
-                <div class="discovery-bookmark" title="Bookmark this server" v-if="card.isServer">
-                    <i class="fas fa-bookmark fa-bookmark-icon"></i>
+                <div class="discovery-bookmark" :title="card.tooltips.bookmark" v-if="card.isServer" v-on:click="app.bookmark(card.id)">
+                    <i :class="card.classes.bookmark"></i>
                 </div>
                 <div class="discovery-channel" :title="card.tooltips.channel" v-if="card.isServer">
                     <i :class="card.classes.channel"></i>
@@ -159,10 +159,12 @@ var app = new Vue({
                             icon: `background: url('${randomIcon(element.id)}'); background-size: 64px 64px;`,
                             tooltips: {
                                 join: element.type.toLowerCase() === 'server' ? 'Open a connection to this server' : `Join this ${element.type.toLowerCase()}`,
+                                bookmark: isBookmarked(element.id) ? 'Unbookmark this server' : 'Bookmark this server',
                                 channel: element.canCreateChannel ? 'Guests can create channels' : "Guests can't create channels",
                                 homebase: element.canCreateHomebase ? 'Guests can use this server as homebase' : "Guests can't use this server as homebase"
                             },
                             classes: {
+                                bookmark: `fas fa-bookmark ${isBookmarked(element.id) ? "fa-bookmark-icon text-primary" : "fa-bookmark-icon"}`,
                                 channel: `fas fa-plus-square ${element.canCreateChannel ? "fa-channel-icon text-primary" : "fa-channel-icon"}`,
                                 homebase: `fas fa-home ${element.canCreateHomebase ? "fa-homebase-icon text-primary" : "fa-homebase-icon"}`
                             },
@@ -266,6 +268,21 @@ var app = new Vue({
                 this.pagination.currentStart -= this.pagination.elementsPerPage;
                 this.doQuery((this.nodeValue ? `%2B*${encodeURIComponent(this.nodeValue)}*` : "*%3A*") + this.filterValue);
             }
+        },
+        bookmark: function(id) {
+            // Check if the server is already bookmarked
+            if (isBookmarked(id)) {
+                removeBookmark(id);
+            } else {
+                addBookmark(id);
+            }
+            // Update the bookmark icon and tooltip
+            this.cards.forEach(function(element) {
+                if (element.id === id) {
+                    element.classes.bookmark = `fas fa-bookmark ${isBookmarked(element.id) ? "fa-bookmark-icon text-primary" : "fa-bookmark-icon"}`;
+                    element.tooltips.bookmark = isBookmarked(element.id) ? 'Unbookmark this server' : 'Bookmark this server';
+                }
+            });
         }
     },
     watch: {
