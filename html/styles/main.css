@@ -214,11 +214,11 @@ video {
     mask: var(--discovery-mask);
     mask-position: center center;
     mask-repeat: no-repeat;
-    mask-size: calc(100% - 6px);
+    mask-size: calc(100% - 3px);
     -webkit-mask: var(--discovery-mask);
     -webkit-mask-position: center center;
     -webkit-mask-repeat: no-repeat;
-    -webkit-mask-size: calc(100% - 6px);
+    -webkit-mask-size: calc(100% - 3px);
     overflow: hidden;
 }
 
