@@ -24,15 +24,20 @@ window.GLOBAL_ENV = {
 
 decodeBase64=function(f){var g={},b=65,d=0,a,c=0,h,e="",k=String.fromCharCode,l=f.length;for(a="";91>b;)a+=k(b++);a+=a.toLowerCase()+"0123456789+/";for(b=0;64>b;b++)g[a.charAt(b)]=b;for(a=0;a<l;a++)for(b=g[f.charAt(a)],d=(d<<6)+b,c+=6;8<=c;)((h=d>>>(c-=8)&255)||a<l-2)&&(e+=k(h));return e};
 
+// month names in german
+const monthNames = ["Januar", "Februar", "März", "April", "Mai", "Juni",
+    "Juli", "August", "September", "Oktober", "November", "Dezember"
+];
+
 parseUnixTime=function(t){
     var date = new Date(t * 1000);
     var curr_date = "0" + date.getDate();
-    var curr_month = "0" + (date.getMonth() + 1); //Months are zero based
+    var curr_month = monthNames[date.getMonth()] //Months are zero based
     var curr_year = date.getFullYear();
     var hours = "0" + date.getHours();
     var minutes = "0" + date.getMinutes();
     var seconds = "0" + date.getSeconds();
-    var formattedTime = curr_date.substr(-2) + '.' + curr_month.substr(-2)  + '.' + curr_year + ' - ' + hours.substr(-2) + ':' + minutes.substr(-2) + ':' + seconds.substr(-2);
+    var formattedTime = curr_date.substr(-2) + '. ' + curr_month  + ' ' + curr_year + ' - ' + hours.substr(-2) + ':' + minutes.substr(-2) + ':' + seconds.substr(-2);
     return formattedTime;
 }
 
